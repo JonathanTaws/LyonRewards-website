@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "lyonrewards",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "A Smart City Application to provide advantages to all Lyon citizens",
+  "repository": "https://github.com/JonathanTaws/LyonRewards-website",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1",
