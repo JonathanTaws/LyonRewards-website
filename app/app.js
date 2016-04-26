@@ -5,11 +5,13 @@ angular.module('lyonRewards', [
   'ngRoute',
   'ngAnimate',
   'angular-loading-bar',
-  'lyonRewards.view1',
-  'lyonRewards.view2',
-  'lyonRewards.version'
+  'lyonRewards.home',
+  'lyonRewards.concept',
+  'lyonRewards.ranking'
 ]).
 config(['$routeProvider', 'cfpLoadingBarProvider', function($routeProvider, cfpLoadingBarProvider) {
-  cfpLoadingBarProvider.latencyThreshold = 0;
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  cfpLoadingBarProvider.latencyThreshold = 100;
+  $routeProvider
+      .when('/', {redirectTo:'/home'})
+      .otherwise({redirectTo:'/home'}); // TODO Change to 404
 }]);
