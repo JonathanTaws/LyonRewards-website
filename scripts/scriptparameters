@@ -1,0 +1,11 @@
+#This file is included in project bash scripts to define common parameters
+#You can modify it.
+
+SOURCEDIR=app
+SCRIPTDIR=scripts
+APACHEUSER=www-data
+APACHEGROUP=www-data
+SCRIPTDEBUG=false
+PROJECTROOTDIR=/var/www/lyonrewards
+USER=lyonrewards
+GROUP=lyonrewards
