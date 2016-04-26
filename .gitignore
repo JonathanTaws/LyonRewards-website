@@ -1,8 +1,8 @@
 logs/*
 !.gitkeep
 node_modules/
+/app/semantic/dist
 bower_components/
-semantic/
 tmp
 .DS_Store
 .idea
