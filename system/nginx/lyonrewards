@@ -1,0 +1,32 @@
+# lyonrewards.antoine-chabert.fr configuration
+#
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+	server_name .lyonrewards.antoine-chabert.fr .lyonrewards.ancha.fr;
+	return 301 https://$server_name$request_uri;
+}
+
+server {
+        listen 443 ssl default_server;
+        listen [::]:443 ssl default_server;
+
+	ssl_certificate     /etc/ssl/certs/lyonrewards.antoine-chabert.fr.crt;
+	ssl_certificate_key /etc/ssl/private/lyonrewards.antoine-chabert.fr.key;
+
+	add_header Strict-Transport-Security "max-age=31536000";
+
+        root /var/www/lyonrewards/app;
+
+        index index.html;
+
+        server_name .lyonrewards.antoine-chabert.fr .lyonrewards.ancha.fr;
+
+        location /api {
+                proxy_pass http://127.0.0.1:8000; # Pass to Gunicorn
+                proxy_set_header X-Real-IP $remote_addr; # get real Client IP
+        }
+
+        error_log /var/log/nginx/lyonrewards.error.log;
+        access_log /var/log/nginx/lyonrewards.access.log;
+}
