@@ -26,7 +26,7 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
 </head>
-<body class="init-app">
+<body ng-controller="MainCtrl">
 
   <!-- Following Menu -->
   <div class="ui large top fixed hidden menu">
@@ -36,7 +36,7 @@
       <a class="item" href="#/ranking" active-link="active">Classement</a>
       <div class="right menu">
         <div class="item">
-          <a class="ui button">Connexion</a>
+          <a class="ui button" href ng-click="login">Connexion</a>
         </div>
         <div class="item">
           <a class="ui primary button">Inscription</a>
@@ -50,7 +50,7 @@
     <a class="active item" href="#/home" active-link="active">Accueil</a>
     <a class="item" href="#/concept" active-link="active">Concept</a>
     <a class="item" href="#/ranking" active-link="active">Classement</a>
-    <a class="item">Connexion</a>
+    <a class="item" href ng-click="login">Connexion</a>
     <a class="item">Inscription</a>
   </div>
 
@@ -68,7 +68,7 @@
           <a class="item" href="#/concept" active-link="active">Concept</a>
           <a class="item" href="#/ranking" active-link="active">Classement</a>
           <div class="right item">
-            <a class="ui inverted button">Connexion</a>
+            <a class="ui inverted button" href ng-click="login">Connexion</a>
             <a class="ui inverted button">Inscription</a>
           </div>
         </div>

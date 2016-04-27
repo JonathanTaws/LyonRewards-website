@@ -19,6 +19,36 @@ app.config(['$routeProvider', 'cfpLoadingBarProvider', function ($routeProvider,
       .otherwise({redirectTo: '/home'}); // TODO Change to 404
 }]);
 
+// Main controler
+app.controller('MainCtrl', ['$scope', '$element', function(scope, element) {
+
+  // Fix menu when passed
+  element.find('.masthead').visibility({
+    once: false,
+    onBottomPassed: function () {
+      $('.fixed.menu').transition('fade in');
+    },
+    onBottomPassedReverse: function () {
+      $('.fixed.menu').transition('fade out');
+    }
+  });
+
+  // Create sidebar and attach to menu open
+  element.find('.ui.sidebar').sidebar('attach events', '.toc.item');
+
+  // Login modal
+  var loginModalElt = element.find('#auth-modal.ui.modal');
+  scope.login = function() {
+    loginModalElt.modal('show');
+  }
+  scope.$on('event:auth-loginRequired', function() {
+    loginModalElt.modal('show');
+  });
+  scope.$on('event:auth-loginConfirmed', function() {
+    loginModalElt.modal('hide');
+  });
+}]);
+
 /*****************************************************************
  *                             Directives                        *
  *****************************************************************/
@@ -46,37 +76,6 @@ app.directive('activeLink', ['$location', function (location) {
   };
 }]);
 
-app.directive('initApp', function() {
-  return {
-    restrict: 'C',
-    link: function(scope, elem, attrs) {
-
-      // Fix menu when passed
-      elem.find('.masthead').visibility({
-        once: false,
-        onBottomPassed: function () {
-          $('.fixed.menu').transition('fade in');
-        },
-        onBottomPassedReverse: function () {
-          $('.fixed.menu').transition('fade out');
-        }
-      });
-
-      // Create sidebar and attach to menu open
-      elem.find('.ui.sidebar').sidebar('attach events', '.toc.item');
-
-      // Login modal
-      var login = elem.find('#auth-modal.ui.modal');
-      scope.$on('event:auth-loginRequired', function() {
-        login.modal('show');
-      });
-      scope.$on('event:auth-loginConfirmed', function() {
-        login.modal('hide');
-      });
-    }
-  }
-});
-
 app.directive('includeReplace', function () {
   return {
     require: 'ngInclude',
@@ -85,12 +84,4 @@ app.directive('includeReplace', function () {
       el.replaceWith(el.children());
     }
   };
-});
-
-/*****************************************************************
- *                     Functions Document Ready                  *
- *****************************************************************/
-
-jQuery(document).ready(function () {
-
 });
