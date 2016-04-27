@@ -1,19 +1,33 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('lyonRewards', [
+var app = angular.module('lyonRewards', [
   'ngRoute',
   'ngAnimate',
   'angular-loading-bar',
+  'http-auth-interceptor',
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking'
-]).config(['$routeProvider', 'cfpLoadingBarProvider', function ($routeProvider, cfpLoadingBarProvider) {
+]);
+
+// Configuration
+app.config(['$routeProvider', 'cfpLoadingBarProvider', function ($routeProvider, cfpLoadingBarProvider) {
   cfpLoadingBarProvider.latencyThreshold = 0;
   $routeProvider
       .when('/', {redirectTo: '/home'})
       .otherwise({redirectTo: '/home'}); // TODO Change to 404
-}]).directive('activeLink', ['$location', function (location) {
+}]);
+
+/*****************************************************************
+ *                             Directives                        *
+ *****************************************************************/
+
+/**
+ * Menu usefull like : <a class="active item" href="#/home" active-link="active">Accueil</a>
+ * Directive : active-link="<name of the classes to display if active>"
+ */
+app.directive('activeLink', ['$location', function (location) {
   return {
     restrict: 'A',
     link: function (scope, element, attrs, controller) {
@@ -32,20 +46,51 @@ angular.module('lyonRewards', [
   };
 }]);
 
-jQuery(document).ready(function () {
+app.directive('initApp', function() {
+  return {
+    restrict: 'C',
+    link: function(scope, elem, attrs) {
 
-  // fix menu when passed
-  $('.masthead').visibility({
-    once: false,
-    onBottomPassed: function () {
-      $('.fixed.menu').transition('fade in');
-    },
-    onBottomPassedReverse: function () {
-      $('.fixed.menu').transition('fade out');
+      // Fix menu when passed
+      elem.find('.masthead').visibility({
+        once: false,
+        onBottomPassed: function () {
+          $('.fixed.menu').transition('fade in');
+        },
+        onBottomPassedReverse: function () {
+          $('.fixed.menu').transition('fade out');
+        }
+      });
+
+      // Create sidebar and attach to menu open
+      elem.find('.ui.sidebar').sidebar('attach events', '.toc.item');
+
+      // Login modal
+      var login = elem.find('#auth-modal.ui.modal');
+      scope.$on('event:auth-loginRequired', function() {
+        login.modal('show');
+      });
+      scope.$on('event:auth-loginConfirmed', function() {
+        login.modal('hide');
+      });
     }
-  });
+  }
+});
 
-  // create sidebar and attach to menu open
-  $('.ui.sidebar').sidebar('attach events', '.toc.item');
+app.directive('includeReplace', function () {
+  return {
+    require: 'ngInclude',
+    restrict: 'A', /* optional */
+    link: function (scope, el, attrs) {
+      el.replaceWith(el.children());
+    }
+  };
+});
+
+/*****************************************************************
+ *                     Functions Document Ready                  *
+ *****************************************************************/
+
+jQuery(document).ready(function () {
 
 });

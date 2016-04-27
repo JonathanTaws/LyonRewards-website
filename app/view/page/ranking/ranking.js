@@ -4,7 +4,7 @@ angular.module('lyonRewards.ranking', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/ranking', {
-    templateUrl: 'view/ranking/ranking.html',
+    templateUrl: 'view/page/ranking/ranking.html',
     controller: 'RankingCtrl'
   });
 }])

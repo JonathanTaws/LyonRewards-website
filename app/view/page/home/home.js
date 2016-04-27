@@ -4,7 +4,7 @@ angular.module('lyonRewards.home', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/home', {
-    templateUrl: 'view/home/home.html',
+    templateUrl: 'view/page/home/home.html',
     controller: 'HomeCtrl'
   });
 }])

@@ -3,7 +3,6 @@
 }
 
 .masthead.segment {
-    min-height: 700px;
     padding: 1em 0em;
 }
 .masthead .logo.item img {
@@ -21,6 +20,11 @@
 .masthead h2 {
     font-size: 1.7em;
     font-weight: normal;
+}
+
+.ui.container.promotion {
+    padding-top: 50px;
+    min-height: 300px;
 }
 
 .ui.vertical.stripe {
