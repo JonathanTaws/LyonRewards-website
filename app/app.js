@@ -8,12 +8,28 @@ angular.module('lyonRewards', [
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking'
-]).
-config(['$routeProvider', 'cfpLoadingBarProvider', function($routeProvider, cfpLoadingBarProvider) {
+]).config(['$routeProvider', 'cfpLoadingBarProvider', function ($routeProvider, cfpLoadingBarProvider) {
   cfpLoadingBarProvider.latencyThreshold = 0;
   $routeProvider
-      .when('/', {redirectTo:'/home'})
-      .otherwise({redirectTo:'/home'}); // TODO Change to 404
+      .when('/', {redirectTo: '/home'})
+      .otherwise({redirectTo: '/home'}); // TODO Change to 404
+}]).directive('activeLink', ['$location', function (location) {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs, controller) {
+      var clazz = attrs.activeLink;
+      var path = attrs.href;
+      path = path.substring(1); //hack because path does not return including hashbang
+      scope.location = location;
+      scope.$watch('location.path()', function (newPath) {
+        if (path === newPath) {
+          element.addClass(clazz);
+        } else {
+          element.removeClass(clazz);
+        }
+      });
+    }
+  };
 }]);
 
 jQuery(document).ready(function () {
