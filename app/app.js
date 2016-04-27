@@ -22,31 +22,6 @@ app.config(['$routeProvider', 'cfpLoadingBarProvider', function ($routeProvider,
 // Main controler
 app.controller('MainCtrl', ['$scope', '$element', function(scope, element) {
 
-  // Fix menu when passed
-  element.find('.masthead').visibility({
-    once: false,
-    onBottomPassed: function () {
-      $('.fixed.menu').transition('fade in');
-    },
-    onBottomPassedReverse: function () {
-      $('.fixed.menu').transition('fade out');
-    }
-  });
-
-  // Create sidebar and attach to menu open
-  element.find('.ui.sidebar').sidebar('attach events', '.toc.item');
-
-  // Login modal
-  var loginModalElt = element.find('#auth-modal.ui.modal');
-  scope.login = function() {
-    loginModalElt.modal('show');
-  }
-  scope.$on('event:auth-loginRequired', function() {
-    loginModalElt.modal('show');
-  });
-  scope.$on('event:auth-loginConfirmed', function() {
-    loginModalElt.modal('hide');
-  });
 }]);
 
 /*****************************************************************
