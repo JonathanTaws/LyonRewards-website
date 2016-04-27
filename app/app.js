@@ -19,8 +19,8 @@ app.config(['$routeProvider', 'cfpLoadingBarProvider', function ($routeProvider,
       .otherwise({redirectTo: '/home'}); // TODO Change to 404
 }]);
 
-// Main controler
-app.controller('MainCtrl', ['$scope', '$element', function(scope, element) {
+// Run
+app.run([function() {
 
 }]);
 
