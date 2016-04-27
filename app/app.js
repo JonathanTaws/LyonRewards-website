@@ -10,7 +10,9 @@ var app = angular.module('lyonRewards', [
   'http-auth-interceptor',
   'lyonRewards.home',
   'lyonRewards.concept',
-  'lyonRewards.ranking'
+  'lyonRewards.ranking',
+  'lyonRewards.login',
+  'lyonRewards.signup'
 ]);
 
 // Configuration
@@ -23,35 +25,15 @@ app.config(['$routeProvider', 'cfpLoadingBarProvider', function ($routeProvider,
 
 // Run
 app.run(['$rootScope', function(rootScope) {
+
+  // Menu Collapse
   rootScope.isMenuCollapsed = true;
+
 }]);
 
 /*****************************************************************
  *                             Directives                        *
  *****************************************************************/
-
-/**
- * Menu usefull like : <a class="active item" href="#/home" active-link="active">Accueil</a>
- * Directive : active-link="<name of the classes to display if active>"
- */
-app.directive('activeLink', ['$location', function (location) {
-  return {
-    restrict: 'A',
-    link: function (scope, element, attrs, controller) {
-      var clazz = attrs.activeLink;
-      var path = attrs.href;
-      path = path.substring(1); //hack because path does not return including hashbang
-      scope.location = location;
-      scope.$watch('location.path()', function (newPath) {
-        if (path === newPath) {
-          element.addClass(clazz);
-        } else {
-          element.removeClass(clazz);
-        }
-      });
-    }
-  };
-}]);
 
 app.directive('includeReplace', function () {
   return {
@@ -59,6 +41,33 @@ app.directive('includeReplace', function () {
     restrict: 'A', /* optional */
     link: function (scope, el, attrs) {
       el.replaceWith(el.children());
+    }
+  };
+});
+
+app.directive('bsNavbar', function($location) {
+  return {
+    restrict: 'A',
+    link: function postLink(scope, element, attrs, controller) {
+      // Watch for the $location
+      scope.$watch(function() {
+        return $location.path();
+      }, function(newValue, oldValue) {
+
+        jQuery('li[data-match-route]', element).each(function(k, li) {
+          var $li = angular.element(li),
+          // data('match-rout') does not work with dynamic attributes
+            pattern = $li.attr('data-match-route'),
+            regexp = new RegExp('^' + pattern + '$', ['i']);
+
+          if(regexp.test(newValue)) {
+            $li.addClass('active');
+          } else {
+            $li.removeClass('active');
+          }
+
+        });
+      });
     }
   };
 });

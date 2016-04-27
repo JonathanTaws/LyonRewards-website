@@ -29,7 +29,7 @@
 </head>
 <body>
 
-  <ng-include src="'view/embed/header.html'"></ng-include>
+  <ng-include src="'view/embed/header.html'" include-replace></ng-include>
 
   <!--[if lt IE 7]>
   <p class="browsehappy">Vous utilisez un navigateur <strong>dépassé</strong>. Merci <a href="http://browsehappy.com/">de le mettre à jour</a> pour améliorer votre expérience sur notre site.</p>
@@ -38,6 +38,8 @@
   <div ng-view></div>
 
   <!-- Scripts -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -50,6 +52,8 @@
   <script src="view/page/home/home.js"></script>
   <script src="view/page/concept/concept.js"></script>
   <script src="view/page/ranking/ranking.js"></script>
+  <script src="components/authentication/login-modal.js"></script>
+  <script src="components/authentication/signup-modal.js"></script>
 
 </body>
 

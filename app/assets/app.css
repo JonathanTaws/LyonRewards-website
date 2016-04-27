@@ -1,1 +1,19 @@
+/* UI Bootstrap - To prevent default bootstrap cursor properties with angular */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.welcome {
+    background-color: #222;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+body {
+    background-color: #f8f8f8;
+}
