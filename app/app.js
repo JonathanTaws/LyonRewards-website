@@ -4,7 +4,9 @@
 var app = angular.module('lyonRewards', [
   'ngRoute',
   'ngAnimate',
+  'ngTouch',
   'angular-loading-bar',
+  'ui.bootstrap',
   'http-auth-interceptor',
   'lyonRewards.home',
   'lyonRewards.concept',
@@ -20,8 +22,8 @@ app.config(['$routeProvider', 'cfpLoadingBarProvider', function ($routeProvider,
 }]);
 
 // Run
-app.run([function() {
-
+app.run(['$rootScope', function(rootScope) {
+  rootScope.isMenuCollapsed = true;
 }]);
 
 /*****************************************************************
