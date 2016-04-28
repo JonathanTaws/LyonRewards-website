@@ -16,11 +16,16 @@ var app = angular.module('lyonRewards', [
 ]);
 
 // Configuration
-app.config(['$routeProvider', 'cfpLoadingBarProvider', function ($routeProvider, cfpLoadingBarProvider) {
+app.config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function ($routeProvider, cfpLoadingBarProvider, $httpProvider) {
   cfpLoadingBarProvider.latencyThreshold = 0;
   $routeProvider
       .when('/', {redirectTo: '/home'})
       .otherwise({redirectTo: '/home'}); // TODO Change to 404
+
+  // TODO remove when production is done
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
 }]);
 
 // Run
