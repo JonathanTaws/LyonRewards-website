@@ -1,7 +1,98 @@
-<style>
-  /* Your style here*/
-</style>
-
-<div class="container">
-  <h2>Concept</h2>
+<div class="container-fluid welcome">
+    <div class="text-center">
+        <h1 class="text-capitalize">Concept</h1>
+        <br>
+    </div>
 </div>
+
+<div class="container concept">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="media">
+                <div class="media-body">
+                    <h3 class="media-heading">Idée</h3>
+                    <div>
+                        <p class="text-justify">
+                            Le concept est le suivant : un système de récompense des utilisateurs en fonction des actes “citoyens” qu’ils accomplissent, en se focalisant dans un premier temps dans la ville de Lyon. Cette définition peut paraître vague au premier abord mais elle permettra d’avoir suffisamment de souplesse pour appliquer ce concept sous des formes diverses.
+                        </p><p class="text-justify">
+                            En pratique cela signifierait que chaque citoyen de Lyon possède un compte, qui permet de l’identifier. À ce compte est lié un nombre de “Lyon Rewards” (points) qui sont gagnés grâce à diverses actions (voir exemples ci-après), et qui peuvent ensuite être dépensés par la personne chez les partenaires de la ville de Lyon, se présentant par exemple sous la forme de remises sur le prix des billets au cinéma UGC, de remises sur les visites de musées, ou sur des transports TCL, etc.
+                        </p><p class="text-justify">
+                            Les utilisateurs auront donc un intérêt certain à gagner des points, qui permet en contrepartie d’encourager les habitants à faire des choses que la ville de Lyon souhaiterait de ses citoyens. On pourrait par exemple récompenser le fait de prendre les transports en communs plutôt que la voiture, voire de prendre le vélo. On pourrait également récompenser le fait d’apporter le verre au bon endroit (à la machine à verre), cette dernière détectant un QR Code identifiant l’utilisateur, et lui rapportant des points, etc. De même, pour promouvoir des évènements du Grand Lyon, des QR Code seraient placés sur les invitations ou au milieu du lieu de rassemblement afin d’inciter les habitants à venir et à démontrer leur présence sur le lieu en question.
+                        </p><p class="text-justify">
+                            A plus long terme, un tel système permettrait à la ville de Lyon d’avoir un véritable médium de communication avec ses “citoyens”, et de bénéficier d’un réseau d’utilisateurs prêt à s’investir pour accomplir des missions, des actions citoyennes, pour améliorer la qualité de vie dans la ville. Par exemple, la ville de Lyon pourrait organiser des concours où les utilisateurs doivent prendre en photo des points d’intérêts clés de la ville de Lyon dans un temps imparti, et les meilleurs seraient récompensés, afin de mettre en avant une image de la ville comme étant dynamique et proche de ses habitants. Ce concept pourrait également s’appliquer à des systèmes de vote, où la ville pourrait proposer des améliorations ou des changements, et les utilisateurs donneraient leur avis sous la forme d’un vote simple, qui leur ferait gagner des points.
+                        </p><p class="text-justify">
+                            On pourrait également mettre en place un système de réalisation de missions ou de tâches entre citoyens, qui permettrait de venir en aide localement à des habitants de la ville. Par exemple, un utilisateur a besoin d’aide pour réparer sa voiture, un autre utilisateur pourrait spontanément venir l’aider et gagner des points grâce à sa “bonne action”.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="media">
+                <div class="media-body">
+                    <h3 class="media-heading">Informatique</h3>
+                    <div>
+                        <p class="text-justify">
+                            Cette idée nécessiterait la mise en place d’une application mobile, d’un site web, et d’une API REST sur un serveur centralisé afin d’avoir une architecture normée pour les échanges d’informations (utilisée à la fois par le site et par l’application mobile).
+                        </p><p class="text-justify">
+                            L’application mobile permettrait de suivre chaque utilisateur pour attribuer des points à ces derniers suivant les actions réalisées. On utiliserait ainsi le relevé GPS ainsi que le lecteur NFC pour vérifier l’utilisation de certaines cartes ou la caméra pour scanner les QR code déposés dans la ville. Afin d’ajouter une dimension sociale à l’application, l’utilisateur aura la possibilité d’ajouter des photos, voire des messages pour permettre des échanges entre citoyens. Bien évidemment, tout ceci serait fait avec la permission de l’utilisateur : ainsi, si l’utilisateur veut gagner des points à travers ses déplacements, il faudra qu’il active le suivi GPS, mais s’il ne le souhaite pas, il ne sera pas obligé d’utiliser cette fonctionnalité.
+                        </p><p class="text-justify">
+                            Le site est plutôt destiné à afficher les informations générales et offrir une interface déportée du téléphone et accessible sur internet. On y trouverait notamment les informations sur notre système mais aussi comment y participer, ainsi que la visualisation de son compte personnel. Un classement des utilisateurs suivants les points collectés serait présenté, ainsi qu’une carte montrant les différents indicateurs (pollution, météo, circulation…) afin d’informer les habitants des possibles points à gagner.
+                        </p><p class="text-justify">
+                            D’un point de vue algorithmique, il pourrait être intéressant de trouver une manière de reconnaître les déplacements (à vélo, à pied, en voiture …), grâce aux coordonnées GPS relevées par l’application mobile, mais aussi à l’aide de comparaisons avec les données provenant de l’Open Data de Lyon (TCL et les données du trafic en temps réel). Ainsi, à l’aide de méthodes de fouille de données voire de machine learning, on pourrait reconnaître la nature du déplacement et donc attribuer la bonne récompense. On pourrait alors attribuer un certain nombre de point suivant les conditions météo, les difficultés de circulation, ou le niveau de pollution actuellement enregistrées dans la zone concernée ou la ville entière. De même, étant donné que les données de pollution ne sont pas en temps réel, nous pourrions établir un modèle prédictif (assez simple) permettant d’utiliser cette information au jour le jour.
+                        </p><p class="text-justify">
+                            Afin d’accéder aux différentes données de l’application, une API REST permettrait de servir à la fois l’application Android et le site web, agissant ainsi comme un référentiel de données commun et permettant de s’interfaçer avec n’importe quel support.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="media">
+                <div class="media-body">
+                    <h3 class="media-heading">Positionnement par rapport à l'existant</h3>
+                    <div>
+                        <p class="text-justify">
+                            La ville de Lyon possède déjà des partenariats avec les cinémas UGC (réduction du coût des tickets de cinéma sur présentation de tickets de transport TCL), ce qui nous permettrait déjà, à travers notre système, de bénéficier de ce partenariat et proposer des récompenses réalistes par rapport à l’existant.
+                        </p><p class="text-justify">
+                            De plus, l’image du grand Lyon étant relativement bonne, les entreprises/commerces auraient tout intérêt à lier leur propre image à celle du grand Lyon, par exemple en créant un label “Partenaire Grand Lyon” : elles seraient mises en avant sur notre application (cartographie des partenaires entre autres), et elles proposeraient des remises sur leurs produits en échange de “points citoyens”. On pourrait d’ailleurs utiliser cette donnée pour faire un classement des partenaires qui utilisent le plus notre système.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="media">
+                <div class="media-body">
+                    <h3 class="media-heading">Besoin</h3>
+                    <div>
+                        <p class="text-justify">
+                            Si l’application venait à tourner en production, nous aurions besoin d’un serveur pour le site web et d’un autre afin d’héberger l’API REST.
+                            Dans l'éventualité où les calculs (machine learning) nécessiterait beaucoup de ressources, il serait envisageable de déporter ces calculs sur des machines prévues à cet effet ou sur des clusters de machines.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+              <span class="pull-right">
+                <button type="button" class="btn btn-default" onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+                  <span><i class="glyphicon glyphicon-chevron-up"></i> Retour en haut de page</span>
+                </button>
+              </span>
+        </p>
+    </div>
+</div>
+
+
+
