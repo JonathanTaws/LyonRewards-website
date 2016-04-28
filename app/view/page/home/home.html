@@ -19,10 +19,15 @@
 
       <div class="events">
 
-        <div class="media event event-default" ng-repeat="event in events">
+        <div class="media event event-default" ng-repeat="event in events" ng-controller="EventCtrl">
           <div class="media-body">
             <h4 class="media-heading">{{event.title}}</h4>
-            <p class="text-justify">{{event.description}}</p>
+            <div uib-collapse="!isCollapsed">
+              <p class="text-justify">{{event.description | cut:true:100:' ...'}}</p>
+            </div>
+            <div uib-collapse="isCollapsed">
+              <p class="text-justify">{{event.description}}</p>
+            </div>
           </div>
           <div class="media-right" ng-if="event.hasOwnProperty(url)">
             <a href="#">
@@ -31,9 +36,15 @@
           </div>
           <div class="media-footer">
             <p>
-              <span am-time-ago="event.publishDate"></span>
+              <span class="publish-date">
+                <i class="glyphicon glyphicon-time"></i>
+                <span am-time-ago="event.publishDate"></span>
+              </span>
               <span class="pull-right">
-                <a>Plus d'informations</a>
+                <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
+                  <span ng-show="isCollapsed"><i class="glyphicon glyphicon-plus"></i> Plus d'informations</span>
+                  <span ng-show="!isCollapsed"><i class="glyphicon glyphicon-minus"></i> Moins d'informations</span>
+                </button>
               </span>
             </p>
             <pre>{{event | json}}</pre>

@@ -31,9 +31,5 @@ app.config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function
 
 // Run
 app.run(function($rootScope, amMoment) {
-
-  // Menu Collapse
-  $rootScope.isMenuCollapsed = true;
-
   amMoment.changeLocale('fr', null);
 });

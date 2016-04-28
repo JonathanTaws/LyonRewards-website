@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('lyonRewards.home', ['ngRoute'])
+angular.module('lyonRewards.home', ['ngRoute', 'angularMoment'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/home', {
@@ -31,4 +31,8 @@ angular.module('lyonRewards.home', ['ngRoute'])
   };
 
   $http.get('https://lyonrewards.antoine-chabert.fr/api/events', {responseType: 'json'}).then(successCallback, errorCallback);
+})
+
+.controller('EventCtrl', function($scope) {
+  $scope.isCollapsed = true;
 });
