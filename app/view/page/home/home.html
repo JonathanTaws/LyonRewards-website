@@ -27,7 +27,7 @@
             </div>
             <div uib-collapse="isCollapsed">
               <p class="text-justify">{{event.description}}</p>
-              <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+              <ui-gmap-google-map ng-if="isVisible" center='map.center' zoom='map.zoom'></ui-gmap-google-map>
             </div>
           </div>
           <div class="media-right" ng-if="event.hasOwnProperty(url)">
@@ -42,7 +42,7 @@
                 <span am-time-ago="event.publishDate"></span>
               </span>
               <span class="pull-right">
-                <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
+                <button type="button" class="btn btn-default" ng-click="toggle()">
                   <span ng-show="isCollapsed"><i class="glyphicon glyphicon-plus"></i> Plus d'informations</span>
                   <span ng-show="!isCollapsed"><i class="glyphicon glyphicon-minus"></i> Moins d'informations</span>
                 </button>

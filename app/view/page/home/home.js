@@ -33,8 +33,15 @@ appPageHome.controller('HomeCtrl', function($scope, $http) {
   $http.get('https://lyonrewards.antoine-chabert.fr/api/events', {responseType: 'json'}).then(successCallback, errorCallback);
 });
 
-appPageHome.controller('EventCtrl', function($scope, $log) {
+appPageHome.controller('EventCtrl', function($scope, $log, $timeout) {
   $scope.isCollapsed = true;
+  $scope.isVisible = false;
+  $scope.toggle = function() {
+    $timeout(function() {
+      $scope.isVisible = !$scope.isVisible;
+    }, 500);
+    $scope.isCollapsed = !$scope.isCollapsed;
+  }
   $scope.map = {
     center: {
       latitude: $scope.event.latitude,
@@ -42,5 +49,4 @@ appPageHome.controller('EventCtrl', function($scope, $log) {
     },
     zoom: 11
   };
-  $log.debug($scope.map);
 });
