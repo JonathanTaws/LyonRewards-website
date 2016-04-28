@@ -1,4 +1,4 @@
-<div class="container-fluid welcome">
+<div class="container-fluid welcome welcome-home">
   <div class="text-center">
     <h1 class="text-capitalize">Lyon Rewards</h1>
     <h4>Et si être citoyen permettait d'économiser de l'argent ?</h4>
@@ -13,7 +13,7 @@
 
     <div class="col-sm-8">
 
-      <div class="loader text-center">
+      <div class="loader-container">
         <img src="assets/images/ajax-loader.gif"/>
       </div>
 
@@ -27,8 +27,8 @@
             </div>
             <div uib-collapse="isCollapsed">
               <p class="text-justify">{{event.description}}</p>
-              <div class="well">
-                <div ng-if="!isVisible" class="text-center">
+              <div class="well wrapper-angular-google-map">
+                <div ng-if="!isVisible" class="loader-container">
                   <img src="assets/images/ajax-loader.gif"/>
                 </div>
                 <ui-gmap-google-map ng-if="isVisible" center='map.center' zoom='map.zoom'>

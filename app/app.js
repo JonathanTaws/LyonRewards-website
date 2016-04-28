@@ -42,3 +42,7 @@ app.config(function ($routeProvider, cfpLoadingBarProvider, $httpProvider, uiGma
 app.run(function($rootScope, amMoment) {
   amMoment.changeLocale('fr', null);
 });
+
+app.controller('MainMenuCtrl', function() {
+  jQuery('#main-menu').addClass('navbar-fixed-top').addClass('navbar-inverse');
+});

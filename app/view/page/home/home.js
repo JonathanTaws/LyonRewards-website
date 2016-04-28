@@ -12,7 +12,7 @@ appPageHome.config(['$routeProvider', function($routeProvider) {
 appPageHome.controller('HomeCtrl', function($scope, $http) {
 
   $scope.events = [];
-  var loader = jQuery('.home .loader');
+  var loader = jQuery('.home .loader-container');
   var events = jQuery('.home .events');
   events.fadeOut(0);
 
