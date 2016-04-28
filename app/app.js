@@ -21,9 +21,11 @@ var app = angular.module('lyonRewards', [
 // Configuration
 app.config(function ($routeProvider, cfpLoadingBarProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
   cfpLoadingBarProvider.latencyThreshold = 0;
+  /* TODO Uncomment in production !!
   $routeProvider
       .when('/', {redirectTo: '/home'})
-      .otherwise({redirectTo: '/home'}); // TODO Change to 404
+      .otherwise({redirectTo: '/home'}); // TODO Change this line to display 404
+  */
 
   // Google Map init SDK JavaScript
   uiGmapGoogleMapApiProvider.configure({

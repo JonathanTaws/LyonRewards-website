@@ -1,14 +1,24 @@
 'use strict';
 
-angular.module('lyonRewards.dashboard', ['ngRoute'])
+var appPageDashboard = angular.module('lyonRewards.dashboard', ['ngRoute']);
 
-.config(['$routeProvider', function($routeProvider) {
+appPageDashboard.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/dashboard', {
     templateUrl: 'view/page/dashboard/dashboard.html',
-    controller: 'DashboardCtrl'
-  });
-}])
+    controller: 'DashboardCtrl' /*, TODO Uncomment in production
+    resolve: {
+      factory: function ($q, $rootScope, $location) {
+        if ($rootScope.isLogin) {
+          return true;
+        } else {
+          $location.path('/login');
+        }
+      }
+    }*/
+  }).otherwise({ redirectTo: '/' });
 
-.controller('DashboardCtrl', function($scope, $http) {
+}]);
 
-})
+appPageDashboard.controller('DashboardCtrl', function($scope, $http) {
+
+});

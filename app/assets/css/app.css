@@ -36,3 +36,9 @@ body {
     padding-top: 10px;
     border-top: 1px solid #eee;
 }
+
+.dashboard-nav {
+    border-right: 1px solid #eee;
+    min-height: 100vh;
+    margin-top: -20px;
+}
