@@ -26,7 +26,6 @@ app.config(function ($routeProvider, cfpLoadingBarProvider, $httpProvider, uiGma
 
   // Google Map init SDK JavaScript
   uiGmapGoogleMapApiProvider.configure({
-    china: true,
     key: 'AIzaSyAb6hZTjcu4AsMj-J5L4WTWWHz7m-MOpUQ',
     v: '3.20', //defaults to latest 3.X anyhow
     libraries: 'weather,geometry,visualization'
