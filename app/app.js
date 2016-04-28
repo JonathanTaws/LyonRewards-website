@@ -44,5 +44,5 @@ app.run(function($rootScope, amMoment) {
 });
 
 app.controller('MainMenuCtrl', function() {
-  jQuery('#main-menu').addClass('navbar-fixed-top').addClass('navbar-inverse');
+  
 });
