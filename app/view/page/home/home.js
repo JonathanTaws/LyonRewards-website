@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('lyonRewards.home', ['ngRoute', 'angularMoment'])
+angular.module('lyonRewards.home', ['ngRoute', 'angularMoment', 'uiGmapgoogle-maps'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/home', {
@@ -33,6 +33,14 @@ angular.module('lyonRewards.home', ['ngRoute', 'angularMoment'])
   $http.get('https://lyonrewards.antoine-chabert.fr/api/events', {responseType: 'json'}).then(successCallback, errorCallback);
 })
 
-.controller('EventCtrl', function($scope) {
+.controller('EventCtrl', function($scope, $log) {
   $scope.isCollapsed = true;
+  $scope.map = {
+    center: {
+      latitude: $scope.event.latitude,
+      longitude: $scope.event.longitude
+    },
+    zoom: 11
+  };
+  $log.debug($scope.map);
 });

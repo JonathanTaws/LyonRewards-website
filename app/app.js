@@ -9,6 +9,7 @@ var app = angular.module('lyonRewards', [
   'ui.bootstrap',
   'http-auth-interceptor',
   'angularMoment',
+  'uiGmapgoogle-maps',
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking',
@@ -17,17 +18,25 @@ var app = angular.module('lyonRewards', [
 ]);
 
 // Configuration
-app.config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function ($routeProvider, cfpLoadingBarProvider, $httpProvider) {
+app.config(function ($routeProvider, cfpLoadingBarProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
   cfpLoadingBarProvider.latencyThreshold = 0;
   $routeProvider
       .when('/', {redirectTo: '/home'})
       .otherwise({redirectTo: '/home'}); // TODO Change to 404
 
+  // Google Map init SDK JavaScript
+  uiGmapGoogleMapApiProvider.configure({
+    china: true,
+    key: 'AIzaSyAb6hZTjcu4AsMj-J5L4WTWWHz7m-MOpUQ',
+    v: '3.20', //defaults to latest 3.X anyhow
+    libraries: 'weather,geometry,visualization'
+  });
+
   // TODO remove when production is done
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-}]);
+});
 
 // Run
 app.run(function($rootScope, amMoment) {

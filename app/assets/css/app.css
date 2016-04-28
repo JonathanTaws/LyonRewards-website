@@ -1,5 +1,8 @@
-/* UI Bootstrap - To prevent default bootstrap cursor properties with angular */
+/* Angular UI Bootstrap - To prevent default bootstrap cursor properties with angular */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/* Angular UI Google Map */
+.angular-google-map-container { height: 400px; }
 
 body {
     background-color: #fff;

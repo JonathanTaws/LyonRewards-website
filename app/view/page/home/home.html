@@ -27,6 +27,7 @@
             </div>
             <div uib-collapse="isCollapsed">
               <p class="text-justify">{{event.description}}</p>
+              <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
             </div>
           </div>
           <div class="media-right" ng-if="event.hasOwnProperty(url)">
@@ -47,7 +48,7 @@
                 </button>
               </span>
             </p>
-            <pre>{{event | json}}</pre>
+            <!--<pre>{{event | json}}</pre>-->
           </div>
         </div>
 
