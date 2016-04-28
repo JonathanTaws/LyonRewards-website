@@ -43,6 +43,6 @@ app.run(function($rootScope, amMoment) {
   amMoment.changeLocale('fr', null);
 });
 
-app.controller('MainMenuCtrl', function() {
+app.controller('MainMenuCtrl', function($log) {
   
 });

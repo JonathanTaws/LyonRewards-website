@@ -1,6 +1,7 @@
 <header ng-controller="MainMenuCtrl">
-  <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" bs-navbar>
+  <nav class="navbar navbar-default" bs-navbar>
     <div class="container">
+
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" ng-init="$root.isMenuCollapsed = true" ng-click="$root.isMenuCollapsed = !$root.isMenuCollapsed" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
@@ -22,7 +23,6 @@
           <li data-match-route="/ranking">
             <a href="#/ranking">Classement</a>
           </li>
-
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -44,4 +44,5 @@
 
     </div>
   </nav>
+
 </header>
