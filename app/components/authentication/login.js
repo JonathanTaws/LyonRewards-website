@@ -2,7 +2,7 @@
 
 var appLogin = angular.module('lyonRewards.login', ['http-auth-interceptor']);
 
-appLogin.run(function ($rootScope, $uibModal, $log) {
+appLogin.run(function ($rootScope, $uibModal, $log, $location) {
 
   $rootScope.isLogin = false;
   $rootScope.$on('event:auth-loginRequired', function() {
@@ -28,7 +28,7 @@ appLogin.run(function ($rootScope, $uibModal, $log) {
   };
 
   $rootScope.logout = function() {
-    // TODO
+    $location.path('/');
     $rootScope.isLogin = false;
   }
 });

@@ -14,7 +14,8 @@ var app = angular.module('lyonRewards', [
   'lyonRewards.concept',
   'lyonRewards.ranking',
   'lyonRewards.login',
-  'lyonRewards.signup'
+  'lyonRewards.signup',
+  'lyonRewards.dashboard'
 ]);
 
 // Configuration

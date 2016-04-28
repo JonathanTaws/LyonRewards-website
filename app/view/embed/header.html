@@ -32,8 +32,8 @@
           <li ng-show="!$root.isLogin">
             <a ng-click="$root.signup()">Inscription</a>
           </li>
-          <li ng-show="$root.isLogin">
-            <a>Tableau de bord</a>
+          <li data-match-route="/dashboard" ng-show="$root.isLogin">
+            <a href="#/dashboard">Tableau de bord</a>
           </li>
           <li ng-show="$root.isLogin">
             <a ng-click="$root.logout()">Déconnexion</a>
