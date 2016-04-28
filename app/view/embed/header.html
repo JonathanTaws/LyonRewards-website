@@ -32,7 +32,7 @@
           <li ng-show="!$root.isLogin">
             <a ng-click="$root.signup()">Inscription</a>
           </li>
-          <li data-match-route="/dashboard" ng-show="$root.isLogin">
+          <li data-match-route="/dashboard.*" ng-show="$root.isLogin">
             <a href="#/dashboard">Tableau de bord</a>
           </li>
           <li ng-show="$root.isLogin">

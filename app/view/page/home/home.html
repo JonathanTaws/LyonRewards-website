@@ -27,7 +27,14 @@
             </div>
             <div uib-collapse="isCollapsed">
               <p class="text-justify">{{event.description}}</p>
-              <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+              <div class="well">
+                <div ng-if="!isVisible" class="text-center">
+                  <img src="assets/images/ajax-loader.gif"/>
+                </div>
+                <ui-gmap-google-map ng-if="isVisible" center='map.center' zoom='map.zoom'>
+                  <ui-gmap-marker idKey='event.id' coords='map.center'></ui-gmap-marker>
+                </ui-gmap-google-map>
+              </div>
             </div>
           </div>
           <div class="media-right" ng-if="event.hasOwnProperty(url)">
@@ -39,10 +46,10 @@
             <p>
               <span class="publish-date">
                 <i class="glyphicon glyphicon-time"></i>
-                <span am-time-ago="event.publishDate"></span>
+                <span am-time-ago="event.publish_date"></span>
               </span>
               <span class="pull-right">
-                <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
+                <button type="button" class="btn btn-default" ng-click="toggle()">
                   <span ng-show="isCollapsed"><i class="glyphicon glyphicon-plus"></i> Plus d'informations</span>
                   <span ng-show="!isCollapsed"><i class="glyphicon glyphicon-minus"></i> Moins d'informations</span>
                 </button>

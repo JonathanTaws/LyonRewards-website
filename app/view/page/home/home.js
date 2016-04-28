@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('lyonRewards.home', ['ngRoute', 'angularMoment', 'uiGmapgoogle-maps'])
+var appPageHome = angular.module('lyonRewards.home', ['ngRoute', 'angularMoment', 'uiGmapgoogle-maps']);
 
-.config(['$routeProvider', function($routeProvider) {
+appPageHome.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/home', {
     templateUrl: 'view/page/home/home.html',
     controller: 'HomeCtrl'
   });
-}])
+}]);
 
-.controller('HomeCtrl', function($scope, $http) {
+appPageHome.controller('HomeCtrl', function($scope, $http) {
 
   $scope.events = [];
   var loader = jQuery('.home .loader');
@@ -31,10 +31,17 @@ angular.module('lyonRewards.home', ['ngRoute', 'angularMoment', 'uiGmapgoogle-ma
   };
 
   $http.get('https://lyonrewards.antoine-chabert.fr/api/events', {responseType: 'json'}).then(successCallback, errorCallback);
-})
+});
 
-.controller('EventCtrl', function($scope, $log) {
+appPageHome.controller('EventCtrl', function($scope, $log, $timeout) {
   $scope.isCollapsed = true;
+  $scope.isVisible = false;
+  $scope.toggle = function() {
+    $timeout(function() {
+      $scope.isVisible = !$scope.isVisible;
+    }, 500);
+    $scope.isCollapsed = !$scope.isCollapsed;
+  }
   $scope.map = {
     center: {
       latitude: $scope.event.latitude,
@@ -42,5 +49,4 @@ angular.module('lyonRewards.home', ['ngRoute', 'angularMoment', 'uiGmapgoogle-ma
     },
     zoom: 11
   };
-  $log.debug($scope.map);
 });
