@@ -8,6 +8,7 @@ var app = angular.module('lyonRewards', [
   'angular-loading-bar',
   'ui.bootstrap',
   'http-auth-interceptor',
+  'angularMoment',
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking',
@@ -29,9 +30,10 @@ app.config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function
 }]);
 
 // Run
-app.run(['$rootScope', function(rootScope) {
+app.run(function($rootScope, amMoment) {
 
   // Menu Collapse
-  rootScope.isMenuCollapsed = true;
+  $rootScope.isMenuCollapsed = true;
 
-}]);
+  amMoment.changeLocale('fr', null);
+});
