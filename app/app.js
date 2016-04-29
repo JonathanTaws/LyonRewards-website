@@ -30,8 +30,12 @@ app.config(function ($routeProvider, cfpLoadingBarProvider, $httpProvider) {
 });
 
 // Run
-app.run(function($rootScope, amMoment) {
+app.run(function($rootScope, amMoment, $location) {
   amMoment.changeLocale('fr', null);
+
+  $rootScope.usePoints = function () {
+    $location.path('/concept');
+  }
 });
 
 app.controller('MainMenuCtrl', function($log) {

@@ -5,5 +5,45 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container partners">
+
+  <h3>Offres</h3>
+
+  <div class="loader-container">
+    <img src="assets/images/ajax-loader.gif"/>
+  </div>
+
+  <div class="row offers">
+
+    <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="offer in offers">
+
+      <div class="thumbnail">
+        <img ng-src="{{offer.partner.image_url}}" err-src="assets/images/pulsate-loader.gif">
+        <div class="caption text-center">
+          <h3>{{offer.title}}</h3>
+          <p>{{offer.description}}</p>
+          <hr>
+          <p>
+            Points :
+            <button type="button" class="btn"
+                  ng-class="{'btn-primary':offer.points<=$root.user.info.current_points,'btn-default':offer.points>$root.user.info.current_points}"
+                  uib-tooltip="{{offer.points<=$root.user.info.current_points && 'Utiliser !' || ($root.user.isLogin && 'Pas assez de points !' || 'Connectez-vous !')}}"
+                  ng-click="$root.usePoints()">
+              {{offer.points}}
+            </button>
+          </p>
+          <hr>
+          <p>Proposé par {{offer.partner.name}}</p>
+        </div>
+      </div>
+
+      <!--<pre>{{ offer | json }}</pre>-->
+
+    </div>
+
+    <div ng-if="offers.length == 0">
+      Pas de partenaires pour l'instant.
+    </div>
+
+  </div>
 </div>

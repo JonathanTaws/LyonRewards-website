@@ -72,7 +72,7 @@
                   <p class="text-center">
                     Points restants :
                     <br>
-                    <span class="points points-left">{{$root.user.info.current_points}}</span>
+                    <span class="points points-primary">{{$root.user.info.current_points}}</span>
                   </p>
                 </div>
                 <div class="col-sm-6">
@@ -86,7 +86,7 @@
               <div class="row">
                 <div class="col-sm-12 text-center">
                   <hr>
-                  <button class="btn btn-primary" type="button">Utiliser mes points</button>
+                  <button class="btn btn-primary" type="button" ng-click="$root.usePoints()">Utiliser mes points</button>
                 </div>
               </div>
             </div>
