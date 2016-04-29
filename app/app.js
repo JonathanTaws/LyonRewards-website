@@ -8,6 +8,7 @@ var app = angular.module('lyonRewards', [
   'angular-loading-bar',
   'ui.bootstrap',
   'http-auth-interceptor',
+  'jkuri.slimscroll',
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking',

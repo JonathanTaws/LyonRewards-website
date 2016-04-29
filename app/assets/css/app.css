@@ -101,3 +101,17 @@ body {
 .points-primary {
     background-color: #286090;
 }
+
+.row-fluid {
+    overflow-x:scroll;
+    overflow-y:hidden;
+    white-space:nowrap;
+}
+.row-fluid .col-sm-1, .row-fluid .col-sm-2, .row-fluid .col-sm-3, .row-fluid .col-sm-4, .row-fluid .col-sm-5, .row-fluid .col-sm-6, .row-fluid .col-sm-7, .row-fluid .col-sm-8, .row-fluid .col-sm-9, .row-fluid .col-sm-10, .row-fluid .col-sm-11, .row-fluid .col-sm-12,
+.row-fluid .col-md-1, .row-fluid .col-md-2, .row-fluid .col-md-3, .row-fluid .col-md-4, .row-fluid .col-md-5, .row-fluid .col-md-6, .row-fluid .col-md-7, .row-fluid .col-md-8, .row-fluid .col-md-9, .row-fluid .col-md-10, .row-fluid .col-md-11, .row-fluid .col-md-12,
+.row-fluid .col-lg-1, .row-fluid .col-lg-2, .row-fluid .col-lg-3, .row-fluid .col-lg-4, .row-fluid .col-lg-5, .row-fluid .col-lg-6, .row-fluid .col-lg-7, .row-fluid .col-lg-8, .row-fluid .col-lg-9, .row-fluid .col-lg-10, .row-fluid .col-lg-11, .row-fluid .col-lg-12  {
+    float:none;
+    display:inline-block;
+    white-space:normal;
+    vertical-align:top;
+}

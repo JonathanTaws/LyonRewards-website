@@ -1,25 +1,40 @@
 <div class="container-fluid welcome welcome-partners welcome-small">
   <div class="text-center">
     <h1 class="text-capitalize">Lyon Rewards</h1>
-    <h2>Partenaires</h2>
+    <h2>Partenaires & Offres</h2>
   </div>
 </div>
 
-<div class="container partners">
+<div class="container partners-page">
 
-  <h3>Offres</h3>
-
-  <div class="loader-container">
+  <h3>Partenaires</h3>
+  <div class="loader-container loader-partners">
     <img src="assets/images/ajax-loader.gif"/>
   </div>
-
-  <div class="row offers">
-
-    <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="offer in offers">
-
+  <div class="row-fluid partners" ng-slimscroll horizontal-scroll="true" height="100%">
+    <div class="col-sm-4 col-md-3 col-lg-2" ng-repeat="partner in partners">
       <div class="thumbnail">
-        <img ng-src="{{offer.partner.image_url}}" err-src="assets/images/pulsate-loader.gif">
+        <img ng-src="{{partner.image_url}}" err-src="assets/images/gift.png">
         <div class="caption text-center">
+          <h3>{{partner.name}}</h3>
+        </div>
+      </div>
+      <!--<pre>{{ partner | json }}</pre>-->
+    </div>
+    <div ng-if="partners.length == 0">
+      Pas de partenaires pour l'instant.
+    </div>
+  </div>
+
+  <h3>Offres</h3>
+  <div class="loader-container loader-offers">
+    <img src="assets/images/ajax-loader.gif"/>
+  </div>
+  <div class="row offers">
+    <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="offer in offers">
+      <div class="thumbnail">
+        <img ng-src="{{offer.partner.image_url}}" err-src="assets/images/gift.png">
+        <div class="caption text-center" ng-slimscroll height="230px" opacity="0.2">
           <h3>{{offer.title}}</h3>
           <p>{{offer.description}}</p>
           <hr>
@@ -36,14 +51,10 @@
           <p>Proposé par {{offer.partner.name}}</p>
         </div>
       </div>
-
       <!--<pre>{{ offer | json }}</pre>-->
-
     </div>
-
     <div ng-if="offers.length == 0">
-      Pas de partenaires pour l'instant.
+      Pas d'offres pour l'instant.
     </div>
-
   </div>
 </div>
