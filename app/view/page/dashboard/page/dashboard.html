@@ -5,6 +5,15 @@
     </div>
     <div class="col-sm-8 col-md-9 col-lg-10">
       <h3>Vue d'ensemble</h3>
+      <div class="row">
+        <div class="col-sm-6" ng-controller="PointsEarnedCtrl">
+          <h4>Historique des points gagnés</h4>
+          <canvas id="line" class="chart chart-line" chart-data="data"
+                  chart-labels="labels" chart-legend="true" chart-series="series"
+                  chart-click="onClick" >
+          </canvas>
+        </div>
+      </div>
     </div>
   </div>
 </div>
