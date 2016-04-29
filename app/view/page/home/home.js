@@ -1,6 +1,10 @@
 'use strict';
 
-var appPageHome = angular.module('lyonRewards.home', ['ngRoute', 'angularMoment', 'uiGmapgoogle-maps']);
+var appPageHome = angular.module('lyonRewards.home', [
+  'ngRoute',
+  'angularMoment',
+  'uiGmapgoogle-maps'
+]);
 
 appPageHome.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/home', {

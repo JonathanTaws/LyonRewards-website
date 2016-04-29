@@ -8,8 +8,6 @@ var app = angular.module('lyonRewards', [
   'angular-loading-bar',
   'ui.bootstrap',
   'http-auth-interceptor',
-  'angularMoment',
-  'uiGmapgoogle-maps',
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking',

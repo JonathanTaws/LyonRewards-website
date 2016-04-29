@@ -28,10 +28,13 @@
     "angular-moment": "^0.10.3",
     "angular-google-maps": "^2.3.2",
     "lodash": "^4.11.2",
-    "angular-simple-logger": "^0.1.7"
+    "angular-simple-logger": "^0.1.7",
+    "Chart.js": "^2.0.2",
+    "angular-chart.js": "^0.10.2"
   },
   "resolutions": {
     "angular": "^1.5.5",
-    "moment": ">=2.8.0 <2.11.0"
+    "moment": ">=2.8.0 <2.11.0",
+    "Chart.js": "~1.1.1"
   }
 }

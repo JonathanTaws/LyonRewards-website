@@ -1,6 +1,9 @@
 'use strict';
 
-var appPageDashboard = angular.module('lyonRewards.dashboard', ['ngRoute']);
+var appPageDashboard = angular.module('lyonRewards.dashboard', [
+  'ngRoute',
+  'chart.js'
+]);
 
 var checkUserLogin = function ($q, $rootScope, $location) {
   if ($rootScope.user.isLogin) {
