@@ -40,6 +40,9 @@ body {
     background-image: url('../images/header/lyon-place-bellecour-roue-nuit.jpg');
     background-position: center -390px;
 }
+.welcome.welcome-partners {
+    background-image: url('../images/header/lyon-pont.jpg');
+}
 .welcome > div {
     background-color: rgba(34,34,34,0.7);
     padding: 20px 0;

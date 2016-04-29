@@ -1,6 +1,6 @@
 'use strict';
 
-var appPagePartners = angular.module('lyonRewards.ranking', ['ngRoute']);
+var appPagePartners = angular.module('lyonRewards.partners', ['ngRoute']);
 
 appPagePartners.config(function($routeProvider) {
   $routeProvider.when('/partners', {

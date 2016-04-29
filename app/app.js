@@ -11,6 +11,7 @@ var app = angular.module('lyonRewards', [
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking',
+  'lyonRewards.partners',
   'lyonRewards.login',
   'lyonRewards.signup',
   'lyonRewards.dashboard'
