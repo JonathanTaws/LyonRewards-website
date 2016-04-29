@@ -41,8 +41,8 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
     var errorMsg = jQuery('#login-modal > .content > .error');
 
     loader.show();
-    errorMsg.hide();
-    content.hide();
+    errorMsg.fadeOut(100);
+    content.fadeOut(100);
 
     var successCallback = function(response) {
       $log.debug(response);
@@ -51,26 +51,32 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
     };
 
     var errorCallback = function (response) {
-      $log.debug(response);
-      loader.hide();
-      errorMsg.show();
-      content.show();
+      if (typeof response != 'undefined') {
+        $log.debug(response);
+      }
+      loader.fadeOut(100);
+      errorMsg.fadeIn(500);
+      content.fadeIn(500);
     };
 
-    $http({
-        method: 'post',
-        url: 'https://lyonrewards.antoine-chabert.fr/api/login/',
-        data: jQuery.param({
-          username: $scope.user.username,
-          password: $scope.user.password
-        }),
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }
-    ).then(successCallback, errorCallback);
-
+    if (typeof $scope.user != 'undefined' && typeof $scope.user.username != 'undefined' && $scope.user.username !== "" && typeof $scope.user.password != 'undefined' && $scope.user.password !== "") {
+      $http({
+          method: 'post',
+          url: 'https://lyonrewards.antoine-chabert.fr/api/login/',
+          data: jQuery.param({
+            username: $scope.user.username,
+            password: $scope.user.password
+          }),
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }
+      ).then(successCallback, errorCallback);
+    } else {
+      errorCallback();
+    }
   };
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
+
 });

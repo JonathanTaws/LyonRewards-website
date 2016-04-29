@@ -62,3 +62,17 @@ app.filter('cut', function () {
     return value + (tail || ' …');
   };
 });
+
+app.directive('enterKey', function () {
+  return function (scope, element, attrs) {
+    element.bind("keypress", function (event) {
+      if(event.which === 13) {
+        scope.$apply(function (){
+          scope.$eval(attrs.enterKey);
+        });
+
+        event.preventDefault();
+      }
+    });
+  };
+});
