@@ -3,7 +3,7 @@
 var appPageDashboard = angular.module('lyonRewards.dashboard', ['ngRoute']);
 
 var checkUserLogin = function ($q, $rootScope, $location) {
-  if ($rootScope.isLogin) {
+  if ($rootScope.user.isLogin) {
     return true;
   } else {
     $location.path('/login');

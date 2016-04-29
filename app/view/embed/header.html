@@ -26,16 +26,16 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li ng-show="!$root.isLogin">
+          <li ng-show="!$root.user.isLogin">
             <a ng-click="$root.login()">Connexion</a>
           </li>
-          <li ng-show="!$root.isLogin">
+          <li ng-show="!$root.user.isLogin">
             <a ng-click="$root.signup()">Inscription</a>
           </li>
-          <li data-match-route="/dashboard.*" ng-show="$root.isLogin">
+          <li data-match-route="/dashboard.*" ng-show="$root.user.isLogin">
             <a href="#/dashboard">Tableau de bord</a>
           </li>
-          <li ng-show="$root.isLogin">
+          <li ng-show="$root.user.isLogin">
             <a ng-click="$root.logout()">Déconnexion</a>
           </li>
         </ul>

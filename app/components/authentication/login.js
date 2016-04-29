@@ -2,15 +2,36 @@
 
 var appLogin = angular.module('lyonRewards.login', ['http-auth-interceptor']);
 
-appLogin.run(function ($rootScope, $uibModal, $log, $location) {
+appLogin.run(function ($rootScope, $uibModal, $log, $location, authService) {
 
-  $rootScope.isLogin = false;
-  $rootScope.$on('event:auth-loginRequired', function() {
+  $rootScope.user = {
+    isLogin: false,
+    token: '',
+    name: '',
+    info: null
+  };
+  $rootScope.$on('event:auth-loginRequired', function(event, data) {
     $rootScope.login();
   });
-  $rootScope.$on('event:auth-loginConfirmed', function() {
-    $rootScope.isLogin = true;
+  $rootScope.$on('event:auth-loginConfirmed', function(event, data) {
+    $rootScope.user.isLogin = true;
+    $rootScope.user.token = data.token;
+    $rootScope.user.name = data.name;
+    $log.info('User login');
+    $log.debug($rootScope.user);
   });
+  $rootScope.$on('event:auth-loginCancelled', function(event, data){
+    $rootScope.user.isLogin = false;
+    $rootScope.user.token = '';
+    $rootScope.user.name = '';
+    $rootScope.user.info = null;
+    $log.info('User logout');
+  });
+
+  $rootScope.logout = function() {
+    $location.path('/');
+    authService.loginCancelled();
+  };
 
   $rootScope.login = function () {
 
@@ -23,14 +44,9 @@ appLogin.run(function ($rootScope, $uibModal, $log, $location) {
     modalInstance.result.then(function () {
 
     }, function () {
-      $log.info('Login modal dismissed at: ' + new Date());
+      $log.debug('Login modal dismissed at: ' + new Date());
     });
   };
-
-  $rootScope.logout = function() {
-    $location.path('/');
-    $rootScope.isLogin = false;
-  }
 });
 
 appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, $http, authService, $log) {
@@ -45,9 +61,20 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
     content.fadeOut(100);
 
     var successCallback = function(response) {
-      $log.debug(response);
-      authService.loginConfirmed(response.token);
-      $uibModalInstance.close();
+      if (typeof response != 'undefined') {
+        $log.debug(response);
+        if (typeof response.data != 'undefined' && typeof response.data.token != 'undefined') {
+          authService.loginConfirmed({
+            name: $scope.userForm.username,
+            token: response.data.token
+          });
+          $uibModalInstance.close();
+          return;
+        }
+      }
+      loader.fadeOut(100);
+      errorMsg.fadeIn(500);
+      content.fadeIn(500);
     };
 
     var errorCallback = function (response) {
@@ -59,13 +86,17 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
       content.fadeIn(500);
     };
 
-    if (typeof $scope.user != 'undefined' && typeof $scope.user.username != 'undefined' && $scope.user.username !== "" && typeof $scope.user.password != 'undefined' && $scope.user.password !== "") {
+    if (typeof $scope.userForm != 'undefined'
+          && typeof $scope.userForm.username != 'undefined'
+          && $scope.userForm.username !== ""
+          && typeof $scope.userForm.password != 'undefined'
+          && $scope.userForm.password !== "") {
       $http({
           method: 'post',
           url: 'https://lyonrewards.antoine-chabert.fr/api/login/',
           data: jQuery.param({
-            username: $scope.user.username,
-            password: $scope.user.password
+            username: $scope.userForm.username,
+            password: $scope.userForm.password
           }),
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }
