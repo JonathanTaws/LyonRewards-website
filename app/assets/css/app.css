@@ -2,7 +2,8 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 /* Angular UI Google Map */
-.angular-google-map-container, .well.wrapper-angular-google-map { height: 400px; }
+.angular-google-map-container { height: 400px; }
+.well.wrapper-angular-google-map { height: 440px; }
 
 body {
     background-color: #fff;
