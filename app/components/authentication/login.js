@@ -7,7 +7,6 @@ appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $htt
   $rootScope.user = {
     isLogin: false,
     token: '',
-    name: '',
     info: null
   };
   $rootScope.$on('event:auth-loginRequired', function(event, data) {
@@ -16,25 +15,11 @@ appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $htt
   $rootScope.$on('event:auth-loginConfirmed', function(event, data) {
     $rootScope.user.isLogin = true;
     $rootScope.user.token = data.token;
-    $rootScope.user.name = data.name;
-
-    var successCallbackUserInfo = function(response) {
-      $rootScope.user.info = response.data;
-      $log.info('User login');
-      $log.debug($rootScope.user);
-    };
-
-    var errorCallbackUserInfo = function (response) {
-      $log.error('User login error when getting info');
-      $log.debug($rootScope.user);
-    };
-
-    $http.get('https://lyonrewards.antoine-chabert.fr/api/users/' + $rootScope.user.name).then(successCallbackUserInfo, errorCallbackUserInfo);
+    $rootScope.user.info = data.user;
   });
   $rootScope.$on('event:auth-loginCancelled', function(event, data){
     $rootScope.user.isLogin = false;
     $rootScope.user.token = '';
-    $rootScope.user.name = '';
     $rootScope.user.info = null;
     $log.info('User logout');
   });
@@ -80,9 +65,12 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
     var successCallback = function(response) {
       if (typeof response != 'undefined') {
         $log.debug(response);
-        if (typeof response.data != 'undefined' && typeof response.data.token != 'undefined') {
+        if (typeof response.data != 'undefined'
+          && typeof response.data.token != 'undefined'
+          && typeof response.data.user != 'undefined') {
+
           authService.loginConfirmed({
-            name: $scope.userForm.username,
+            user: response.data.user,
             token: response.data.token
           });
           $uibModalInstance.close();
@@ -108,6 +96,7 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
           && $scope.userForm.username !== ""
           && typeof $scope.userForm.password != 'undefined'
           && $scope.userForm.password !== "") {
+
       $http({
           method: 'post',
           url: 'https://lyonrewards.antoine-chabert.fr/api/login/',
@@ -118,6 +107,7 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }
       ).then(successCallback, errorCallback);
+
     } else {
       errorCallback();
     }

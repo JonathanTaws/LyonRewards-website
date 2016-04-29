@@ -21,7 +21,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 col-sm-offset-1 control-label">Nom d'utilisateur</label>
                   <div class="col-sm-7">
-                    <p class="form-control-static">{{$root.user.name}}</p>
+                    <p class="form-control-static">{{$root.user.info.username}}</p>
                   </div>
                 </div>
                 <div class="form-group">
@@ -65,7 +65,7 @@
             <img ng-src="assets/images/user-anonymous.png">
             <div class="caption">
               <hr>
-              <h3 class="text-center">{{$root.user.name}}</h3>
+              <h3 class="text-center">{{$root.user.info.username}}</h3>
               <h4 class="text-center text-capitalize">{{$root.user.info.first_name}} {{$root.user.info.last_name}}</h4>
               <hr>
               <div class="row">
