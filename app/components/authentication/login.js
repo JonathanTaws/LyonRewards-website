@@ -46,7 +46,7 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
 
     var successCallback = function(response) {
       $log.debug(response);
-      authService.loginConfirmed();
+      authService.loginConfirmed(response.token);
       $uibModalInstance.close();
     };
 
@@ -57,12 +57,17 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
       content.show();
     };
 
-    // TODO remove, just a test
-    $http.get('https://lyonrewards.antoine-chabert.fr/api/events/1', {responseType: 'json'}).then(successCallback, errorCallback);
+    $http({
+        method: 'post',
+        url: 'https://lyonrewards.antoine-chabert.fr/api/login/',
+        data: jQuery.param({
+          username: $scope.user.username,
+          password: $scope.user.password
+        }),
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      }
+    ).then(successCallback, errorCallback);
 
-    /* When API Auth is done
-    $http.post('https://lyonrewards.antoine-chabert.fr/auth', $scope.user, {responseType: 'json'}).then(successCallback, errorCallback);
-    */
   };
 
   $scope.cancel = function () {
