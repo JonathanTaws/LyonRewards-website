@@ -6,6 +6,8 @@ var appPageDashboard = angular.module('lyonRewards.dashboard', [
 ]);
 
 var checkUserLogin = function ($q, $rootScope, $location) {
+  // TODO remove after dev
+  return true;
   if ($rootScope.user.isLogin) {
     return true;
   } else {
@@ -48,15 +50,16 @@ appPageDashboard.controller('DashboardSettingsCtrl', function($scope, $http) {
 
 });
 
-appPageDashboard.controller("PointsEarnedCtrl", function ($scope) {
+appPageDashboard.controller("PointsEarnedChartCtrl", function ($scope) {
 
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
+  $scope.labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"];
   $scope.data = [
     [65, 59, 80, 81, 56, 55, 40]
   ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
 });
 
+appPageDashboard.controller("TransportChartCtrl", function ($scope) {
+
+  $scope.labels = ["Voiture", "Bus", "Vélo", "Pied"];
+  $scope.data = [300, 500, 100, 600];
+});

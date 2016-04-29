@@ -6,12 +6,19 @@ var appPageHome = angular.module('lyonRewards.home', [
   'uiGmapgoogle-maps'
 ]);
 
-appPageHome.config(['$routeProvider', function($routeProvider) {
+appPageHome.config(function($routeProvider, uiGmapGoogleMapApiProvider) {
   $routeProvider.when('/home', {
     templateUrl: 'view/page/home/home.html',
     controller: 'HomeCtrl'
   });
-}]);
+
+  // Google Map init SDK JavaScript
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyAb6hZTjcu4AsMj-J5L4WTWWHz7m-MOpUQ',
+    v: '3', //defaults to latest 3.X anyhow
+    libraries: 'weather,geometry,visualization'
+  });
+});
 
 appPageHome.controller('HomeCtrl', function($scope, $http) {
 
