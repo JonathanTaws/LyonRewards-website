@@ -1,0 +1,104 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4 col-md-3 col-lg-2 dashboard-nav">
+      <ng-include src="'view/page/dashboard/embed/dashboard-submenu.html'" include-replace></ng-include>
+    </div>
+    <div class="col-sm-8 col-md-9 col-lg-10">
+      <h3>Profil</h3>
+
+      <div class="row">
+
+        <div class="col-sm-6 col-md-8">
+
+          <div class="panel panel-default">
+
+            <div class="panel-heading">
+              <h4 class="panel-title">Mes informations</h4>
+            </div>
+
+            <div class="panel-body">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Nom d'utilisateur</label>
+                  <div class="col-sm-7">
+                    <p class="form-control-static">{{$root.user.name}}</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Adresse mail</label>
+                  <div class="col-sm-7">
+                    <p class="form-control-static">{{$root.user.info.email}}</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="firstName" class="col-sm-3 col-sm-offset-1 control-label">Prénom</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="firstName" ng-model="$root.user.info.first_name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="lastName" class="col-sm-3 col-sm-offset-1 control-label">Nom</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="lastName" ng-model="$root.user.info.last_name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="newPassword" class="col-sm-3 col-sm-offset-1 control-label">Changer de mot de passe</label>
+                  <div class="col-sm-7">
+                    <input type="password" class="form-control" id="newPassword" placeholder="Nouveau mot de passe">
+                    <br>
+                    <input type="password" class="form-control" id="newPasswordConfirmation" placeholder="Confirmation du nouveau mot de passe">
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Modifier</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img ng-src="assets/images/user-anonymous.png">
+            <div class="caption">
+              <hr>
+              <h3 class="text-center">{{$root.user.name}}</h3>
+              <h4 class="text-center text-capitalize">{{$root.user.info.first_name}} {{$root.user.info.last_name}}</h4>
+              <hr>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p class="text-center">
+                    Points restants :
+                    <br>
+                    <span class="points points-left">{{$root.user.info.current_points}}</span>
+                  </p>
+                </div>
+                <div class="col-sm-6">
+                  <p class="text-center">
+                    Points gagnés :
+                    <br>
+                    <span class="points">{{$root.user.info.global_points}}</span>
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 text-center">
+                  <hr>
+                  <button class="btn btn-primary" type="button">Utiliser mes points</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+

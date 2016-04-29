@@ -2,7 +2,7 @@
 
 var appLogin = angular.module('lyonRewards.login', ['http-auth-interceptor']);
 
-appLogin.run(function ($rootScope, $uibModal, $log, $location, authService) {
+appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $http) {
 
   $rootScope.user = {
     isLogin: false,
@@ -17,8 +17,19 @@ appLogin.run(function ($rootScope, $uibModal, $log, $location, authService) {
     $rootScope.user.isLogin = true;
     $rootScope.user.token = data.token;
     $rootScope.user.name = data.name;
-    $log.info('User login');
-    $log.debug($rootScope.user);
+
+    var successCallbackUserInfo = function(response) {
+      $rootScope.user.info = response.data;
+      $log.info('User login');
+      $log.debug($rootScope.user);
+    };
+
+    var errorCallbackUserInfo = function (response) {
+      $log.error('User login error when getting info');
+      $log.debug($rootScope.user);
+    };
+
+    $http.get('https://lyonrewards.antoine-chabert.fr/api/users/' + $rootScope.user.name).then(successCallbackUserInfo, errorCallbackUserInfo);
   });
   $rootScope.$on('event:auth-loginCancelled', function(event, data){
     $rootScope.user.isLogin = false;

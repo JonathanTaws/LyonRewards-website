@@ -28,6 +28,12 @@ appPageDashboard.config(['$routeProvider', function($routeProvider) {
     resolve: {
       factory: checkUserLogin
     }
+  }).when('/dashboard/profile', {
+    templateUrl: 'view/page/dashboard/page/profile.html',
+    controller: 'DashboardProfileCtrl',
+    resolve: {
+      factory: checkUserLogin
+    }
   }).when('/dashboard/settings', {
     templateUrl: 'view/page/dashboard/page/settings.html',
     controller: 'DashboardSettingsCtrl',
@@ -43,6 +49,10 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http) {
 });
 
 appPageDashboard.controller('DashboardHistoryCtrl', function($scope, $http) {
+
+});
+
+appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http) {
 
 });
 
