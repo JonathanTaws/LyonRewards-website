@@ -7,49 +7,65 @@
 
 <div class="container partners-page">
 
-  <h3>Partenaires</h3>
-  <div class="loader-container loader-partners">
-    <img src="assets/images/ajax-loader.gif"/>
-  </div>
-  <div class="row-fluid partners" ng-slimscroll horizontal-scroll="true" height="100%">
-    <div class="col-sm-4 col-md-3 col-lg-2" ng-repeat="partner in partners">
-      <div class="thumbnail">
-        <img ng-src="{{partner.image_url}}" err-src="assets/images/gift.png">
-        <div class="caption text-center">
-          <h3>{{partner.name}}</h3>
-        </div>
-      </div>
-      <!--<pre>{{ partner | json }}</pre>-->
-    </div>
-    <div ng-if="partners.length == 0">
-      Pas de partenaires pour l'instant.
-    </div>
-  </div>
-
   <h3>Offres</h3>
+
   <div class="loader-container loader-offers">
     <img src="assets/images/ajax-loader.gif"/>
   </div>
+
+  <div class="row filters">
+    <div class="col-sm-12 text-center">
+      <hr>
+      <h4>Filtres</h4>
+    </div>
+    <div class="partners form-group col-sm-6">
+      <label for="partner-filter">Partenaires </label>
+      <select id="partner-filter" name="partner-filter" class="form-control" ng-model="selectedPartner.partner.id">
+        <option value="!!">Tous</option>
+        <option ng-repeat="offer in offers | unique: 'partner.id'" value="{{offer.partner.id}}">{{offer.partner.name}}</option>
+      </select>
+    </div>
+    <div class="order form-group col-sm-6">
+      <label for="order-filter">Trier par </label>
+      <select id="order-filter" name="order-filter" class="form-control" ng-model="offersOrderBy">
+        <option value="+points">Points croissant</option>
+        <option value="-points">Points décroissant</option>
+        <option value="+partner.name">Partenaires croissant</option>
+        <option value="-partner.name">Partenaires décroissant</option>
+      </select>
+    </div>
+    <div class="col-sm-12">
+      <hr>
+    </div>
+  </div>
+
   <div class="row offers">
-    <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="offer in offers">
+    <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="offer in offers | filter:selectedPartner | orderBy:offersOrderBy">
+
       <div class="thumbnail">
+
         <img ng-src="{{offer.partner.image_url}}" err-src="assets/images/gift.png">
-        <div class="caption text-center" ng-slimscroll height="230px" opacity="0.2">
-          <h3>{{offer.title}}</h3>
-          <p>{{offer.description}}</p>
-          <hr>
-          <p>
-            Points :
-            <button type="button" class="btn"
-                  ng-class="{'btn-primary':offer.points<=$root.user.info.current_points,'btn-default':offer.points>$root.user.info.current_points}"
-                  uib-tooltip="{{offer.points<=$root.user.info.current_points && 'Utiliser !' || ($root.user.isLogin && 'Pas assez de points !' || 'Connectez-vous !')}}"
-                  ng-click="$root.usePoints()">
-              {{offer.points}}
-            </button>
-          </p>
-          <hr>
-          <p>Proposé par {{offer.partner.name}}</p>
+
+
+        <div class="caption text-center" >
+          <perfect-scrollbar class="offer-scroller">
+            <h3>{{offer.title}}</h3>
+            <p>{{offer.description}}</p>
+            <hr>
+            <p>
+              Points :
+              <button type="button" class="btn"
+                      ng-class="{'btn-primary':offer.points<=$root.user.info.current_points,'btn-default':offer.points>$root.user.info.current_points}"
+                      uib-tooltip="{{offer.points<=$root.user.info.current_points && 'Utiliser !' || ($root.user.isLogin && 'Pas assez de points !' || 'Connectez-vous !')}}"
+                      ng-click="$root.usePoints()">
+                {{offer.points}}
+              </button>
+            </p>
+            <hr>
+            <p>Proposé par {{offer.partner.name}}</p>
+          </perfect-scrollbar>
         </div>
+
       </div>
       <!--<pre>{{ offer | json }}</pre>-->
     </div>

@@ -115,3 +115,14 @@ body {
     white-space:normal;
     vertical-align:top;
 }
+
+.partners-page .offers .thumbnail img {
+    height: 100px;
+    margin-top: 20px;
+}
+
+.offer-scroller {
+    height: 230px;
+    overflow-y: hidden;
+    position: relative;
+}

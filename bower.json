@@ -31,11 +31,14 @@
     "angular-simple-logger": "^0.1.7",
     "Chart.js": "^2.0.2",
     "angular-chart.js": "^0.10.2",
-    "ngSlimscroll": "*"
+    "angular-filter": "^0.5.8",
+    "angular-perfect-scrollbar": "^0.0.4",
+    "perfect-scrollbar": "^0.6.11"
   },
   "resolutions": {
     "angular": "^1.5.5",
     "moment": ">=2.8.0 <2.11.0",
-    "Chart.js": "~1.1.1"
+    "Chart.js": "~1.1.1",
+    "perfect-scrollbar": "~0.5.1"
   }
 }
