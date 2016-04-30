@@ -70,7 +70,7 @@ body {
 }
 
 .points-primary {
-    background-color: #286090;
+    background-color: #c42127;
 }
 
 .row-fluid {
@@ -86,6 +86,29 @@ body {
     display:inline-block;
     white-space:normal;
     vertical-align:top;
+}
+
+a, a:hover, a:focus {
+    color: #c42127;
+}
+
+.badge {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.btn-primary {
+    background-color: #c42127;
+    border-color: #951f25;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #8c1e24;
+    border-color: #7b1e24;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #c42127;
 }
 
 /**************************************************************************************
@@ -155,7 +178,7 @@ body {
 }
 
 .event-default {
-    border-left-color: #1b809e;
+    border-left-color: #c42127;
 }
 
 .event .media-right .well {
