@@ -135,7 +135,7 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
          method  : 'patch',
          url     : '/api/users/' + $rootScope.user.info.id + '/',
          data    : jQuery.param(valuesToPatch),
-         headers : { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': 'Token ' + $rootScope.user.token }
+         headers : { 'Content-Type': 'application/json', 'Authorization': 'Token ' + $rootScope.user.token }
        }).then(editProfileSuccessCallback, editProfileErrorCallback);
     } else {
       resetMessages();
