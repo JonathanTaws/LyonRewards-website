@@ -19,14 +19,14 @@
       <h4>Filtres</h4>
     </div>
     <div class="partners form-group col-sm-6">
-      <label for="partner-filter">Partenaires </label>
+      <label for="partner-filter"><i class="glyphicon glyphicon-gift"></i> Partenaires</label>
       <select id="partner-filter" name="partner-filter" class="form-control" ng-model="selectedPartner.partner.id">
         <option value="!!">Tous</option>
         <option ng-repeat="offer in offers | unique: 'partner.id'" value="{{offer.partner.id}}">{{offer.partner.name}}</option>
       </select>
     </div>
     <div class="order form-group col-sm-6">
-      <label for="order-filter">Trier par </label>
+      <label for="order-filter"><i class="glyphicon glyphicon-sort"></i> Trier</label>
       <select id="order-filter" name="order-filter" class="form-control" ng-model="offersOrderBy">
         <option value="+points">Points croissant</option>
         <option value="-points">Points décroissant</option>
@@ -40,7 +40,7 @@
   </div>
 
   <div class="row offers">
-    <div class="col-sm-6 col-md-4 col-lg-3 animate-repeat" ng-repeat="offer in offers | filter:selectedPartner | orderBy:offersOrderBy">
+    <div class="col-sm-6 col-md-4 col-lg-3 animate-repeat animate-appear" ng-repeat="offer in offers | filter:selectedPartner | orderBy:offersOrderBy">
 
       <div class="thumbnail">
 

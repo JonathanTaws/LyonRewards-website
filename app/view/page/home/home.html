@@ -41,7 +41,7 @@
             </div>
 
             <div class="panel-body" uib-collapse="isCollapsed">
-                <p>Où est-ce que ça bouge à Lyon en ce moment ?</p>
+                <p class="text-center lead">Les évènements en cours</p>
                 <div class="well wrapper-angular-google-map">
                   <div ng-if="!isVisible" class="loader-container">
                     <img src="assets/images/ajax-loader.gif"/>
@@ -53,12 +53,29 @@
             </div>
 
             <div class="panel-footer">
-              Filtres TODO
+              <div class="row">
+
+                <div class="form-group col-sm-6">
+                  <label for="text-filter"><i class="glyphicon glyphicon-search"></i> Recherche</label>
+                  <input id="text-filter" type="search" class="form-control" ng-model="eventsQuery" placeholder="tags, titre, ..." aria-label="filtre" />
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label for="order-filter"><i class="glyphicon glyphicon-sort"></i> Trier</label>
+                  <select id="order-filter" name="order-filter" class="form-control" ng-model="eventsOrderBy">
+                    <option value="+end_date">Date de fin de l'évènement (croissant)</option>
+                    <option value="-end_date">Date de fin de l'évènement (décroissant)</option>
+                    <option value="+start_date">Date de début de l'évènement (croissant)</option>
+                    <option value="-start_date">Date de début de l'évènement (décroissant)</option>
+                  </select>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="media event event-default" ng-repeat="event in events | orderBy: '-end_date'" ng-controller="EventCtrl">
+        <div class="media event event-default animate-repeat animate-appear" ng-repeat="event in events | filter:eventsQuery | orderBy: eventsOrderBy" ng-controller="EventCtrl">
           <div class="media-body">
             <h4 class="media-heading">{{event.title}}</h4>
             <div uib-collapse="!isCollapsed">

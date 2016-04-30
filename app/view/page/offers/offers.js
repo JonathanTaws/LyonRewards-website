@@ -31,4 +31,12 @@ appPageOffers.controller('OffersCtrl', function($scope, $http, $q) {
   };
   $http.get('https://lyonrewards.antoine-chabert.fr/api/offers', {responseType: 'json'}).then(successOffers,errorOffers);
 
+  // Init filters
+  $scope.selectedPartner = {
+    partner: {
+      id: '!!'
+    }
+  };
+
+  $scope.offersOrderBy = '+points';
 });

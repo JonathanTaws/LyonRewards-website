@@ -9,6 +9,29 @@
 .angular-google-map-container { height: 400px; }
 .well.wrapper-angular-google-map { height: 440px; }
 
+/* Angular Animate */
+.animate-repeat.animate-appear.ng-move,
+.animate-repeat.animate-appear.ng-enter,
+.animate-repeat.animate-appear.ng-leave {
+    -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+}
+
+.animate-repeat.animate-appear.ng-leave.ng-leave-active,
+.animate-repeat.animate-appear.ng-move,
+.animate-repeat.animate-appear.ng-enter {
+    opacity:0;
+}
+
+.animate-repeat.animate-appear.ng-leave,
+.animate-repeat.animate-appear.ng-move.ng-move-active,
+.animate-repeat.animate-appear.ng-enter.ng-enter-active {
+    opacity:1;
+}
+
 /**************************************************************************************
  ***                                     General                                    ***
  **************************************************************************************/
@@ -158,27 +181,4 @@ body {
     height: 230px;
     overflow-y: hidden;
     position: relative;
-}
-
-/* Angular Animate */
-.offers-page .offers .animate-repeat.ng-move,
-.offers-page .offers .animate-repeat.ng-enter,
-.offers-page .offers .animate-repeat.ng-leave {
-    -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -ms-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -o-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-}
-
-.offers-page .offers .animate-repeat.ng-leave.ng-leave-active,
-.offers-page .offers .animate-repeat.ng-move,
-.offers-page .offers .animate-repeat.ng-enter {
-    opacity:0;
-}
-
-.offers-page .offers .animate-repeat.ng-leave,
-.offers-page .offers .animate-repeat.ng-move.ng-move-active,
-.offers-page .offers .animate-repeat.ng-enter.ng-enter-active {
-    opacity:1;
 }

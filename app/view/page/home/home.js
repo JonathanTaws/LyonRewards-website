@@ -23,6 +23,8 @@ appPageHome.config(function($routeProvider, uiGmapGoogleMapApiProvider) {
 
 appPageHome.controller('HomeCtrl', function($scope, $http) {
 
+  $scope.eventsOrderBy = '-end_date';
+
   $scope.events = [];
   var loader = jQuery('.home .loader-container');
   var events = jQuery('.home .events');
@@ -64,7 +66,6 @@ appPageHome.controller('EventCtrl', function($scope, $log, $timeout) {
     },
     zoom: 11
   };
-
 });
 
 appPageHome.controller('EventsInfoCtrl', function($scope, $log, $timeout){
@@ -78,6 +79,14 @@ appPageHome.controller('EventsInfoCtrl', function($scope, $log, $timeout){
         $scope.currentEvents.push(value);
       }
     });
+  });
+
+  $scope.$watch('eventsOrderBy', function () {
+    $scope.$parent.eventsOrderBy = $scope.eventsOrderBy
+  });
+
+  $scope.$watch('eventsQuery', function () {
+    $scope.$parent.eventsQuery = $scope.eventsQuery
   });
 
   $scope.isCollapsed = true;
