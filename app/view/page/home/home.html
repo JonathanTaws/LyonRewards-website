@@ -25,14 +25,14 @@
 
             <div class="panel-heading">
               <div class="row">
-                <div class="col-sm-5 text-center">
+                <div class="col-sm-4 text-center">
                   Évènements en cours : <span class="points points-primary">{{currentEvents.length}}</span>
                 </div>
-                <div class="col-sm-5 text-center">
+                <div class="col-sm-4 text-center">
                   Tout les évènements : <span class="points">{{events.length}}</span>
                 </div>
-                <div class="col-sm-2">
-                  <button type="button" class="btn btn-default pull-right" ng-click="toggle()">
+                <div class="col-sm-4 text-right">
+                  <button type="button" class="btn btn-default" ng-click="toggle()">
                     <span ng-show="isCollapsed">Voir la carte <i class="glyphicon glyphicon-chevron-up"></i></span>
                     <span ng-show="!isCollapsed">Réduire la carte <i class="glyphicon glyphicon-chevron-down"></i></span>
                   </button>
