@@ -35,6 +35,9 @@
           <li ng-show="!$root.user.isLogin">
             <a ng-click="$root.signup()">Inscription</a>
           </li>
+          <li ng-show="$root.user.isLogin">
+            <a href="#/offers"><span class="pts-logo pts-primary">{{$root.user.info.current_points}}</span></a>
+          </li>
           <li data-match-route="/dashboard.*" ng-show="$root.user.isLogin">
             <a href="#/dashboard">Tableau de bord</a>
           </li>

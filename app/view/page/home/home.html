@@ -27,10 +27,10 @@
             <div class="panel-heading">
               <div class="row">
                 <div class="col-sm-4 text-center">
-                  Évènements en cours : <span class="points points-primary">{{currentEvents.length}}</span>
+                  Évènements en cours : <span class="badge-custom badge-custom-primary">{{currentEvents.length}}</span>
                 </div>
                 <div class="col-sm-4 text-center">
-                  Tout les évènements : <span class="points">{{events.length}}</span>
+                  Tout les évènements : <span class="badge-custom">{{events.length}}</span>
                 </div>
                 <div class="col-sm-4 text-right">
                   <button type="button" class="btn btn-default" ng-click="toggle()">
@@ -97,7 +97,7 @@
             <div class="well">
               <div class="crop">
                 <a href ng-click="toggle()">
-                  <img class="media-object" ng-src="{{event.image_url}}" err-src="assets/images/gift.png">
+                  <img class="media-object" ng-src="{{event.image_url}}" err-src="assets/images/lyon-rewards-icon.png">
                 </a>
               </div>
             </div>

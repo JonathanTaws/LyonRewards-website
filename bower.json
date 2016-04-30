@@ -33,7 +33,8 @@
     "angular-filter": "^0.5.8",
     "angular-perfect-scrollbar": "^0.0.4",
     "perfect-scrollbar": "^0.6.11",
-    "angular-moment": "1.0.0-beta.6"
+    "angular-moment": "1.0.0-beta.6",
+    "angular-qrcode": "monospaced/angular-qrcode#^6.2.1"
   },
   "resolutions": {
     "angular": "^1.5.5",

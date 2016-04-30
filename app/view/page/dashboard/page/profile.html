@@ -79,21 +79,19 @@
                   <p class="text-center">
                     Points restants :
                     <br>
-                    <span class="points points-primary">{{$root.user.info.current_points}}</span>
+                    <br>
+                    <a href="#/offers">
+                      <span class="pts-logo pts-primary pts-lg">{{$root.user.info.current_points}}</span>
+                    </a>
                   </p>
                 </div>
                 <div class="col-sm-6">
                   <p class="text-center">
                     Points gagnés :
                     <br>
-                    <span class="points">{{$root.user.info.global_points}}</span>
+                    <br>
+                    <span class="pts-logo pts-lg">{{$root.user.info.global_points}}</span>
                   </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 text-center">
-                  <hr>
-                  <button class="btn btn-primary" type="button" ng-click="$root.usePoints()">Utiliser mes points</button>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 'use strict';
 
-var appPageOffers = angular.module('lyonRewards.offers', ['ngRoute', 'ngAnimate']);
+var appPageOffers = angular.module('lyonRewards.offers', ['ngRoute', 'ngAnimate', 'monospaced.qrcode']);
 
 appPageOffers.config(function($routeProvider) {
   $routeProvider.when('/offers', {
@@ -9,7 +9,7 @@ appPageOffers.config(function($routeProvider) {
   });
 });
 
-appPageOffers.controller('OffersCtrl', function($scope, $http, $q) {
+appPageOffers.controller('OffersCtrl', function($scope, $http, $rootScope, $log, $uibModal) {
 
   $scope.offers = [];
   var loaderOffersElt = jQuery('.offers-page .loader-offers');
@@ -39,4 +39,37 @@ appPageOffers.controller('OffersCtrl', function($scope, $http, $q) {
   };
 
   $scope.offersOrderBy = '+points';
+
+  // Use points
+  $scope.usePoints = function (offer) {
+    if ($rootScope.user.isLogin && !_.isNull($rootScope.user.info) && $rootScope.user.info.current_points >= offer.points) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'view/page/offers/embed/offer-modal.html',
+        controller: 'OfferModalInstanceCtrl'
+      });
+      modalInstance.result.then();
+    } else if ($rootScope.user.isLogin) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'view/page/offers/embed/info-modal.html',
+        controller: 'OfferModalInstanceCtrl'
+      });
+      modalInstance.result.then();
+    } else {
+      $rootScope.login();
+    }
+  };
+});
+
+appPageOffers.controller('OfferModalInstanceCtrl', function ($scope, $uibModalInstance) {
+  $scope.ok = function () {
+      $uibModalInstance.close();
+  };
+});
+
+appPageOffers.controller('InfoModalInstanceCtrl', function ($scope, $uibModalInstance) {
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  };
 });

@@ -56,7 +56,7 @@
               <button type="button" class="btn"
                       ng-class="{'btn-primary':offer.points<=$root.user.info.current_points,'btn-default':offer.points>$root.user.info.current_points}"
                       uib-tooltip="{{offer.points<=$root.user.info.current_points && 'Utiliser !' || ($root.user.isLogin && 'Pas assez de points !' || 'Connectez-vous !')}}"
-                      ng-click="$root.usePoints()">
+                      ng-click="usePoints(offer)">
                 {{offer.points}}
               </button>
             </p>

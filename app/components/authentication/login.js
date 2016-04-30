@@ -38,7 +38,7 @@ appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $htt
     });
 
     modalInstance.result.then(function () {
-
+      // Success
     }, function () {
       $log.debug('Login modal dismissed at: ' + new Date());
     });

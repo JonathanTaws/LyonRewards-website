@@ -53,7 +53,7 @@ body {
     border-top: 1px solid #eee;
 }
 
-.points {
+.badge-custom {
     display: inline-block;
     min-width: 10px;
     padding: 7px 10px;
@@ -69,8 +69,34 @@ body {
     margin: 5px;
 }
 
-.points-primary {
+.badge-custom-primary {
     background-color: #c42127;
+}
+
+.pts-logo {
+    display: inline-block;
+    min-width: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 10px;
+    background: url('../images/lyon-rewards-icon.png') no-repeat right center #777;
+    background-size: 18px;
+    padding: 3px 23px 3px 7px;
+}
+
+.pts-primary {
+    background-color: #c42127;
+}
+
+.pts-lg {
+    font-size: 18px;
+    background-size: 22px;
+    padding-right: 26px;
 }
 
 .row-fluid {
