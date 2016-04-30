@@ -19,6 +19,7 @@
 
       <div class="events">
 
+        <!-- Events Information -->
         <div class="events-info" ng-controller="EventsInfoCtrl">
 
           <div class="panel panel-default">
@@ -75,14 +76,37 @@
           </div>
         </div>
 
+        <!-- Events display -->
         <div class="media event event-default animate-repeat animate-appear" ng-repeat="event in events | filter:eventsQuery | orderBy: eventsOrderBy" ng-controller="EventCtrl">
+
           <div class="media-body">
-            <h4 class="media-heading">{{event.title}}</h4>
-            <div uib-collapse="!isCollapsed">
+            <a href ng-click="toggle()">
+              <h4 class="media-heading">
+                {{event.title}}
+              </h4>
+            </a>
+            <div uib-collapse="!isCollapsed" ng-click="toggle()">
               <p class="text-justify">{{event.description | cut:true:100:' ...'}}</p>
             </div>
             <div uib-collapse="isCollapsed">
               <p class="text-justify">{{event.description}}</p>
+            </div>
+          </div>
+
+          <div class="media-right">
+            <div class="well">
+              <div class="crop">
+                <a href ng-click="toggle()">
+                  <img class="media-object" ng-src="{{event.image_url}}" err-src="assets/images/gift.png">
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="media-footer">
+
+            <div uib-collapse="isCollapsed">
+
               <div class="well wrapper-angular-google-map">
                 <div ng-if="!isVisible" class="loader-container">
                   <img src="assets/images/ajax-loader.gif"/>
@@ -91,20 +115,18 @@
                   <ui-gmap-marker idKey='event.id' coords='map.center'></ui-gmap-marker>
                 </ui-gmap-google-map>
               </div>
+
+              <hr>
               <div class="tags">
                 Tags :
                 <span class="badge" ng-repeat="tag in event.tags">
                   {{getTag(tag).title}}
                 </span>
               </div>
+              <hr>
+              
             </div>
-          </div>
-          <div class="media-right" ng-if="event.hasOwnProperty(url)">
-            <a href="#">
-              <img class="media-object" ng-src="event.url">
-            </a>
-          </div>
-          <div class="media-footer">
+
             <p>
               <span class="publish-date">
                 <i class="glyphicon glyphicon-time"></i>
@@ -118,7 +140,7 @@
                 </button>
               </span>
             </p>
-            <!--<pre>{{event | json}}</pre>-->
+
           </div>
         </div>
 
@@ -132,6 +154,7 @@
 
     </div>
 
+    <!-- Ranking -->
     <div class="col-sm-4">
       <div class="panel panel-default">
         <div class="panel-body">

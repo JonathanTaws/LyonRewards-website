@@ -158,6 +158,26 @@ body {
     border-left-color: #1b809e;
 }
 
+.event .media-right .well {
+    height: 140px;
+    width: 150px;
+    padding: 9px;
+}
+
+.event .crop {
+    height: 120px;
+    width: 130px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.event .crop img.media-object {
+    max-width: 240px;
+    max-height: 220px;
+}
+
 /**************************************************************************************
  ***                                   Dashboard page                               ***
  **************************************************************************************/
