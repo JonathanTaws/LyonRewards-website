@@ -57,11 +57,19 @@ body {
     background-color: #fff;
 }
 
+body > .main {
+    min-height: 70vh;
+}
+
 .loader-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.main-loader {
+    min-height: 50vh;
 }
 
 .media-footer {
@@ -231,6 +239,56 @@ a, a:hover, a:focus {
 .navbar > .container .navbar-brand,
 .navbar > .container-fluid .navbar-brand {
     padding: 5px;
+}
+
+/**************************************************************************************
+ ***                                      Header                                    ***
+ **************************************************************************************/
+
+footer {
+    background: #222;
+    margin-top: 30px;
+    color: #fff;
+    padding: 10px 0;
+}
+
+footer a,
+footer a:hover,
+footer a:active {
+    color: #fff;;
+}
+
+@media (min-width: 768px) {
+    footer .separator {
+        border-left: solid 1px #fff;
+        min-height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    footer .separator {
+        margin-top: 15px;
+        border-top: solid 1px #fff;
+        padding-top: 15px;
+    }
+}
+
+footer .logo-lw img {
+    height: 150px;
+}
+
+footer .title-lw h2 {
+    margin: 5px;
+}
+
+footer .logo-insa img {
+    height: 60px;
+    margin-top: 10px;
+}
+
+footer .logo-vdl img {
+    margin-top: 40px;
+    height: 60px;
 }
 
 /**************************************************************************************

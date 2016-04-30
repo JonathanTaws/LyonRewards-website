@@ -38,7 +38,9 @@
   <p class="browsehappy">Vous utilisez un navigateur <strong>dépassé</strong>. Merci <a href="http://browsehappy.com/">de le mettre à jour</a> pour améliorer votre expérience sur notre site.</p>
   <![endif]-->
 
-  <div ng-view></div>
+  <div class="main" ng-view></div>
+
+  <ng-include src="'view/embed/footer.html'" include-replace></ng-include>
 
   <!-- Scripts -->
   <script src="bower_components/jquery/dist/jquery.js"></script>

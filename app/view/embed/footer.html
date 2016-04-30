@@ -1,0 +1,68 @@
+<footer>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-4">
+        <div class="row text-center">
+          <div class="col-sm-12 logo-lw">
+            <img ng-src="assets/images/lyon-rewards-icon.png" alt="Lyon Rewards" title="Lyon Rewards">
+          </div>
+          <div class="col-sm-12 title-lw">
+            <h2>Lyon Rewards</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4 website-map separator text-center">
+        <ul class="list-unstyled">
+          <li>
+            <p class="lead">Lyon Rewards</p>
+          </li>
+          <li>
+            <a href="#/home">Accueil</a>
+          </li>
+          <li>
+            <a href="#/concept">Concept</a>
+          </li>
+          <li>
+            <a href="#/ranking">Classement</a>
+          </li>
+          <li>
+            <a href="#/offers">Offres</a>
+          </li>
+          <li ng-show="!$root.user.isLogin">
+            <a href ng-click="$root.login()">Connexion</a>
+          </li>
+          <li ng-show="!$root.user.isLogin">
+            <a href ng-click="$root.signup()">Inscription</a>
+          </li>
+          <li ng-show="$root.user.isLogin">
+            <a href="#/dashboard">Tableau de bord</a>
+          </li>
+          <li ng-show="$root.user.isLogin">
+            <a href ng-click="$root.logout()">Déconnexion</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-4 separator text-center">
+        <div class="row">
+          <div class="col-sm-12 logo-insa">
+            <img ng-src="assets/images/insa-logo-blanc.png" alt="INSA Lyon" title="INSA Lyon">
+          </div>
+          <div class="col-sm-12 logo-vdl">
+            <img ng-src="assets/images/vdl-logo-blanc.png" alt="Ville de Lyon" title="Ville de Lyon">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <hr>
+        <p><i class="glyphicon glyphicon-copyright-mark"></i> 2015-2016 Lyon Rewards & INSA Lyon - Tous droits réservés - <a href>Mentions légales</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
