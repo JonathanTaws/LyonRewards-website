@@ -46,7 +46,12 @@ appPageOffers.controller('OffersCtrl', function($scope, $http, $rootScope, $log,
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'view/page/offers/embed/offer-modal.html',
-        controller: 'OfferModalInstanceCtrl'
+        controller: 'OfferModalInstanceCtrl',
+        resolve: {
+          offer: function () {
+            return offer;
+          }
+        }
       });
       modalInstance.result.then();
     } else if ($rootScope.user.isLogin) {
@@ -62,7 +67,8 @@ appPageOffers.controller('OffersCtrl', function($scope, $http, $rootScope, $log,
   };
 });
 
-appPageOffers.controller('OfferModalInstanceCtrl', function ($scope, $uibModalInstance) {
+appPageOffers.controller('OfferModalInstanceCtrl', function ($scope, $uibModalInstance, offer) {
+  $scope.offer = offer;
   $scope.ok = function () {
       $uibModalInstance.close();
   };

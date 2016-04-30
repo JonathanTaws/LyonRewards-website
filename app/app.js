@@ -9,6 +9,7 @@ var app = angular.module('lyonRewards', [
   'http-auth-interceptor',
   'perfect_scrollbar',
   'angular.filter',
+  'AngularPrint',
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking',

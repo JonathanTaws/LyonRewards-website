@@ -1,9 +1,37 @@
 <div class="modal-header">
-  <h3 class="modal-title">Offre</h3>
+  <h3 class="modal-title">Offre : {{offer.title}}</h3>
 </div>
 <div class="modal-body text-center">
-  <qrcode data="{{$root.user.info.id}}&{{offer.id}}" size="200"></qrcode>
+
+  <div print-section >
+
+    <div print-only>
+      <img ng-src="assets/images/lyon-rewards-icon.png" width="30%" height="30%">
+      <br>
+      <h3>Lyon Rewards</h3>
+      <hr>
+    </div>
+
+    <div class="offer-info">
+      <h4>{{offer.title}}</h4>
+      <p>{{offer.description}}</p>
+      <p>Proposé par {{offer.partner.name}} - {{offer.partner.address}}</p>
+      <hr>
+    </div>
+
+    <qrcode data="{{$root.user.info.id}}&{{offer.id}}" size="200"></qrcode>
+
+    <div class="use-info">
+      <hr>
+      <p>Présentez ce QRcode au partenaire afin de bénéficier de l'offre.</p>
+      <p>Vous ne serez pas débité tant que ce code ne sera pas scanné par le partenaire.</p>
+    </div>
+
+  </div>
+
 </div>
+
 <div class="modal-footer">
-  <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
+  <button class="btn btn-primary" type="button" print-btn>Imprimer</button>
+  <button class="btn btn-default" type="button" ng-click="ok()">Ok</button>
 </div>
