@@ -32,6 +32,23 @@
     opacity:1;
 }
 
+/* Angular Loading Bar - Custom color */
+#loading-bar .bar {
+    background: #c42127;
+}
+
+#loading-bar .peg {
+    -moz-box-shadow: #c42127 1px 0 6px 1px;
+    -ms-box-shadow: #c42127 1px 0 6px 1px;
+    -webkit-box-shadow: #c42127 1px 0 6px 1px;
+    box-shadow: #c42127 1px 0 6px 1px;
+}
+
+#loading-bar-spinner .spinner-icon {
+    border-top-color: #c42127;
+    border-left-color: #c42127;
+}
+
 /**************************************************************************************
  ***                                     General                                    ***
  **************************************************************************************/
