@@ -44,19 +44,12 @@ appPageDashboard.config(['$routeProvider', function($routeProvider) {
 
 }]);
 
+
+/**************************************************************************
+ ***                           Dashboard                                ***
+ **************************************************************************/
+
 appPageDashboard.controller('DashboardCtrl', function($scope, $http) {
-
-});
-
-appPageDashboard.controller('DashboardHistoryCtrl', function($scope, $http) {
-
-});
-
-appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http) {
-
-});
-
-appPageDashboard.controller('DashboardSettingsCtrl', function($scope, $http) {
 
 });
 
@@ -73,3 +66,90 @@ appPageDashboard.controller("TransportChartCtrl", function ($scope) {
   $scope.labels = ["Voiture", "Bus", "Vélo", "Pied"];
   $scope.data = [300, 500, 100, 600];
 });
+
+/**************************************************************************
+ ***                            History                                 ***
+ **************************************************************************/
+
+appPageDashboard.controller('DashboardHistoryCtrl', function($scope, $http) {
+
+});
+
+
+/**************************************************************************
+ ***                            Profile                                 ***
+ **************************************************************************/
+
+appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $rootScope, $log) {
+
+  $scope.isEdit = false;
+
+  $scope.editProfileForm = {
+    email: null,
+    firstName: null,
+    lastName: null,
+    password: null,
+    passwordConfirmation: null
+  };
+
+  var resetMessages = function() {
+    $scope.message = {
+      success: null,
+      info: null,
+      error: null
+    };
+  };
+  resetMessages();
+
+  $scope.processEditProfileForm = function() {
+
+    var valuesToPatch = _($scope.editProfileForm).omitBy(_.isUndefined).omitBy(_.isNull).omitBy(_.isEmpty).value();
+
+    var editProfileSuccessCallback = function (response) {
+
+      $log.debug(response);
+
+      resetMessages();
+      $scope.message.success = 'Modifications envoyées avec succès !';
+      $scope.isEdit = false;
+      /*
+      if (!response.success) {
+        // if not successful, bind errors to error variables
+        $scope.errorName = response.errors.name;
+        $scope.errorSuperhero = response.errors.superheroAlias;
+      } else {
+        // if successful, bind success message to message
+        $scope.message = response.message;
+      }
+      */
+    };
+
+    var editProfileErrorCallback = function (response) {
+      $log.error(response);
+      resetMessages();
+      $scope.message.error = 'Problème lors de l\'envoie, veuillez réessayer plus tard.';
+    };
+
+    if (!_.isEmpty(valuesToPatch) && !_.isEmpty($rootScope.user.token) && !_.isNull($rootScope.user.info)) {
+       $http({
+         method  : 'patch',
+         url     : '/api/users/' + $rootScope.user.info.id + '/',
+         data    : jQuery.param(valuesToPatch),
+         headers : { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': 'Token ' + $rootScope.user.token }
+       }).then(editProfileSuccessCallback, editProfileErrorCallback);
+    } else {
+      resetMessages();
+      $scope.message.info = 'Aucun champ modifié.';
+    }
+  };
+});
+
+
+/**************************************************************************
+ ***                            Settings                                 ***
+ **************************************************************************/
+
+appPageDashboard.controller('DashboardSettingsCtrl', function($scope, $http) {
+
+});
+

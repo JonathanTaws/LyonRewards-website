@@ -17,7 +17,12 @@
             </div>
 
             <div class="panel-body">
-              <form class="form-horizontal">
+
+              <div ng-show="message.success" class="alert alert-success" role="alert">{{message.success}}</div>
+              <div ng-show="message.info" class="alert alert-info" role="alert">{{message.info}}</div>
+              <div ng-show="message.error" class="alert alert-danger" role="alert">{{message.error}}</div>
+
+              <form class="form-horizontal" ng-submit="processEditProfileForm()">
                 <div class="form-group">
                   <label class="col-sm-3 col-sm-offset-1 control-label">Nom d'utilisateur</label>
                   <div class="col-sm-7">
@@ -25,33 +30,35 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Adresse mail</label>
+                  <label for="email" class="col-sm-3 col-sm-offset-1 control-label">Adresse mail</label>
                   <div class="col-sm-7">
-                    <p class="form-control-static">{{$root.user.info.email}}</p>
+                    <input type="text" class="form-control" id="email" placeholder="{{$root.user.info.email}}" ng-model="editProfileForm.email" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="firstName" class="col-sm-3 col-sm-offset-1 control-label">Prénom</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="firstName" ng-model="$root.user.info.first_name">
+                    <input type="text" class="form-control" id="firstName" placeholder="{{$root.user.info.first_name}}" ng-model="editProfileForm.firstName" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="lastName" class="col-sm-3 col-sm-offset-1 control-label">Nom</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="lastName" ng-model="$root.user.info.last_name">
+                    <input type="text" class="form-control" id="lastName" placeholder="{{$root.user.info.last_name}}" ng-model="editProfileForm.lastName" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="newPassword" class="col-sm-3 col-sm-offset-1 control-label">Changer de mot de passe</label>
                   <div class="col-sm-7">
-                    <input type="password" class="form-control" id="newPassword" placeholder="Nouveau mot de passe">
+                    <input type="password" class="form-control" id="newPassword" placeholder="Nouveau mot de passe" ng-model="editProfileForm.password" ng-disabled="!isEdit">
                     <br>
-                    <input type="password" class="form-control" id="newPasswordConfirmation" placeholder="Confirmation du nouveau mot de passe">
+                    <input type="password" class="form-control" id="newPasswordConfirmation" placeholder="Confirmation du nouveau mot de passe" ng-model="editProfileForm.passwordConfirmation" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Modifier</button>
+                  <button ng-show="!isEdit" ng-click="isEdit = !isEdit" type="button" class="btn btn-default">Éditer</button>
+                  <button ng-show="isEdit" ng-click="isEdit = !isEdit" type="reset" class="btn btn-default">Annuler</button>
+                  <button ng-show="isEdit" type="submit" class="btn btn-primary">Modifier</button>
                 </div>
 
               </form>
