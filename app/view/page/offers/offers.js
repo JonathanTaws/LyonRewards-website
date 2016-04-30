@@ -58,7 +58,7 @@ appPageOffers.controller('OffersCtrl', function($scope, $http, $rootScope, $log,
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'view/page/offers/embed/info-modal.html',
-        controller: 'OfferModalInstanceCtrl'
+        controller: 'InfoModalInstanceCtrl'
       });
       modalInstance.result.then();
     } else {

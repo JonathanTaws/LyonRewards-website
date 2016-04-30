@@ -7,7 +7,7 @@ var appPageDashboard = angular.module('lyonRewards.dashboard', [
 
 var checkUserLogin = function ($q, $rootScope, $location) {
   // TODO remove after dev
-  return true;
+  //return true;
   if ($rootScope.user.isLogin) {
     return true;
   } else {
