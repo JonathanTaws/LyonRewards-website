@@ -21,7 +21,7 @@ appPageHome.config(function($routeProvider, uiGmapGoogleMapApiProvider) {
   });
 });
 
-appPageHome.controller('HomeCtrl', function($scope, $http) {
+appPageHome.controller('HomeCtrl', function($scope, $http, $log) {
 
   $scope.eventsOrderBy = '-end_date';
 
@@ -35,16 +35,33 @@ appPageHome.controller('HomeCtrl', function($scope, $http) {
     events.fadeIn(500);
   };
 
-  var successCallback = function(response) {
+  var eventsSuccessCallback = function(response) {
     $scope.events = response.data;
     displayEvents();
   };
 
-  var errorCallback = function(response) {
+  var eventsErrorCallback = function(response) {
     displayEvents();
   };
 
-  $http.get('https://lyonrewards.antoine-chabert.fr/api/events', {responseType: 'json'}).then(successCallback, errorCallback);
+  $http.get('https://lyonrewards.antoine-chabert.fr/api/events', {responseType: 'json'}).then(eventsSuccessCallback, eventsErrorCallback);
+
+
+  // Get tags
+  $scope.tags = [];
+
+  var tagsSuccessCallback = function(response) {
+    $scope.tags = response.data;
+  };
+
+  var tagsErrorCallback = function(response) {
+    $log.error('Impossible to get all tags');
+  };
+  $http.get('https://lyonrewards.antoine-chabert.fr/api/tags', {responseType: 'json'}).then(tagsSuccessCallback, tagsErrorCallback);
+
+  $scope.getTag = function(id) {
+    return _.find($scope.tags, function(tag) { return tag.id == id; });
+  };
 });
 
 appPageHome.controller('EventCtrl', function($scope, $log, $timeout) {

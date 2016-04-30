@@ -91,6 +91,12 @@
                   <ui-gmap-marker idKey='event.id' coords='map.center'></ui-gmap-marker>
                 </ui-gmap-google-map>
               </div>
+              <div class="tags">
+                Tags :
+                <span class="badge" ng-repeat="tag in event.tags">
+                  {{getTag(tag).title}}
+                </span>
+              </div>
             </div>
           </div>
           <div class="media-right" ng-if="event.hasOwnProperty(url)">
