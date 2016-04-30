@@ -134,7 +134,7 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
        $http({
          method  : 'patch',
          url     : '/api/users/' + $rootScope.user.info.id + '/',
-         data    : jQuery.param(valuesToPatch),
+         data    : valuesToPatch,
          headers : { 'Content-Type': 'application/json', 'Authorization': 'Token ' + $rootScope.user.token }
        }).then(editProfileSuccessCallback, editProfileErrorCallback);
     } else {
