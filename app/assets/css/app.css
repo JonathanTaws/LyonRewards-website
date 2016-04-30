@@ -1,9 +1,17 @@
+/**************************************************************************************
+ ***                             AngularJS Modules CSS                              ***
+ **************************************************************************************/
+
 /* Angular UI Bootstrap - To prevent default bootstrap cursor properties with angular */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 /* Angular UI Google Map */
 .angular-google-map-container { height: 400px; }
 .well.wrapper-angular-google-map { height: 440px; }
+
+/**************************************************************************************
+ ***                                     General                                    ***
+ **************************************************************************************/
 
 body {
     background-color: #fff;
@@ -16,70 +24,10 @@ body {
     height: 100%;
 }
 
-.welcome {
-    background-color: #222;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
-    margin-top: -20px;
-    margin-bottom: 20px;
-    padding: 0;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-.welcome.welcome-home {
-    background-image: url('../images/header/lyon-musee-des-confluances.jpg');
-}
-.welcome.welcome-concept {
-    background-image: url('../images/header/lyon-parc-tete-or-art.jpg');
-}
-.welcome.welcome-ranking {
-    background-image: url('../images/header/lyon-place-bellecour-roue-nuit.jpg');
-    background-position: center -390px;
-}
-.welcome.welcome-partners {
-    background-image: url('../images/header/lyon-pont.jpg');
-}
-.welcome > div {
-    background-color: rgba(34,34,34,0.7);
-    padding: 20px 0;
-    width: 100%;
-}
-.welcome > div > h1 {
-    margin-top: 5px;
-}
-.welcome.welcome-small {
-    height: 200px;
-}
-.welcome.welcome-small > div {
-    padding: 5px 0;
-}
-
-.event {
-    padding: 20px 20px 10px 20px;
-    margin: 20px 0;
-    border: 1px solid #eee;
-    border-left-width: 5px;
-    border-radius: 3px;
-}
-
-.event-default {
-    border-left-color: #1b809e;
-}
-
 .media-footer {
     margin-top: 10px;
     padding-top: 10px;
     border-top: 1px solid #eee;
-}
-
-.dashboard-nav {
-    border-right: 1px solid #eee;
-    min-height: 100vh;
-    margin-top: -20px;
 }
 
 .points {
@@ -107,6 +55,7 @@ body {
     overflow-y:hidden;
     white-space:nowrap;
 }
+
 .row-fluid .col-sm-1, .row-fluid .col-sm-2, .row-fluid .col-sm-3, .row-fluid .col-sm-4, .row-fluid .col-sm-5, .row-fluid .col-sm-6, .row-fluid .col-sm-7, .row-fluid .col-sm-8, .row-fluid .col-sm-9, .row-fluid .col-sm-10, .row-fluid .col-sm-11, .row-fluid .col-sm-12,
 .row-fluid .col-md-1, .row-fluid .col-md-2, .row-fluid .col-md-3, .row-fluid .col-md-4, .row-fluid .col-md-5, .row-fluid .col-md-6, .row-fluid .col-md-7, .row-fluid .col-md-8, .row-fluid .col-md-9, .row-fluid .col-md-10, .row-fluid .col-md-11, .row-fluid .col-md-12,
 .row-fluid .col-lg-1, .row-fluid .col-lg-2, .row-fluid .col-lg-3, .row-fluid .col-lg-4, .row-fluid .col-lg-5, .row-fluid .col-lg-6, .row-fluid .col-lg-7, .row-fluid .col-lg-8, .row-fluid .col-lg-9, .row-fluid .col-lg-10, .row-fluid .col-lg-11, .row-fluid .col-lg-12  {
@@ -116,13 +65,120 @@ body {
     vertical-align:top;
 }
 
+/**************************************************************************************
+ ***                                      Header                                    ***
+ **************************************************************************************/
+
+.welcome {
+    background-color: #222;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.welcome.welcome-home {
+    background-image: url('../images/header/lyon-musee-des-confluances.jpg');
+}
+
+.welcome.welcome-concept {
+    background-image: url('../images/header/lyon-parc-tete-or-art.jpg');
+}
+
+.welcome.welcome-ranking {
+    background-image: url('../images/header/lyon-place-bellecour-roue-nuit.jpg');
+    background-position: center -390px;
+}
+
+.welcome.welcome-partners {
+    background-image: url('../images/header/lyon-pont.jpg');
+}
+
+.welcome > div {
+    background-color: rgba(34,34,34,0.7);
+    padding: 20px 0;
+    width: 100%;
+}
+
+.welcome > div > h1 {
+    margin-top: 5px;
+}
+
+.welcome.welcome-small {
+    height: 200px;
+}
+
+.welcome.welcome-small > div {
+    padding: 5px 0;
+}
+
+/**************************************************************************************
+ ***                                    Home page                                   ***
+ **************************************************************************************/
+
+.event {
+    padding: 20px 20px 10px 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.event-default {
+    border-left-color: #1b809e;
+}
+
+/**************************************************************************************
+ ***                                   Dashboard page                               ***
+ **************************************************************************************/
+
+.dashboard-nav {
+    border-right: 1px solid #eee;
+    min-height: 100vh;
+    margin-top: -20px;
+}
+
+/**************************************************************************************
+ ***                                   Partners page                                ***
+ **************************************************************************************/
+
 .partners-page .offers .thumbnail img {
     height: 100px;
     margin-top: 20px;
 }
 
-.offer-scroller {
+.partners-page .offer-scroller {
     height: 230px;
     overflow-y: hidden;
     position: relative;
+}
+
+/* Angular Animate */
+.partners-page .offers .animate-repeat.ng-move,
+.partners-page .offers .animate-repeat.ng-enter,
+.partners-page .offers .animate-repeat.ng-leave {
+    -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+}
+
+.partners-page .offers .animate-repeat.ng-leave.ng-leave-active,
+.partners-page .offers .animate-repeat.ng-move,
+.partners-page .offers .animate-repeat.ng-enter {
+    opacity:0;
+}
+
+.partners-page .offers .animate-repeat.ng-leave,
+.partners-page .offers .animate-repeat.ng-move.ng-move-active,
+.partners-page .offers .animate-repeat.ng-enter.ng-enter-active {
+    opacity:1;
 }

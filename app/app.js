@@ -3,7 +3,6 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('lyonRewards', [
   'ngRoute',
-  'ngAnimate',
   'ngTouch',
   'angular-loading-bar',
   'ui.bootstrap',
