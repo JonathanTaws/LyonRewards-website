@@ -1,20 +1,20 @@
 'use strict';
 
-var appPagePartners = angular.module('lyonRewards.partners', ['ngRoute', 'ngAnimate']);
+var appPageOffers = angular.module('lyonRewards.offers', ['ngRoute', 'ngAnimate']);
 
-appPagePartners.config(function($routeProvider) {
-  $routeProvider.when('/partners', {
-    templateUrl: 'view/page/partners/partners.html',
-    controller: 'PartnersCtrl'
+appPageOffers.config(function($routeProvider) {
+  $routeProvider.when('/offers', {
+    templateUrl: 'view/page/offers/offers.html',
+    controller: 'OffersCtrl'
   });
 });
 
-appPagePartners.controller('PartnersCtrl', function($scope, $http, $q) {
+appPageOffers.controller('OffersCtrl', function($scope, $http, $q) {
 
   $scope.offers = [];
-  var loaderOffersElt = jQuery('.partners-page .loader-offers');
-  var offersElt = jQuery('.partners-page .offers');
-  var filtersElt = jQuery('.partners-page .filters');
+  var loaderOffersElt = jQuery('.offers-page .loader-offers');
+  var offersElt = jQuery('.offers-page .offers');
+  var filtersElt = jQuery('.offers-page .filters');
   offersElt.fadeOut(0);
   filtersElt.fadeOut(0);
   var displayOffers = function() {

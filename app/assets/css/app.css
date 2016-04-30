@@ -149,21 +149,21 @@ body {
  ***                                   Partners page                                ***
  **************************************************************************************/
 
-.partners-page .offers .thumbnail img {
+.offers-page .offers .thumbnail img {
     height: 100px;
     margin-top: 20px;
 }
 
-.partners-page .offer-scroller {
+.offers-page .offer-scroller {
     height: 230px;
     overflow-y: hidden;
     position: relative;
 }
 
 /* Angular Animate */
-.partners-page .offers .animate-repeat.ng-move,
-.partners-page .offers .animate-repeat.ng-enter,
-.partners-page .offers .animate-repeat.ng-leave {
+.offers-page .offers .animate-repeat.ng-move,
+.offers-page .offers .animate-repeat.ng-enter,
+.offers-page .offers .animate-repeat.ng-leave {
     -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     -moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     -ms-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
@@ -171,14 +171,14 @@ body {
     transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
 }
 
-.partners-page .offers .animate-repeat.ng-leave.ng-leave-active,
-.partners-page .offers .animate-repeat.ng-move,
-.partners-page .offers .animate-repeat.ng-enter {
+.offers-page .offers .animate-repeat.ng-leave.ng-leave-active,
+.offers-page .offers .animate-repeat.ng-move,
+.offers-page .offers .animate-repeat.ng-enter {
     opacity:0;
 }
 
-.partners-page .offers .animate-repeat.ng-leave,
-.partners-page .offers .animate-repeat.ng-move.ng-move-active,
-.partners-page .offers .animate-repeat.ng-enter.ng-enter-active {
+.offers-page .offers .animate-repeat.ng-leave,
+.offers-page .offers .animate-repeat.ng-move.ng-move-active,
+.offers-page .offers .animate-repeat.ng-enter.ng-enter-active {
     opacity:1;
 }
