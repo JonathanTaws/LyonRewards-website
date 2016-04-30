@@ -19,7 +19,46 @@
 
       <div class="events">
 
-        <div class="media event event-default" ng-repeat="event in events" ng-controller="EventCtrl">
+        <div class="events-info" ng-controller="EventsInfoCtrl">
+
+          <div class="panel panel-default">
+
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-sm-5 text-center">
+                  Évènements en cours : <span class="points points-primary">{{currentEvents.length}}</span>
+                </div>
+                <div class="col-sm-5 text-center">
+                  Tout les évènements : <span class="points">{{events.length}}</span>
+                </div>
+                <div class="col-sm-2">
+                  <button type="button" class="btn btn-default pull-right" ng-click="toggle()">
+                    <span ng-show="isCollapsed">Voir la carte <i class="glyphicon glyphicon-chevron-up"></i></span>
+                    <span ng-show="!isCollapsed">Réduire la carte <i class="glyphicon glyphicon-chevron-down"></i></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-body" uib-collapse="isCollapsed">
+                <p>Où est-ce que ça bouge à Lyon en ce moment ?</p>
+                <div class="well wrapper-angular-google-map">
+                  <div ng-if="!isVisible" class="loader-container">
+                    <img src="assets/images/ajax-loader.gif"/>
+                  </div>
+                  <ui-gmap-google-map ng-if="isVisible" center='map.center' zoom='map.zoom'>
+                    <ui-gmap-marker idKey='event.id' coords='{latitude:event.latitude,longitude:event.longitude}' ng-repeat="event in currentEvents"></ui-gmap-marker>
+                  </ui-gmap-google-map>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+              Filtres TODO
+            </div>
+          </div>
+        </div>
+
+        <div class="media event event-default" ng-repeat="event in events | orderBy: '-end_date'" ng-controller="EventCtrl">
           <div class="media-body">
             <h4 class="media-heading">{{event.title}}</h4>
             <div uib-collapse="!isCollapsed">
@@ -46,7 +85,8 @@
             <p>
               <span class="publish-date">
                 <i class="glyphicon glyphicon-time"></i>
-                <span am-time-ago="event.publish_date"></span>
+                Début <span am-time-ago="event.start_date"></span> <span>({{event.start_date | amUtc | amLocal | amDateFormat:'DD/MM/YY'}})</span> -
+                Fin <span am-time-ago="event.end_date"></span> <span>({{event.end_date | amUtc | amLocal | amDateFormat:'DD/MM/YY'}})</span>
               </span>
               <span class="pull-right">
                 <button type="button" class="btn btn-default" ng-click="toggle()">
