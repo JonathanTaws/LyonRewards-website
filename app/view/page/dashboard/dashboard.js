@@ -133,7 +133,7 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
     if (!_.isEmpty(valuesToPatch) && !_.isEmpty($rootScope.user.token) && !_.isNull($rootScope.user.info)) {
        $http({
          method  : 'patch',
-         url     : '/api/users/' + $rootScope.user.info.id + '/',
+         url     : 'https://lyonrewards.antoine-chabert.fr/api/users/' + $rootScope.user.info.id + '/',
          data    : valuesToPatch,
          headers : { 'Content-Type': 'application/json', 'Authorization': 'Token ' + $rootScope.user.token }
        }).then(editProfileSuccessCallback, editProfileErrorCallback);
