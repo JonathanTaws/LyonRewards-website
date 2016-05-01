@@ -59,8 +59,10 @@
             <p>Bientôt disponible</p>
           </div>
         </div>
-        <div class="col-sm-8">
-          Mobile capture
+        <div class="col-sm-8 mockup-mobile">
+          <div class="wrapper">
+            <img ng-src="/assets/images/app-mockup.png">
+          </div>
         </div>
       </div>
     </div>
@@ -81,12 +83,9 @@
     </div>
 
     <div class="row-fluid partners">
-      <div class="col-sm-2 btn" ng-repeat="partner in partners" ng-click="onClickPartner(partner)">
+      <div class="col-sm-3 col-xs-6 btn" ng-repeat="partner in partners" ng-click="onClickPartner(partner)">
         <div class="thumbnail">
           <img ng-src="{{partner.image_url}}" err-src="assets/images/gift.png">
-          <div class="caption text-center" >
-            <h3>{{partner.name}}</h3>
-          </div>
         </div>
       </div>
     </div>
