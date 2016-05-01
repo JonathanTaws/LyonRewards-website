@@ -1,144 +1,87 @@
 <div class="container-fluid welcome welcome-concept welcome-small">
-    <div class="text-center">
-        <h1 class="text-capitalize">Lyon Rewards</h1>
-        <h2>Concept</h2>
-    </div>
+  <div class="text-center">
+    <h1 class="text-capitalize">Lyon Rewards</h1>
+    <h2>Concept</h2>
+  </div>
 </div>
 
-<div class="container concept">
+<div class="concept-page">
 
+  <div class="container">
     <div class="row">
-        <div class="col-sm-12">
-            <div class="media">
-                <div class="media-body">
-                    <h3 class="media-heading">Origine</h3>
-                    <div>
-                        <p class="text-justify">
-                            <b>Lyon Rewards</b> est avant tout une idée innovante.
-                            Être citoyen est profitable à tous, mais il est difficile de le percevoir pour tous les habitants.
-                            Les citoyens ne souhaitent pas s'attarder sur une idée qui ne leur apporte rien en direct.
-                            C'est là que <b>Lyon Rewards</b> entre en jeu avec cette idée simple : pourquoi ne pas valoriser les actions citoyennes dans la ville de Lyon?
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="thumbnail">
-                <img src="assets/images/concept/LyonRewards.jpg" style="width:50%">
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="media">
-                <div class="media-body">
-                    <h3 class="media-heading">Idée</h3>
-                    <div>
-                        <p class="text-justify">
-                            Le concept est le suivant : les utilisateurs réalisent des actions citoyennes qui sont automatiquement comptabilisées, leur rapportant un certain nombre de points.
-                            Ces derniers peuvent décider à tout moment d'utiliser ces points gagnés au quotidien pour obtenir des récompenses diverses, simplement.
-                        </p><p class="text-justify">
-                            Ainsi, chaque citoyen peut posséder un compte, qui permet de l’identifier.
-                            À ce compte est lié un nombre de points qui sont gagnés grâce à diverses actions (voir exemples ci-après), et qui peuvent ensuite être dépensés par la personne chez les partenaires de la ville de Lyon, se présentant par exemple sous la forme de remises sur le prix des billets au cinéma UGC, de remises sur les visites de musées, ou sur des transports TCL, etc.
-                        </p><p class="text-justify">
-                            Les utilisateurs ont donc un intérêt certain à gagner des points, qui permet en contrepartie d’encourager les habitants à adopter un comportement citoyen afin que la ville de Lyon s'épanouisse.
-                            En décidant de se déplacer en transport en commun, en vélo ou à pied plutôt qu'en voiture, l'utilisateur obtient une récompense adaptée à ce mode de transport, et à la distance parcourue.
-                            De même, pour promouvoir des évènements du Grand Lyon, des QR Code sont placés sur les invitations ou au milieu du lieu de rassemblement afin d’inciter les habitants à participer à la vie active de la ville de Lyon.
-                            Pour voir plus loin, nous pouvons envisager d'également récompenser le fait d’apporter le verre au bon endroit (à la poubelle à verre) afin d'inviter les gens à adopter le tri sélectif.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="media">
-                <div class="media-body">
-                    <h3 class="media-heading">Objectifs</h3>
-                    <div>
-                        <p class="text-justify">
-                            A plus long terme, un tel système permettrait à la ville de Lyon d’avoir un véritable médium de communication avec ses “citoyens”, et de bénéficier d’un réseau d’utilisateurs prêt à s’investir pour accomplir des missions, des actions citoyennes, pour améliorer la qualité de vie dans la ville.
-                            Par exemple, la ville de Lyon pourrait organiser des concours où les utilisateurs ont pour objectif de prendre en photo des points d’intérêts clés de la ville de Lyon dans un temps imparti, et les meilleurs seraient récompensés, afin de mettre en avant une image de la ville comme étant dynamique et proche de ses habitants.
-                            Ce concept pourrait également s’appliquer à des systèmes de vote, où la ville pourrait proposer des améliorations ou des changements, et les utilisateurs donneraient leur avis sous la forme d’un vote simple, qui leur ferait gagner des points.
-                        </p><p class="text-justify">
-                            On pourrait également mettre en place un système de réalisation de missions ou de tâches entre citoyens, qui permettrait de venir en aide localement à des habitants de la ville.
-                            Par exemple, un utilisateur a besoin d’aide pour réparer sa voiture, un autre utilisateur pourrait spontanément venir l’aider et gagner des points grâce à sa “bonne action”.
-                        </p><p class="text-justify">
-                            Vous l'aurez compris, <b>Lyon Rewards</b> se veut citoyenne, simple à utiliser, profitable à tous.
-                            Sa structure même lui permet d'être adaptable et de suivre l'évolution de la ville : par exemple l'utilisation de QR Code permet à notre application d'être modulaire, et de pouvoir s'adapter à de nouveaux cas de figure au fil du temps.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="media">
-                <div class="media-body">
-                    <h3 class="media-heading">Support</h3>
-                    <div>
-                        <p class="text-justify">
-                            <b>Lyon Rewards</b> est avant tout basé sur une application mobile.
-                            Cependant le site permet de se renseigner et de suivre les évènement organisés par la ville.
-                            Ces deux supports sont entretenu par un serveur centralisé par l'intermédiaire d'une API REST, ceci dans le but d'avoir une architecture normée pour les échanges d'informations.
-                        </p><p class="text-justify">
-                            L’application mobile est la source de points de <b>Lyon Rewards</b>.
-                            Les utilisateurs utilisent leur caméra pour scanner des QR code lors des évènements organisés par la ville, afin de prouver leur présence sur les lieux et de gagner des points.
-                            Si désiré, la localisation GPS peut être activée après autorisation de l'utilisateur pour que ses déplacements soient valorisés, celle ci permettant de vérifier automatiquement le type de transport utilisé et d'adapter ainsi la récompense.
-                            Cette fonctionnalité est activable et désactivable par l'utilisateur à tout moment.
-                            Plus tard, nous pourrions ajouter un aspect social sur l'application via la possibilité d'ajouter des photos voire des messages pour permettre les intéractions entre les utilisateurs.
-                            Le lecteur NFC pourrait lui aussi être utilisé lorsque le support d'une valorisation citoyenne est une carte à puce (cela pourrait être applicable pour un abonnement TCL par exemple).
-                        </p><p class="text-justify">
-                            Le site quant à lui est plutôt destiné à afficher les informations générales et offrir une interface déportée du téléphone accessible sur internet.
-                            On y trouverait notamment les informations sur notre système mais aussi comment y participer, ainsi que les évènements à venir.
-                            Par ailleurs, le site permet d'accéder à un tableau de bord non disponible sur l'application, afin de bénéficier d'un aperçu complet de son profil et de ses paramètres.
-                            Un classement des utilisateurs selon les points collectés y est aussi présenté, et une carte montrant les différents indicateurs (pollution, météo, circulation…) afin d’informer les habitants des possibles points à gagner sera ajoutée à l'avenir.
-                        </p><p class="text-justify">
-                            L'API REST offre les informations nécessaires aux deux supports pour fonctionner, et une version adaptée pourra être utilisée par le grand public pour lier <b>Lyon Rewards</b> avec, par exemple, les réseaux sociaux.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="thumbnail">
-                <img src="assets/images/concept/Smartphone.png" style="width:65%">
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="media">
-                <div class="media-body">
-                    <h3 class="media-heading">Récompenses</h3>
-                    <div>
-                        <p class="text-justify">
-                            Les points gagnés au fil du temps permettent donc d'accéder à des offres proposées par nos partenaires.
-                            La liste des partenaires est accessible sur le site.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>
-              <span class="pull-right">
-                <button type="button" class="btn btn-default" onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
-                  <span><i class="glyphicon glyphicon-chevron-up"></i> Retour en haut de page</span>
-                </button>
-              </span>
+      <div class="col-sm-9">
+        <h3>Origine</h3>
+        <p class="text-justify">
+          <b>Lyon Rewards</b> est avant tout une idée innovante.
+          Être citoyen est profitable à tous, sa famille, ses amis, ses voisins, mais aussi sa ville !
+          Cependant, ces petits gestes demande un effort sans récompense apparante.
+          C'est là que <b>Lyon Rewards</b> entre en jeu avec cette idée simple : pourquoi ne pas valoriser les actions citoyennes dans la ville de Lyon ?
         </p>
+        <p class="text-justify">
+          Le principe est plutôt simple, vous réalisez une action citoyenne, comme se déplacer en vélo ou en bus à la place de sa voiture,
+          vous participez aux évènements de la ville de Lyon, ou vous triez vos déchets et en échange vous recevez des points.<br>
+          Il ne vous reste plus qu'à aller utiliser ces points pour avoir des réductions ou des cadeaux chez nos partenaires !
+        </p>
+      </div>
+      <div class="col-sm-3">
+        <div class="thumbnail">
+          <img ng-src="/assets/images/lyon-rewards-icon.png">
+        </div>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Comment participer ?</h3>
+        <p class="text-justify">
+          Créer votre compte directement en cliquant <a href ng-click="$root.signup()">ici</a>, et téléchargez notre application mobile sur le Play Store.
+          Il ne vous reste plus qu'à trouver des QRcode dans les évènements de Lyon ou de vous déplacer avec votre téléphone !
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid inverse">
+    <div class="container">
+      <div class="row">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Récompenses</h3>
+        <p class="text-justify">
+          Consultez toutes nos offres pour dépender vos points en cliquant <a href="#/offers">ici</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="row-fluid partners">
+      <div class="col-sm-2" ng-repeat="partner in partners">
+        <div class="thumbnail">
+          <img ng-src="{{partner.image_url}}" err-src="assets/images/gift.png">
+          <div class="caption text-center" >
+            <h3>{{partner.name}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Navigation</h3>
+      </div>
+    </div>
+
+  </div>
+
 </div>
+
+
 
 
 

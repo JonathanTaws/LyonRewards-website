@@ -61,6 +61,12 @@ body > .main {
     min-height: 70vh;
 }
 
+.container.inverse,
+.container-fluid.inverse {
+    color: #bcbcbc;
+    background-color: #222;
+}
+
 .loader-container {
     display: flex;
     justify-content: center;
@@ -381,4 +387,12 @@ footer .logo-vdl img {
     height: 230px;
     overflow-y: hidden;
     position: relative;
+}
+
+/**************************************************************************************
+ ***                                   Concept page                                 ***
+ **************************************************************************************/
+
+.concept-page .partners .thumbnail img {
+    height: 80px;
 }
