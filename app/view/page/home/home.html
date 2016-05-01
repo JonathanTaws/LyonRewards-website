@@ -138,7 +138,7 @@
               <div class="tags">
                 Tags :
                 <span class="badge" ng-repeat="tag in event.tags">
-                  {{getTag(tag).title}}
+                  {{tag}}
                 </span>
               </div>
               <hr>
@@ -160,7 +160,7 @@
             </p>
 
           </div>
-          <pre>{{event | json}}</pre>
+          <!--<pre>{{event | json}}</pre>-->
         </div>
 
         <div class="media" ng-if="events.length == 0">
