@@ -405,3 +405,25 @@ footer .logo-vdl img {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.concept-page .mobile .download .row {
+    margin: 15px 0;
+}
+
+.concept-page .mobile .download .row img {
+    width: 70%;
+}
+
+.concept-page .mobile .download .row a {
+    opacity: 0.9;
+}
+
+.concept-page .mobile .download .row a:hover,
+.concept-page .mobile .download .row a:active,
+.concept-page .mobile .download .row a:focus {
+    opacity: 1;
+}
+
+.concept-page .mobile .download .row.disabled {
+    opacity: 0.4;
+}
