@@ -53,16 +53,16 @@
 
                   <!-- Map with current events -->
                   <ui-gmap-google-map ng-if="isVisible && !displayAllEvents" center='map.center' zoom='map.zoom'>
-                    <ui-gmap-marker idKey='event.id' coords='{latitude:event.latitude,longitude:event.longitude}' ng-repeat="event in currentEvents"></ui-gmap-marker>
+                    <ui-gmap-markers models="currentEvents" coords="'self'"></ui-gmap-markers>
                   </ui-gmap-google-map>
 
                   <!-- Map with all events -->
                   <ui-gmap-google-map ng-if="isVisible && displayAllEvents" center='map.center' zoom='map.zoom'>
-                    <ui-gmap-marker idKey='event.id' coords='{latitude:event.latitude,longitude:event.longitude}' ng-repeat="event in events"></ui-gmap-marker>
+                    <ui-gmap-markers models="events" coords="'self'"></ui-gmap-markers>
                   </ui-gmap-google-map>
 
                 </div>
-              
+
                 <div class="checkbox">
                   <label>
                     <input type="checkbox" ng-model="displayAllEvents"> Afficher les évènements passés
@@ -160,6 +160,7 @@
             </p>
 
           </div>
+          <pre>{{event | json}}</pre>
         </div>
 
         <div class="media" ng-if="events.length == 0">
