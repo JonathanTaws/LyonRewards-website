@@ -10,6 +10,7 @@ var app = angular.module('lyonRewards', [
   'perfect_scrollbar',
   'angular.filter',
   'AngularPrint',
+  'duScroll',
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking',
@@ -32,8 +33,12 @@ app.config(function ($routeProvider, cfpLoadingBarProvider, $httpProvider) {
 });
 
 // Run
-app.run(function($rootScope, amMoment, $location) {
+app.run(function($rootScope, amMoment, $document) {
   amMoment.changeLocale('fr', null);
+
+  $rootScope.scrollTop = function() {
+    $document.scrollTopAnimated(0, 500);
+  };
 });
 
 app.controller('MainMenuCtrl', function($log) {
