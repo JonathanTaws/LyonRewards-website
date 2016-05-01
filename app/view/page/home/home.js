@@ -108,6 +108,7 @@ appPageHome.controller('EventsInfoCtrl', function($scope, $log, $timeout){
 
   $scope.isCollapsed = true;
   $scope.isVisible = false;
+  $scope.displayAllEvents = false;
 
   $scope.toggle = function() {
     $timeout(function() {

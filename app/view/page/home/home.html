@@ -34,23 +34,41 @@
                 </div>
                 <div class="col-sm-4 text-right">
                   <button type="button" class="btn btn-default" ng-click="toggle()">
-                    <span ng-show="isCollapsed">Voir la carte <i class="glyphicon glyphicon-chevron-up"></i></span>
-                    <span ng-show="!isCollapsed">Réduire la carte <i class="glyphicon glyphicon-chevron-down"></i></span>
+                    <span ng-show="isCollapsed">Voir la carte <i class="glyphicon glyphicon-chevron-down"></i></span>
+                    <span ng-show="!isCollapsed">Réduire la carte <i class="glyphicon glyphicon-chevron-up"></i></span>
                   </button>
                 </div>
               </div>
             </div>
 
             <div class="panel-body" uib-collapse="isCollapsed">
+
                 <p class="text-center lead">Les évènements en cours</p>
+
                 <div class="well wrapper-angular-google-map">
+
                   <div ng-if="!isVisible" class="loader-container">
                     <img src="assets/images/ajax-loader.gif"/>
                   </div>
-                  <ui-gmap-google-map ng-if="isVisible" center='map.center' zoom='map.zoom'>
+
+                  <!-- Map with current events -->
+                  <ui-gmap-google-map ng-if="isVisible && !displayAllEvents" center='map.center' zoom='map.zoom'>
                     <ui-gmap-marker idKey='event.id' coords='{latitude:event.latitude,longitude:event.longitude}' ng-repeat="event in currentEvents"></ui-gmap-marker>
                   </ui-gmap-google-map>
+
+                  <!-- Map with all events -->
+                  <ui-gmap-google-map ng-if="isVisible && displayAllEvents" center='map.center' zoom='map.zoom'>
+                    <ui-gmap-marker idKey='event.id' coords='{latitude:event.latitude,longitude:event.longitude}' ng-repeat="event in events"></ui-gmap-marker>
+                  </ui-gmap-google-map>
+
                 </div>
+              
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="displayAllEvents"> Afficher les évènements passés
+                  </label>
+                </div>
+
             </div>
 
             <div class="panel-footer">
