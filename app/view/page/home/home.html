@@ -53,12 +53,44 @@
 
                   <!-- Map with current events -->
                   <ui-gmap-google-map ng-if="isVisible && !displayAllEvents" center='map.center' zoom='map.zoom'>
-                    <ui-gmap-markers models="currentEvents" coords="'self'"></ui-gmap-markers>
+                    <ui-gmap-markers models="currentEvents" coords="'self'" click="onMarkerClick">
+                      <ui-gmap-windows show="show">
+                        <div ng-controller="EventInfoWindowCtrl" class="container-fluid">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <h4 ng-non-bindable>{{title}}</h4>
+                            </div>
+                            <div class="col-sm-12">
+                              <p ng-non-bindable>{{description | cut:true:100:' ...'}}</p>
+                            </div>
+                            <div class="col-sm-12 text-right">
+                              <button class="btn btn-default" ng-click="gotToEvent()">Plus d'informations</button>
+                            </div>
+                          </div>
+                        </div>
+                      </ui-gmap-windows>
+                    </ui-gmap-markers>
                   </ui-gmap-google-map>
 
                   <!-- Map with all events -->
                   <ui-gmap-google-map ng-if="isVisible && displayAllEvents" center='map.center' zoom='map.zoom'>
-                    <ui-gmap-markers models="events" coords="'self'"></ui-gmap-markers>
+                    <ui-gmap-markers models="events" coords="'self'" click="onMarkerClick">
+                      <ui-gmap-windows show="show">
+                        <div ng-controller="EventInfoWindowCtrl" class="container-fluid">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <h4 ng-non-bindable>{{title}}</h4>
+                            </div>
+                            <div class="col-sm-12">
+                              <p ng-non-bindable>{{description | cut:true:100:' ...'}}</p>
+                            </div>
+                            <div class="col-sm-12 text-right">
+                              <button class="btn btn-default" ng-click="gotToEvent()">Plus d'informations</button>
+                            </div>
+                          </div>
+                        </div>
+                      </ui-gmap-windows>
+                    </ui-gmap-markers>
                   </ui-gmap-google-map>
 
                 </div>
@@ -95,7 +127,7 @@
         </div>
 
         <!-- Events display -->
-        <div class="media event event-default animate-repeat animate-appear" ng-repeat="event in events | filter:eventsQuery | orderBy: eventsOrderBy" ng-controller="EventCtrl">
+        <div class="media event event-default animate-repeat animate-appear" id="event-{{event.id}}" ng-repeat="event in events | filter:eventsQuery | orderBy: eventsOrderBy" ng-controller="EventCtrl">
 
           <div class="media-body">
             <a href ng-click="toggle()">
@@ -108,6 +140,13 @@
             </div>
             <div uib-collapse="isCollapsed">
               <p class="text-justify">{{event.description}}</p>
+              <p>
+                Rendez-vous le {{event.start_date | amUtc | amLocal | amDateFormat:'Do MMMM YYYY'}} à {{event.start_date | amUtc | amLocal | amDateFormat:'HH:mm'}} :
+                <address>
+                  {{event.address}}
+                </address>
+              </p>
+
             </div>
           </div>
 
@@ -130,7 +169,17 @@
                   <img src="assets/images/ajax-loader.gif"/>
                 </div>
                 <ui-gmap-google-map ng-if="isVisible" center='map.center' zoom='map.zoom'>
-                  <ui-gmap-marker idKey='event.id' coords='map.center'></ui-gmap-marker>
+                  <ui-gmap-marker idKey='event.id' coords='map.center' click="onMarkerClick">
+                    <ui-gmap-window show='show'>
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <h4>{{event.title}}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </ui-gmap-window>
+                  </ui-gmap-marker>
                 </ui-gmap-google-map>
               </div>
 

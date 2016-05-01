@@ -4,7 +4,8 @@ var appPageHome = angular.module('lyonRewards.home', [
   'ngRoute',
   'angularMoment',
   'uiGmapgoogle-maps',
-  'angular.filter'
+  'angular.filter',
+  'duScroll'
 ]);
 
 appPageHome.config(function($routeProvider, uiGmapGoogleMapApiProvider) {
@@ -45,23 +46,6 @@ appPageHome.controller('HomeCtrl', function($scope, $http, $log) {
   };
 
   $http.get('https://lyonrewards.antoine-chabert.fr/api/events', {responseType: 'json'}).then(eventsSuccessCallback, eventsErrorCallback);
-
-
-  // Get tags
-  $scope.tags = [];
-
-  var tagsSuccessCallback = function(response) {
-    $scope.tags = response.data;
-  };
-
-  var tagsErrorCallback = function(response) {
-    $log.error('Impossible to get all tags');
-  };
-  $http.get('https://lyonrewards.antoine-chabert.fr/api/tags', {responseType: 'json'}).then(tagsSuccessCallback, tagsErrorCallback);
-
-  $scope.getTag = function(id) {
-    return _.find($scope.tags, function(tag) { return tag.id == id; });
-  };
 });
 
 appPageHome.controller('EventCtrl', function($scope, $log, $timeout) {
@@ -83,6 +67,10 @@ appPageHome.controller('EventCtrl', function($scope, $log, $timeout) {
     },
     zoom: 11
   };
+
+  $scope.onMarkerClick = function(marker, eventName, model) {
+    model.show = !model.show;
+  };
 });
 
 appPageHome.controller('EventsInfoCtrl', function($scope, $log, $timeout){
@@ -91,9 +79,9 @@ appPageHome.controller('EventsInfoCtrl', function($scope, $log, $timeout){
 
   $scope.$watch('events', function () {
     var now = new Date();
-    angular.forEach($scope.events, function(value) {
-      if (new Date(value.end_date) >= now) {
-        $scope.currentEvents.push(value);
+    angular.forEach($scope.events, function(event) {
+      if (new Date(event.end_date) >= now) {
+        $scope.currentEvents.push(event);
       }
     });
   });
@@ -126,5 +114,16 @@ appPageHome.controller('EventsInfoCtrl', function($scope, $log, $timeout){
     zoom: 13
   };
 
+  $scope.onMarkerClick = function(marker, eventName, model) {
+    model.show = !model.show;
+  };
+});
+
+appPageHome.controller('EventInfoWindowCtrl', function($scope, $log, $document){
+
+  $scope.gotToEvent = function() {
+    var event = angular.element.find('#event-' + $scope.model.id);
+    $document.scrollToElementAnimated(event);
+  };
 
 });
