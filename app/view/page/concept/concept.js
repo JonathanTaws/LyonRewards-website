@@ -9,7 +9,7 @@ appPageConcept.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-appPageConcept.controller('ConceptCtrl', function($scope, $http) {
+appPageConcept.controller('ConceptCtrl', function($scope, $http, $location) {
 
   $scope.partners = [];
   var loaderPartnersElt = jQuery('.concept-page .loader-partners');
@@ -27,5 +27,10 @@ appPageConcept.controller('ConceptCtrl', function($scope, $http) {
     displayPartners();
   };
   $http.get('https://lyonrewards.antoine-chabert.fr/api/partners', {responseType: 'json'}).then(successPartners,errorPartners);
+
+
+  $scope.onClickPartner = function(partner) {
+    $location.path('/offers');
+  };
 
 });

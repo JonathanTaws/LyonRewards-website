@@ -39,7 +39,7 @@
   </div>
 
   <div class="row offers">
-    <div class="col-sm-6 col-md-4 col-lg-3 animate-repeat animate-appear" ng-repeat="offer in offers | filter:selectedPartner | orderBy:offersOrderBy">
+    <div class="col-sm-6 col-md-4 col-lg-3 animate-repeat animate-appear btn" ng-repeat="offer in offers | filter:selectedPartner | orderBy:offersOrderBy" ng-click="usePoints(offer)">
 
       <div class="thumbnail">
 
@@ -55,8 +55,7 @@
               Points :
               <button type="button" class="btn"
                       ng-class="{'btn-primary':offer.points<=$root.user.info.current_points,'btn-default':offer.points>$root.user.info.current_points}"
-                      uib-tooltip="{{offer.points<=$root.user.info.current_points && 'Utiliser !' || ($root.user.isLogin && 'Pas assez de points !' || 'Connectez-vous !')}}"
-                      ng-click="usePoints(offer)">
+                      uib-tooltip="{{offer.points<=$root.user.info.current_points && 'Utiliser !' || ($root.user.isLogin && 'Pas assez de points !' || 'Connectez-vous !')}}">
                 {{offer.points}}
               </button>
             </p>

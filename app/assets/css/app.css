@@ -168,6 +168,10 @@ a, a:hover, a:focus {
     background-color: #c42127;
 }
 
+.thumbnail {
+    box-shadow: 0 1px 4px rgba(0,0,0,.3);
+}
+
 /**************************************************************************************
  ***                                      Header                                    ***
  **************************************************************************************/
@@ -395,4 +399,9 @@ footer .logo-vdl img {
 
 .concept-page .partners .thumbnail img {
     height: 80px;
+}
+
+.concept-page .mobile {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
