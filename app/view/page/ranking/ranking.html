@@ -29,8 +29,8 @@
         <th>#</th>
         <th>Utilisateur</th>
         <th>Total de points</th>
-        <th>Points gagnés aujourd'hui</th>
-        <th>Points gagnés durant le mois</th>
+        <th>Points gagnés les dernières 24h</th>
+        <th>Points gagnés pendant ce mois</th>
       </tr>
       </thead>
       <tbody>
@@ -39,9 +39,10 @@
         <td>{{userRank.username}}</td>
         <td>{{userRank.global_points}}</td>
         <td>{{userRank.last_tfh_points}}</td>
-        <td>{{userRank.last_month_points}}</td>
+        <td>{{userRank.current_month_points}}</td>
       </tr>
       </tbody>
     </table>
   </div>
+  <!--<pre>{{usersRanking | json}}</pre>-->
 </div>
