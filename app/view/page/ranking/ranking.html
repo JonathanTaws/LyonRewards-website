@@ -5,39 +5,25 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="table-responsive">
+<div class="container ranking-page">
+  <div class="table-responsive ranking">
     <table class="table table-hover">
       <thead>
       <tr>
         <th>#</th>
         <th>Utilisateur</th>
-        <th>Total de point</th>
-        <th>Point gagné aujourd'hui</th>
-        <th>Inscrit depuis</th>
+        <th>Total de points</th>
+        <th>Points gagnés aujourd'hui</th>
+        <th>Points gagnés durant le mois</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Antoine</td>
-        <td>3500</td>
-        <td>600</td>
-        <td>10 minutes</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Pierre</td>
-        <td>2400</td>
-        <td>700</td>
-        <td>3 mois</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Jonathan</td>
-        <td>100</td>
-        <td>100</td>
-        <td>3 ans</td>
+      <tr ng-repeat="userRank in usersRanking">
+        <th scope="row">{{$index + 1}}</th>
+        <td>{{userRank.username}}</td>
+        <td>{{userRank.global_points}}</td>
+        <td>{{userRank.last_tfh_points}}</td>
+        <td>{{userRank.last_month_points}}</td>
       </tr>
       </tbody>
     </table>
