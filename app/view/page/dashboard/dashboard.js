@@ -113,16 +113,7 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
       resetMessages();
       $scope.message.success = 'Modifications envoyées avec succès !';
       $scope.isEdit = false;
-      /*
-      if (!response.success) {
-        // if not successful, bind errors to error variables
-        $scope.errorName = response.errors.name;
-        $scope.errorSuperhero = response.errors.superheroAlias;
-      } else {
-        // if successful, bind success message to message
-        $scope.message = response.message;
-      }
-      */
+      $rootScope.user.info = response.data;
     };
 
     var editProfileErrorCallback = function (response) {
