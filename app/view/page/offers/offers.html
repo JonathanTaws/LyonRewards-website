@@ -49,16 +49,16 @@
         <div class="caption text-center" >
           <perfect-scrollbar class="offer-scroller">
             <h3>{{offer.title}}</h3>
-            <p>{{offer.description}}</p>
             <hr>
             <p>
-              Points :
-              <button type="button" class="btn"
+              Points : <button type="button" class="btn"
                       ng-class="{'btn-primary':offer.points<=$root.user.info.current_points,'btn-default':offer.points>$root.user.info.current_points}"
                       uib-tooltip="{{offer.points<=$root.user.info.current_points && 'Utiliser !' || ($root.user.isLogin && 'Pas assez de points !' || 'Connectez-vous !')}}">
                 {{offer.points}}
               </button>
             </p>
+            <hr>
+            <p>{{offer.description}}</p>
             <hr>
             <p>Proposé par {{offer.partner.name}}</p>
           </perfect-scrollbar>

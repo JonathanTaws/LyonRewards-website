@@ -391,6 +391,14 @@ footer .logo-vdl img {
     height: 230px;
     overflow-y: hidden;
     position: relative;
+    white-space: pre-line;
+}
+
+.offers-page .offer-scroller hr,
+.offers-page .offer-scroller h3,
+.offers-page .offer-scroller p {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /**************************************************************************************
