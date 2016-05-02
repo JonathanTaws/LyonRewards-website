@@ -6,6 +6,7 @@ var appPageHome = angular.module('lyonRewards.home', [
   'uiGmapgoogle-maps',
   'angular.filter',
   'duScroll',
+  'lyonRewards.ranking',
   'lyonRewards.config'
 ]);
 
@@ -127,29 +128,4 @@ appPageHome.controller('EventInfoWindowCtrl', function($scope, $log, $document){
     $document.scrollToElementAnimated(event);
   };
 
-});
-
-appPageHome.controller('RankingCtrl', function($scope, $http, $log, API_URL) {
-
-  $scope.usersRanking = [];
-
-  var loaderRankingElt = jQuery('.home-page .loader-ranking');
-  var rankingElt = jQuery('.home-page .ranking');
-  rankingElt.fadeOut(0);
-
-  var displayRanking = function() {
-    loaderRankingElt.hide();
-    rankingElt.fadeIn(500);
-  };
-  var successRanking = function(response) {
-    $log.debug(response);
-    $scope.usersRanking = _.take(response.data, 5);
-    displayRanking();
-  };
-  var errorRanking = function(response) {
-    $log.debug(response);
-    displayRanking();
-  };
-
-  $http.get(API_URL + '/api/users/ranking', {responseType: 'json'}).then(successRanking,errorRanking);
 });
