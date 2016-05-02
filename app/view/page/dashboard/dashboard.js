@@ -123,12 +123,20 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
     };
 
     if (!_.isEmpty(valuesToPatch) && !_.isEmpty($rootScope.user.token) && !_.isNull($rootScope.user.info)) {
-       $http({
-         method  : 'patch',
-         url     : API_URL + '/api/users/' + $rootScope.user.info.id + '/',
-         data    : valuesToPatch,
-         headers : { 'Content-Type': 'application/json', 'Authorization': 'Token ' + $rootScope.user.token }
-       }).then(editProfileSuccessCallback, editProfileErrorCallback);
+      if (valuesToPatch.hasOwnProperty('password') && valuesToPatch.hasOwnProperty('passwordConfirmation') && valuesToPatch.password !== valuesToPatch.passwordConfirmation) {
+        resetMessages();
+        $scope.message.error = 'Les deux mots de passe ne correspondent pas.';
+      } else {
+        if (valuesToPatch.hasOwnProperty('passwordConfirmation')) {
+          delete valuesToPatch.passwordConfirmation;
+        }
+        $http({
+          method  : 'patch',
+          url     : API_URL + '/api/users/' + $rootScope.user.info.id + '/',
+          data    : valuesToPatch,
+          headers : { 'Content-Type': 'application/json', 'Authorization': 'Token ' + $rootScope.user.token }
+        }).then(editProfileSuccessCallback, editProfileErrorCallback);
+      }
     } else {
       resetMessages();
       $scope.message.info = 'Aucun champ modifié.';
