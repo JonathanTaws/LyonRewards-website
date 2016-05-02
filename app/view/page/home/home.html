@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div class="container home">
+<div class="container home-page">
 
   <div class="row">
 
@@ -223,33 +223,26 @@
     </div>
 
     <!-- Ranking -->
-    <div class="col-sm-4">
+    <div class="col-sm-4" ng-controller="RankingCtrl">
       <div class="panel panel-default">
         <div class="panel-body">
-          <div class="table-responsive">
+          <div class="loader-container loader-ranking">
+            <img src="assets/images/ajax-loader.gif"/>
+          </div>
+          <div class="table-responsive ranking">
             <table class="table table-hover">
               <thead>
               <tr>
                 <th>#</th>
-                <th>Utilisateur</th>
-                <th>Points</th>
+                <th class="text-center">Utilisateur</th>
+                <th class="text-center">Total de points</th>
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Antoine</td>
-                <td>3500</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Pierre</td>
-                <td>2400</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Jonathan</td>
-                <td>100</td>
+              <tr ng-repeat="userRank in usersRanking | limitTo:5">
+                <th scope="row">{{$index + 1}}</th>
+                <td class="text-center">{{userRank.username}}</td>
+                <td class="text-center">{{userRank.global_points}}</td>
               </tr>
               </tbody>
             </table>

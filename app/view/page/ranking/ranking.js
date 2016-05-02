@@ -15,6 +15,9 @@ appPageRanking.config(['$routeProvider', function($routeProvider) {
 appPageRanking.controller('RankingCtrl', function($scope, $http, $log, API_URL) {
 
   $scope.usersRanking = [];
+  $scope.rankOrderBy = '-global_points';
+
+
   var loaderRankingElt = jQuery('.ranking-page .loader-ranking');
   var rankingElt = jQuery('.ranking-page .ranking');
   var filtersElt = jQuery('.ranking-page .filters');

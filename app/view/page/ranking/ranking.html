@@ -11,24 +11,47 @@
     <img src="assets/images/ajax-loader.gif"/>
   </div>
 
+  <div class="row filters">
+    <div class="search form-group col-sm-6">
+      <label for="text-filter"><i class="glyphicon glyphicon-search"></i> Recherche</label>
+      <input id="text-filter" type="search" class="form-control" ng-model="rankQuery" placeholder="Nom d'utilisateur, prénom, nom ...." aria-label="filtre" />
+    </div>
+    <div class="order form-group col-sm-6">
+      <label for="order-filter"><i class="glyphicon glyphicon-sort"></i> Trier</label>
+      <select id="order-filter" name="order-filter" class="form-control" ng-model="rankOrderBy">
+        <option value="+username">Nom d'utilisateur croissant</option>
+        <option value="-username">Nom d'utilisateur décroissant</option>
+        <option value="+global_points">Total de points croissant</option>
+        <option value="-global_points">Total de points décroissant</option>
+        <option value="+last_tfh_points">Total de points gagnés les dernières 24h croissant</option>
+        <option value="-last_tfh_points">Total de points gagnés les dernières 24h décroissant</option>
+        <option value="+current_month_points">Total de points gagnés pendant ce mois croissant</option>
+        <option value="-current_month_points">Total de points gagnés pendant ce mois décroissant</option>
+      </select>
+    </div>
+    <div class="col-sm-12">
+      <hr>
+    </div>
+  </div>
+
   <div class="table-responsive ranking">
     <table class="table table-hover">
       <thead>
       <tr>
         <th>#</th>
-        <th>Utilisateur</th>
-        <th>Total de points</th>
-        <th>Points gagnés les dernières 24h</th>
-        <th>Points gagnés pendant ce mois</th>
+        <th class="text-center">Utilisateur</th>
+        <th class="text-center">Total de points</th>
+        <th class="text-center">Points gagnés les dernières 24h</th>
+        <th class="text-center">Points gagnés pendant ce mois</th>
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="userRank in usersRanking">
+      <tr ng-repeat="userRank in usersRanking | filter:rankQuery | orderBy: rankOrderBy">
         <th scope="row">{{$index + 1}}</th>
-        <td>{{userRank.username}}</td>
-        <td>{{userRank.global_points}}</td>
-        <td>{{userRank.last_tfh_points}}</td>
-        <td>{{userRank.current_month_points}}</td>
+        <td class="text-center">{{userRank.username}}</td>
+        <td class="text-center">{{userRank.global_points}}</td>
+        <td class="text-center">{{userRank.last_tfh_points}}</td>
+        <td class="text-center">{{userRank.current_month_points}}</td>
       </tr>
       </tbody>
     </table>
