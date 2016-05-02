@@ -4,10 +4,12 @@ var appLogin = angular.module('lyonRewards.login', [
   'http-auth-interceptor',
   'lyonRewards.config']);
 
-appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $http) {
+appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $http, ADMIN_ID, SUPVI_ID) {
 
   $rootScope.user = {
     isLogin: false,
+    isAdmin: false,
+    isSupervisor: false,
     token: '',
     info: null
   };
@@ -18,11 +20,18 @@ appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $htt
     $rootScope.user.isLogin = true;
     $rootScope.user.token = data.token;
     $rootScope.user.info = data.user;
+    if (data.user.group === ADMIN_ID) {
+      $rootScope.user.isAdmin = true;
+    } else if (data.user.group === SUPVI_ID) {
+      $rootScope.user.isSupervisor = true;
+    }
   });
   $rootScope.$on('event:auth-loginCancelled', function(event, data){
     $rootScope.user.isLogin = false;
     $rootScope.user.token = '';
     $rootScope.user.info = null;
+    $rootScope.user.isAdmin = false;
+    $rootScope.user.isSupervisor = false;
     $log.info('User logout');
   });
 
@@ -50,11 +59,10 @@ appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $htt
 appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, $http, authService, $log, API_URL) {
 
   // TODO remove later
-  /*
   $scope.userForm = {
-    username: 'antoine',
+    username: 'Antoine',
     password: 'azertyuiop'
-  };*/
+  };
 
   $scope.ok = function () {
     var loader = jQuery('#login-modal > .loader');

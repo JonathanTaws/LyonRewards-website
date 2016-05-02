@@ -8,7 +8,7 @@ var appPageDashboard = angular.module('lyonRewards.dashboard', [
 
 var checkUserLogin = function ($q, $rootScope, $location) {
   // TODO remove after dev
-  //return true;
+  return true;
   if ($rootScope.user.isLogin) {
     return true;
   } else {
@@ -16,7 +16,7 @@ var checkUserLogin = function ($q, $rootScope, $location) {
   }
 };
 
-appPageDashboard.config(['$routeProvider', function($routeProvider) {
+appPageDashboard.config(['$routeProvider', function($routeProvider, $rootScope) {
   $routeProvider.when('/dashboard', {
     templateUrl: 'view/page/dashboard/page/dashboard.html',
     controller: 'DashboardCtrl',
@@ -41,6 +41,14 @@ appPageDashboard.config(['$routeProvider', function($routeProvider) {
     resolve: {
       factory: checkUserLogin
     }
+  }).when('/dashboard/supervisor', {
+    templateUrl: 'view/page/dashboard/page/supervisor.html',
+    controller: 'DashboardSupervisorCtrl',
+    resolve: {
+      factory: function($q, $rootScope, $location) {
+        return checkUserLogin($q, $rootScope, $location) && ($rootScope.user.isSupervisor || $rootScope.user.isAdmin);
+      }
+    }
   }).otherwise({ redirectTo: '/' });
 
 }]);
@@ -52,27 +60,53 @@ appPageDashboard.config(['$routeProvider', function($routeProvider) {
 
 appPageDashboard.controller('DashboardCtrl', function($scope, $http) {
 
-});
+  $scope.pointsEarnedChart = {
+    labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+    data: [
+      [65, 59, 80, 81, 56, 55, 40]
+    ]
+  };
 
-appPageDashboard.controller("PointsEarnedChartCtrl", function ($scope) {
+  $scope.transportChart = {
+    labels: ["Voiture", "Bus", "Vélo", "Pied"],
+    data: [300, 500, 100, 600]
+  };
 
-  $scope.labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40]
-  ];
-});
-
-appPageDashboard.controller("TransportChartCtrl", function ($scope) {
-
-  $scope.labels = ["Voiture", "Bus", "Vélo", "Pied"];
-  $scope.data = [300, 500, 100, 600];
 });
 
 /**************************************************************************
  ***                            History                                 ***
  **************************************************************************/
 
-appPageDashboard.controller('DashboardHistoryCtrl', function($scope, $http) {
+appPageDashboard.controller('DashboardHistoryCtrl', function($scope, $http, API_URL, $log, $rootScope) {
+
+  $scope.historyList = [];
+  $scope.historyOrderBy = '-date';
+
+  var loaderHistoryElt = jQuery('.history-page .loader-history');
+  var historyTableElt = jQuery('.history-page .history-table');
+  var filtersElt = jQuery('.history-page .filters');
+  filtersElt.fadeOut(0);
+  historyTableElt.fadeOut(0);
+
+  var displayHistory = function() {
+    loaderHistoryElt.hide();
+    historyTableElt.fadeIn(500);
+    filtersElt.fadeIn(500);
+  };
+
+  var historySuccessCallback = function(response) {
+    $scope.historyList = response.data;
+    $log.debug(response);
+    displayHistory();
+  };
+
+  var historyErrorCallback = function(response) {
+    $log.error(response);
+    displayHistory();
+  };
+
+  $http.get(API_URL + '/api/users/' + $rootScope.user.info.id + '/history/', {responseType: 'json'}).then(historySuccessCallback, historyErrorCallback);
 
 });
 
@@ -153,5 +187,32 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
 
 appPageDashboard.controller('DashboardSettingsCtrl', function($scope, $http) {
 
+});
+
+/**************************************************************************
+ ***                          Supervisor                                ***
+ **************************************************************************/
+
+appPageDashboard.controller('DashboardSupervisorCtrl', function($scope, $http, API_URL, $log) {
+
+  $scope.users = [];
+
+  $scope.pointsEarnedChart = {
+    labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+    data: [
+      [65, 59, 80, 81, 56, 55, 40]
+    ]
+  };
+  
+  var usersSuccessCallback = function(response) {
+    $scope.users = response.data;
+    $log.debug(response);
+  };
+
+  var usersErrorCallback = function(response) {
+    $log.error(response);
+  };
+
+  $http.get(API_URL + '/api/users', {responseType: 'json'}).then(usersSuccessCallback, usersErrorCallback);
 });
 
