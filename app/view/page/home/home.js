@@ -130,11 +130,17 @@ appPageHome.controller('EventsInfoCtrl', function($scope, $log, $timeout){
   };
 });
 
-appPageHome.controller('EventInfoWindowCtrl', function($scope, $log, $document){
+appPageHome.controller('EventInfoWindowCtrl', function($scope, $log, $document, $timeout){
 
   $scope.gotToEvent = function() {
-    var event = angular.element.find('#event-' + $scope.model.id);
-    $document.scrollToElementAnimated(event);
+
+    // Ugly trick, sorry
+    $scope.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.eventsQuery = '';
+
+    $timeout(function() {
+      var event = angular.element.find('#event-' + $scope.model.id);
+      $document.scrollToElementAnimated(event);
+    }, 500);
   };
 
 });
