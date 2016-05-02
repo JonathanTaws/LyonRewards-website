@@ -116,8 +116,17 @@ appPageHome.controller('EventsInfoCtrl', function($scope, $log, $timeout){
     zoom: 13
   };
 
+  var currentWindowOpen = null;
   $scope.onMarkerClick = function(marker, eventName, model) {
+    if (currentWindowOpen) {
+      currentWindowOpen.show = false;
+    }
     model.show = !model.show;
+    if (model.show) {
+      currentWindowOpen = model;
+    } else {
+      currentWindowOpen = null;
+    }
   };
 });
 
