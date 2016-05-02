@@ -29,7 +29,7 @@ appPageOffers.controller('OffersCtrl', function($scope, $http, $rootScope, $log,
   var errorOffers = function(response) {
     displayOffers();
   };
-  $http.get('https://lyonrewards.antoine-chabert.fr/api/offers', {responseType: 'json'}).then(successOffers,errorOffers);
+  $http.get(API_URL + '/api/offers', {responseType: 'json'}).then(successOffers,errorOffers);
 
   // Init filters
   $scope.selectedPartner = {

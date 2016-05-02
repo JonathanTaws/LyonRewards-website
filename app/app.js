@@ -1,5 +1,8 @@
 'use strict';
 
+var API_URL = 'https://lyonrewards.antoine-chabert.fr';
+
+
 // Declare app level module which depends on views, and components
 var app = angular.module('lyonRewards', [
   'ngRoute',

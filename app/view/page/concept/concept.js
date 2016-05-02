@@ -26,7 +26,7 @@ appPageConcept.controller('ConceptCtrl', function($scope, $http, $location) {
   var errorPartners = function(response) {
     displayPartners();
   };
-  $http.get('https://lyonrewards.antoine-chabert.fr/api/partners', {responseType: 'json'}).then(successPartners,errorPartners);
+  $http.get(API_URL + '/api/partners', {responseType: 'json'}).then(successPartners,errorPartners);
 
 
   $scope.onClickPartner = function(partner) {

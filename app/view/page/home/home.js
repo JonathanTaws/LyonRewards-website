@@ -45,7 +45,7 @@ appPageHome.controller('HomeCtrl', function($scope, $http, $log) {
     displayEvents();
   };
 
-  $http.get('https://lyonrewards.antoine-chabert.fr/api/events', {responseType: 'json'}).then(eventsSuccessCallback, eventsErrorCallback);
+  $http.get(API_URL + '/api/events', {responseType: 'json'}).then(eventsSuccessCallback, eventsErrorCallback);
 });
 
 appPageHome.controller('EventCtrl', function($scope, $log, $timeout) {

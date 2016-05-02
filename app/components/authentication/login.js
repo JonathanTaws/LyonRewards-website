@@ -100,7 +100,7 @@ appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstanc
 
       $http({
           method: 'post',
-          url: 'https://lyonrewards.antoine-chabert.fr/api/login/',
+          url: API_URL + '/api/login/',
           data: jQuery.param({
             username: $scope.userForm.username,
             password: $scope.userForm.password
