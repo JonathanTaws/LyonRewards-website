@@ -58,7 +58,7 @@ appPageDashboard.config(['$routeProvider', function($routeProvider, $rootScope) 
  ***                           Dashboard                                ***
  **************************************************************************/
 
-appPageDashboard.controller('DashboardCtrl', function($scope, $http) {
+appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope) {
 
   $scope.pointsEarnedChart = {
     labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
@@ -67,9 +67,14 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http) {
     ]
   };
 
-  $scope.transportChart = {
-    labels: ["Voiture", "Bus", "Vélo", "Pied"],
-    data: [300, 500, 100, 600]
+  $scope.transportPointsChart = {
+    labels: ["Vélo", "Bus", "Pied"],
+    data: [$rootScope.user.info.bike_points, $rootScope.user.info.tram_points, $rootScope.user.info.walk_points]
+  };
+
+  $scope.transportDistanceChart = {
+    labels: ["Vélo", "Bus", "Pied"],
+    data: [$rootScope.user.info.bike_distance, $rootScope.user.info.tram_distance, $rootScope.user.info.walk_distance]
   };
 
 });

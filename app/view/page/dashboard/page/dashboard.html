@@ -8,30 +8,38 @@
       <div class="row">
 
         <div class="col-sm-6">
-
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">Historique des points gagnés</h4>
             </div>
             <div class="panel-body">
-              <canvas id="line" class="chart chart-line" chart-data="pointsEarnedChart.data" chart-labels="pointsEarnedChart.labels"></canvas>
+              <canvas class="chart chart-line" chart-data="pointsEarnedChart.data" chart-labels="pointsEarnedChart.labels"></canvas>
             </div>
           </div>
-
         </div>
 
         <div class="col-sm-6">
-
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title">Transport le plus utilisé</h4>
+              <h4 class="panel-title">Points gagnés par transport</h4>
             </div>
             <div class="panel-body">
-              <canvas id="doughnut" class="chart chart-doughnut" chart-data="transportChart.data" chart-labels="transportChart.labels" chart-legend="true"></canvas>
+              <canvas class="chart chart-doughnut" chart-data="transportPointsChart.data" chart-labels="transportDistanceChart.labels" chart-legend="true"></canvas>
             </div>
           </div>
-
         </div>
+
+        <div class="col-sm-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">Distance parcouru en kilomètres par transport</h4>
+            </div>
+            <div class="panel-body">
+              <canvas class="chart chart-doughnut" chart-data="transportDistanceChart.data" chart-labels="transportDistanceChart.labels" chart-legend="true"></canvas>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
