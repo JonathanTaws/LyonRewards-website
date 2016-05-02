@@ -2,7 +2,6 @@
 
 var appPageRanking = angular.module('lyonRewards.ranking', [
   'ngRoute',
-  'ngTable',
   'lyonRewards.config'
 ]);
 
@@ -13,7 +12,7 @@ appPageRanking.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-appPageRanking.controller('RankingCtrl', function($scope, $http, $log, NgTableParams, API_URL) {
+appPageRanking.controller('RankingCtrl', function($scope, $http, $log, API_URL) {
 
   $scope.usersRanking = [];
   var loaderRankingElt = jQuery('.ranking-page .loader-ranking');
@@ -21,6 +20,7 @@ appPageRanking.controller('RankingCtrl', function($scope, $http, $log, NgTablePa
   var filtersElt = jQuery('.ranking-page .filters');
   rankingElt.fadeOut(0);
   filtersElt.fadeOut(0);
+
   var displayRanking = function() {
     loaderRankingElt.hide();
     rankingElt.fadeIn(500);
@@ -36,12 +36,5 @@ appPageRanking.controller('RankingCtrl', function($scope, $http, $log, NgTablePa
     displayRanking();
   };
 
-  $scope.tableParams = new NgTableParams({}, {
-    getData: function(params) {
-      return $http.get(API_URL + '/api/users/ranking', {responseType: 'json'}).then(function (response) {
-        successRanking(response);
-        return $scope.usersRanking;
-      }, errorRanking);
-    }
-  });
+  $http.get(API_URL + '/api/users/ranking', {responseType: 'json'}).then(successRanking,errorRanking);
 });
