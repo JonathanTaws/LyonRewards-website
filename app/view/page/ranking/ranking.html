@@ -6,6 +6,22 @@
 </div>
 
 <div class="container ranking-page">
+
+  <div class="loader-container loader-ranking main-loader">
+    <img src="assets/images/ajax-loader.gif"/>
+  </div>
+
+  <div class="table-responsive ranking">
+    <table ng-table="tableParams" class="table table-hover" show-filter="true">
+      <tr ng-repeat="userRank in $tableParams">
+        <td title="'Utilisateur'" filter="{ username: 'text'}" sortable="'username'">{{userRank.username}}</td>
+        <td title="'Total de points'" filter="{ global_points: 'number'}" sortable="'global_points'">{{userRank.global_points}}</td>
+        <td title="'Points gagnés aujourd\'hui'" filter="{ last_tfh_points: 'number'}" sortable="'last_tfh_points'">{{userRank.last_tfh_points}}</td>
+        <td title="'Points gagnés durant le mois'" filter="{ last_month_points: 'number'}" sortable="'last_month_points'">{{userRank.last_month_points}}</td>
+      </tr>
+    </table>
+  </div>
+
   <div class="table-responsive ranking">
     <table class="table table-hover">
       <thead>
