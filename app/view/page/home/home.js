@@ -134,8 +134,8 @@ appPageHome.controller('EventInfoWindowCtrl', function($scope, $log, $document, 
 
   $scope.gotToEvent = function() {
 
-    // Ugly trick, sorry
-    $scope.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.eventsQuery = '';
+    // Ugly trick, sorry : get the scope of EventsInfoCtrl
+    $scope.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.eventsQuery = $scope.model.title;
 
     $timeout(function() {
       var event = angular.element.find('#event-' + $scope.model.id);
