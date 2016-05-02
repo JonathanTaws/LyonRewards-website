@@ -1,7 +1,7 @@
 'use strict';
 
-var API_URL = 'https://lyonrewards.antoine-chabert.fr';
-
+angular.module('lyonRewards.config', [])
+  .constant('API_URL','https://lyonrewards.antoine-chabert.fr');
 
 // Declare app level module which depends on views, and components
 var app = angular.module('lyonRewards', [
@@ -14,6 +14,7 @@ var app = angular.module('lyonRewards', [
   'angular.filter',
   'AngularPrint',
   'duScroll',
+  'lyonRewards.config',
   'lyonRewards.home',
   'lyonRewards.concept',
   'lyonRewards.ranking',

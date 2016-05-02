@@ -5,7 +5,8 @@ var appPageHome = angular.module('lyonRewards.home', [
   'angularMoment',
   'uiGmapgoogle-maps',
   'angular.filter',
-  'duScroll'
+  'duScroll',
+  'lyonRewards.config'
 ]);
 
 appPageHome.config(function($routeProvider, uiGmapGoogleMapApiProvider) {
@@ -22,7 +23,7 @@ appPageHome.config(function($routeProvider, uiGmapGoogleMapApiProvider) {
   });
 });
 
-appPageHome.controller('HomeCtrl', function($scope, $http, $log) {
+appPageHome.controller('HomeCtrl', function($scope, $http, $log, API_URL) {
 
   $scope.eventsOrderBy = '-end_date';
 

@@ -1,6 +1,11 @@
 'use strict';
 
-var appPageOffers = angular.module('lyonRewards.offers', ['ngRoute', 'ngAnimate', 'monospaced.qrcode']);
+var appPageOffers = angular.module('lyonRewards.offers', [
+  'ngRoute',
+  'ngAnimate',
+  'monospaced.qrcode',
+  'lyonRewards.config'
+]);
 
 appPageOffers.config(function($routeProvider) {
   $routeProvider.when('/offers', {
@@ -9,7 +14,7 @@ appPageOffers.config(function($routeProvider) {
   });
 });
 
-appPageOffers.controller('OffersCtrl', function($scope, $http, $rootScope, $log, $uibModal) {
+appPageOffers.controller('OffersCtrl', function($scope, $http, $rootScope, $log, $uibModal, API_URL) {
 
   $scope.offers = [];
   var loaderOffersElt = jQuery('.offers-page .loader-offers');

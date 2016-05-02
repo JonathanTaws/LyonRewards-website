@@ -2,7 +2,8 @@
 
 var appPageDashboard = angular.module('lyonRewards.dashboard', [
   'ngRoute',
-  'chart.js'
+  'chart.js',
+  'lyonRewards.config'
 ]);
 
 var checkUserLogin = function ($q, $rootScope, $location) {
@@ -80,7 +81,7 @@ appPageDashboard.controller('DashboardHistoryCtrl', function($scope, $http) {
  ***                            Profile                                 ***
  **************************************************************************/
 
-appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $rootScope, $log) {
+appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $rootScope, $log, API_URL) {
 
   $scope.isEdit = false;
 
@@ -133,7 +134,7 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
     if (!_.isEmpty(valuesToPatch) && !_.isEmpty($rootScope.user.token) && !_.isNull($rootScope.user.info)) {
        $http({
          method  : 'patch',
-         url     : 'https://lyonrewards.antoine-chabert.fr/api/users/' + $rootScope.user.info.id + '/',
+         url     : API_URL + '/api/users/' + $rootScope.user.info.id + '/',
          data    : valuesToPatch,
          headers : { 'Content-Type': 'application/json', 'Authorization': 'Token ' + $rootScope.user.token }
        }).then(editProfileSuccessCallback, editProfileErrorCallback);

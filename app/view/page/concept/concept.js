@@ -1,6 +1,6 @@
 'use strict';
 
-var appPageConcept = angular.module('lyonRewards.concept', ['ngRoute']);
+var appPageConcept = angular.module('lyonRewards.concept', ['ngRoute', 'lyonRewards.config']);
 
 appPageConcept.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/concept', {
@@ -9,7 +9,7 @@ appPageConcept.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-appPageConcept.controller('ConceptCtrl', function($scope, $http, $location) {
+appPageConcept.controller('ConceptCtrl', function($scope, $http, $location, API_URL) {
 
   $scope.partners = [];
   var loaderPartnersElt = jQuery('.concept-page .loader-partners');

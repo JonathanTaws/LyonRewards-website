@@ -1,6 +1,10 @@
 'use strict';
 
-var appPageRanking = angular.module('lyonRewards.ranking', ['ngRoute']);
+var appPageRanking = angular.module('lyonRewards.ranking', [
+  'ngRoute',
+  'ngTable',
+  'lyonRewards.config'
+]);
 
 appPageRanking.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/ranking', {
@@ -9,7 +13,7 @@ appPageRanking.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-appPageRanking.controller('RankingCtrl', function($scope, $http, $log) {
+appPageRanking.controller('RankingCtrl', function($scope, $http, $log, API_URL) {
 
   $scope.usersRanking = [];
   var loaderRankingElt = jQuery('.ranking-page .loader-ranking');
@@ -31,4 +35,5 @@ appPageRanking.controller('RankingCtrl', function($scope, $http, $log) {
     $log.debug(response);
     displayRanking();
   };
+  
 });

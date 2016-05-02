@@ -1,6 +1,9 @@
 'use strict';
 
-var appLogin = angular.module('lyonRewards.login', ['http-auth-interceptor']);
+var appLogin = angular.module('lyonRewards.login', [
+  'http-auth-interceptor',
+  'lyonRewards.config'
+]);
 
 appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $http) {
 
@@ -45,7 +48,7 @@ appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $htt
   };
 });
 
-appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, $http, authService, $log) {
+appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, $http, authService, $log, API_URL) {
 
   // TODO remove later
   /*
