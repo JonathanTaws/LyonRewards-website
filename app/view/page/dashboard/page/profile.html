@@ -57,7 +57,7 @@
                 </div>
                 <div class="text-center">
                   <button ng-show="!isEdit" ng-click="isEdit = !isEdit" type="button" class="btn btn-default">Éditer</button>
-                  <button ng-show="isEdit" ng-click="isEdit = !isEdit" type="reset" class="btn btn-default">Annuler</button>
+                  <button ng-show="isEdit" ng-click="isEdit = !isEdit" type="button" ng-click="resetEditProfileForm()" class="btn btn-default">Annuler</button>
                   <button ng-show="isEdit" type="submit" class="btn btn-primary">Modifier</button>
                 </div>
 

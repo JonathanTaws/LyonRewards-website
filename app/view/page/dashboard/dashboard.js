@@ -85,13 +85,16 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
 
   $scope.isEdit = false;
 
-  $scope.editProfileForm = {
-    email: null,
-    firstName: null,
-    lastName: null,
-    password: null,
-    passwordConfirmation: null
+  $scope.resetEditProfileForm = function () {
+    $scope.editProfileForm = {
+      email: null,
+      firstName: null,
+      lastName: null,
+      password: null,
+      passwordConfirmation: null
+    };
   };
+  $scope.resetEditProfileForm();
 
   var resetMessages = function() {
     $scope.message = {
@@ -107,13 +110,12 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
     var valuesToPatch = _($scope.editProfileForm).omitBy(_.isUndefined).omitBy(_.isNull).omitBy(_.isEmpty).value();
 
     var editProfileSuccessCallback = function (response) {
-
       $log.debug(response);
-
       resetMessages();
       $scope.message.success = 'Modifications envoyées avec succès !';
       $scope.isEdit = false;
       $rootScope.user.info = response.data;
+      $scope.resetEditProfileForm();
     };
 
     var editProfileErrorCallback = function (response) {
