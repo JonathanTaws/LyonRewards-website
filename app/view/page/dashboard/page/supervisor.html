@@ -3,23 +3,30 @@
     <div class="col-sm-4 col-md-3 col-lg-2 dashboard-nav">
       <ng-include src="'view/page/dashboard/embed/dashboard-submenu.html'" include-replace></ng-include>
     </div>
-    <div class="col-sm-8 col-md-9 col-lg-10">
+    <div class="col-sm-8 col-md-9 col-lg-10 supervision-page">
       <h3>Comportement des utilisateurs</h3>
-      <div class="row">
 
-        <div class="col-sm-12">
+      <uib-tabset active="activeJustified" justified="true">
+        <uib-tab heading="Utilisation des transports">
 
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">Points gagnés par les utilisateurs</h4>
-            </div>
+          <div class="panel panel-default" ng-controller="SupervisorTransportChartCtrl">
             <div class="panel-body">
-              <canvas id="line" class="chart chart-line" chart-data="pointsEarnedChart.data" chart-labels="pointsEarnedChart.labels"></canvas>
+              <canvas class="chart chart-bar" chart-data="transportChart.data" chart-labels="transportChart.labels"></canvas>
             </div>
           </div>
 
-        </div>
-      </div>
+        </uib-tab>
+        <uib-tab heading="Évolution des points">
+
+          <div class="panel panel-default" ng-controller="SupervisorPointsChartCtrl">
+            <div class="panel-body">
+              <canvas class="chart chart-line" chart-data="pointsChart.data" chart-labels="pointsChart.labels" chart-series="pointsChart.series" chart-legend="true"></canvas>
+            </div>
+          </div>
+
+        </uib-tab>
+      </uib-tabset>
+
     </div>
   </div>
 </div>

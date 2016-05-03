@@ -289,24 +289,100 @@ appPageDashboard.controller('DashboardSettingsCtrl', function($scope, $http) {
 
 appPageDashboard.controller('DashboardSupervisorCtrl', function($scope, $http, API_URL, $log) {
 
-  $scope.users = [];
+});
 
-  $scope.pointsEarnedChart = {
-    labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
-    data: [
-      [65, 59, 80, 81, 56, 55, 40]
-    ]
+appPageDashboard.controller('SupervisorTransportChartCtrl', function($scope, $http, API_URL, $log) {
+  $scope.tranportChart = {
+    labels: [],
+    data: []
   };
-  
+
+  /*
   var usersSuccessCallback = function(response) {
-    $scope.users = response.data;
     $log.debug(response);
-  };
+    var labels = [],
+      dataUsedPoints = [],
+      dataEarnedPoints = [],
+      lastUsedPoints = 0,
+      lastEarnedPoints = 0;
 
+    angular.forEach(response.data, function(value) {
+
+      labels.push(moment(value.date).format('DD/MM à HH[h]mm'));
+
+      if (value.hasOwnProperty('citizen_act')) {
+        dataEarnedPoints.push(value.citizen_act.points);
+        lastEarnedPoints = value.citizen_act.points;
+        //dataUsedPoints.push(lastUsedPoints);
+        dataUsedPoints.push(null);
+      } else if (value.hasOwnProperty('partner_offer')) {
+        dataUsedPoints.push(value.partner_offer.points);
+        lastUsedPoints = value.partner_offer.points;
+        //dataEarnedPoints.push(lastEarnedPoints);
+        dataEarnedPoints.push(null);
+      }
+    });
+
+    $scope.pointsChart.labels = labels;
+    $scope.pointsChart.data = [
+      dataUsedPoints,
+      dataEarnedPoints
+    ];
+
+  };
   var usersErrorCallback = function(response) {
     $log.error(response);
   };
+  $http.get(API_URL + '/api/users/', {responseType: 'json'}).then(usersSuccessCallback, usersErrorCallback);
+  */
+});
 
-  $http.get(API_URL + '/api/users', {responseType: 'json'}).then(usersSuccessCallback, usersErrorCallback);
+appPageDashboard.controller('SupervisorPointsChartCtrl', function($scope, $http, API_URL, $log) {
+
+  $scope.pointsChart = {
+    labels: [],
+    data: [],
+    series: []
+  };
+
+  // Line Chart - Points used / earned
+  var historySuccessCallback = function(response) {
+    $log.debug(response);
+    var labels = [],
+      dataUsedPoints = [],
+      dataEarnedPoints = [],
+      lastUsedPoints = 0,
+      lastEarnedPoints = 0;
+
+    angular.forEach(response.data, function(value) {
+
+      labels.push(moment(value.date).format('DD/MM à HH[h]mm'));
+
+      if (value.hasOwnProperty('citizen_act')) {
+        dataEarnedPoints.push(value.citizen_act.points);
+        lastEarnedPoints = value.citizen_act.points;
+        //dataUsedPoints.push(lastUsedPoints);
+        dataUsedPoints.push(null);
+      } else if (value.hasOwnProperty('partner_offer')) {
+        dataUsedPoints.push(value.partner_offer.points);
+        lastUsedPoints = value.partner_offer.points;
+        //dataEarnedPoints.push(lastEarnedPoints);
+        dataEarnedPoints.push(null);
+      }
+    });
+
+    $scope.pointsChart.labels = labels;
+    $scope.pointsChart.data = [
+      dataUsedPoints,
+      dataEarnedPoints
+    ];
+    $scope.pointsChart.series = ['Points utilisés', 'Points gagnés'];
+
+  };
+  var historyErrorCallback = function(response) {
+    $log.error(response);
+  };
+  $http.get(API_URL + '/api/users/globalhistory/', {responseType: 'json'}).then(historySuccessCallback, historyErrorCallback);
+
 });
 
