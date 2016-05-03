@@ -27,13 +27,18 @@
             <div class="panel-body transport">
               <uib-tabset active="activeJustified" justified="true">
                 <uib-tab heading="Points gagnés par transport">
-                  <canvas class="chart chart-doughnut" chart-data="transportPointsChart.data" chart-labels="transportDistanceChart.labels" chart-legend="true"></canvas>
+                  <canvas ng-if="transportPointsChart.data.length" class="chart chart-doughnut" chart-data="transportPointsChart.data" chart-labels="transportDistanceChart.labels" chart-legend="true"></canvas>
+                  <div ng-if="!transportPointsChart.data.length">
+                    <p>Vous n'avez pas effectué de trajet pour le moment.</p>
+                  </div>
                 </uib-tab>
                 <uib-tab heading="Distance parcouru en kilomètres par transport">
-                  <canvas class="chart chart-doughnut" chart-data="transportDistanceChart.data" chart-labels="transportDistanceChart.labels" chart-legend="true"></canvas>
+                  <canvas ng-if="transportDistanceChart.data.length" class="chart chart-doughnut" chart-data="transportDistanceChart.data" chart-labels="transportDistanceChart.labels" chart-legend="true"></canvas>
+                  <div ng-if="!transportDistanceChart.data.length">
+                    <p>Vous n'avez pas effectué de trajet pour le moment.</p>
+                  </div>
                 </uib-tab>
               </uib-tabset>
-
             </div>
           </div>
         </div>
