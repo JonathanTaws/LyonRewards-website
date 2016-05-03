@@ -60,10 +60,12 @@ appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $htt
 appLogin.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, $http, authService, $log, API_URL) {
 
   // TODO remove later
+  /*
   $scope.userForm = {
     username: 'Antoine',
     password: 'azertyuiop'
   };
+  */
 
   $scope.ok = function () {
     var loader = jQuery('#login-modal > .loader');

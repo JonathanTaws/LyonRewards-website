@@ -9,7 +9,7 @@ var appPageDashboard = angular.module('lyonRewards.dashboard', [
 
 var checkUserLogin = function ($q, $rootScope, $location) {
   // TODO remove after dev
-  return true;
+  //return true;
   if ($rootScope.user.isLogin) {
     return true;
   } else {
@@ -369,28 +369,46 @@ appPageDashboard.controller('SupervisorPointsChartCtrl', function($scope, $http,
   // Line Chart - Points used / earned
   var historySuccessCallback = function(response) {
     $log.debug(response);
+
     var labels = [],
       dataUsedPoints = [],
       dataEarnedPoints = [],
-      lastUsedPoints = 0,
-      lastEarnedPoints = 0;
+      currentPointsUsed = 0,
+      currentPointsEarned = 0,
+      currentDay = moment(_.head(response.data).date);
 
     angular.forEach(response.data, function(value) {
 
-      labels.push(moment(value.date).format('DD/MM à HH[h]mm'));
-
       if (value.hasOwnProperty('citizen_act')) {
-        dataEarnedPoints.push(value.citizen_act.points);
-        lastEarnedPoints = value.citizen_act.points;
-        //dataUsedPoints.push(lastUsedPoints);
-        dataUsedPoints.push(null);
+        currentPointsEarned += value.citizen_act.points;
       } else if (value.hasOwnProperty('partner_offer')) {
-        dataUsedPoints.push(value.partner_offer.points);
-        lastUsedPoints = value.partner_offer.points;
-        //dataEarnedPoints.push(lastEarnedPoints);
-        dataEarnedPoints.push(null);
+        currentPointsUsed += value.partner_offer.points;
       }
+
+      if (!currentDay.isSame(value.date, 'day')) {
+        dataUsedPoints.push(currentPointsUsed);
+        dataEarnedPoints.push(currentPointsEarned);
+        labels.push(currentDay.format('DD MMMM YYYY'));
+        currentDay = currentDay.add(1, 'd');
+        currentPointsEarned = 0;
+        currentPointsUsed = 0;
+      }
+
     });
+
+    if (currentPointsUsed != 0 || currentPointsEarned != 0) {
+      labels.push(currentDay.format('DD MMMM YYYY'));
+      if (currentPointsUsed != 0 && currentPointsEarned != 0) {
+        dataEarnedPoints.push(currentPointsEarned);
+        dataUsedPoints.push(currentPointsUsed);
+      } else if (currentPointsEarned != 0) {
+        dataEarnedPoints.push(currentPointsEarned);
+        dataUsedPoints.push(null);
+      } else if (currentPointsUsed != 0) {
+        dataEarnedPoints.push(null);
+        dataUsedPoints.push(currentPointsUsed);
+      }
+    }
 
     $scope.pointsChart.labels = labels;
     $scope.pointsChart.data = [
