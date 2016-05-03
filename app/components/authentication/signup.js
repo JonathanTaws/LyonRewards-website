@@ -82,7 +82,7 @@ appLogin.controller('SignupModalInstanceCtrl', function ($scope, $uibModalInstan
 
         // TODO refactoring needed with login.js
         if (typeof responseLogin != 'undefined') {
-          $log.debug(responseLogin);
+
           if (typeof responseLogin.data != 'undefined'
             && typeof responseLogin.data.token != 'undefined'
             && typeof responseLogin.data.user != 'undefined') {
@@ -91,12 +91,8 @@ appLogin.controller('SignupModalInstanceCtrl', function ($scope, $uibModalInstan
               user: responseLogin.data.user,
               token: responseLogin.data.token
             });
-            $uibModalInstance.close();
-            return;
           }
         }
-
-        displayContent();
         $uibModalInstance.close();
       }, function(responseLogin) {
         $log.error(responseLogin);
@@ -142,8 +138,6 @@ appLogin.controller('SignupModalInstanceCtrl', function ($scope, $uibModalInstan
   };
 
   $scope.cancel = function() {
-    resetSignupForm();
-    displayContent();
     $uibModalInstance.close();
   };
 });
