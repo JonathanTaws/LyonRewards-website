@@ -67,14 +67,26 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope)
     ]
   };
 
+  var transportPointsRounded = {
+    bike: _.round($rootScope.user.info.bike_points, 2),
+    tram: _.round($rootScope.user.info.tram_points, 2),
+    walk: _.round($rootScope.user.info.walk_points, 2)
+  };
+
   $scope.transportPointsChart = {
-    labels: ["Vélo", "Bus", "Pied"],
-    data: [$rootScope.user.info.bike_points, $rootScope.user.info.tram_points, $rootScope.user.info.walk_points]
+    labels: ['Vélo: ' + transportPointsRounded.bike + ' pts', 'Bus: ' + transportPointsRounded.tram + ' pts', 'Pied: ' + transportPointsRounded.walk + ' pts'],
+    data: [transportPointsRounded.bike, transportPointsRounded.tram, transportPointsRounded.walk]
+  };
+
+  var transportDistanceRounded = {
+    bike: _.round($rootScope.user.info.bike_distance, 2),
+    tram: _.round($rootScope.user.info.tram_distance, 2),
+    walk: _.round($rootScope.user.info.walk_distance, 2)
   };
 
   $scope.transportDistanceChart = {
-    labels: ["Vélo", "Bus", "Pied"],
-    data: [$rootScope.user.info.bike_distance, $rootScope.user.info.tram_distance, $rootScope.user.info.walk_distance]
+    labels: ['Vélo: ' + transportDistanceRounded.bike + ' km', 'Bus: ' + transportDistanceRounded.tram + ' km', 'Pied: ' + transportDistanceRounded.walk + ' km'],
+    data: [transportDistanceRounded.bike, transportDistanceRounded.tram, transportDistanceRounded.walk]
   };
 
 });
