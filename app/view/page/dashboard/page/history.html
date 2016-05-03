@@ -14,23 +14,26 @@
         <div class="col-sm-12">
           <hr>
         </div>
-        <div class="order form-group col-sm-6">
+        <div class="order form-group col-sm-6" ng-if="historyList.length">
           <label for="order-filter"><i class="glyphicon glyphicon-sort"></i> Trier</label>
           <select id="order-filter" name="order-filter" class="form-control" ng-model="historyOrderBy">
             <option value="+date">Dates croissant</option>
             <option value="-date">Dates décroissant</option>
           </select>
         </div>
-        <div class="search form-group col-sm-6">
+        <div class="search form-group col-sm-6" ng-if="historyList.length">
           <label for="text-filter"><i class="glyphicon glyphicon-search"></i> Recherche</label>
           <input id="text-filter" type="search" class="form-control" ng-model="historyQuery" placeholder="Type d'action, description de l'action ...." aria-label="filtre" />
+        </div>
+        <div class="no-data-message col-sm-6" ng-if="!historyList.length">
+          Vous n'avez pas encore effectué d'action pour le moment.
         </div>
         <div class="col-sm-12">
           <hr>
         </div>
       </div>
 
-      <div class="table-responsive history-table">
+      <div class="table-responsive history-table" ng-if="historyList.length">
         <table class="table table-hover">
           <thead>
           <tr>
