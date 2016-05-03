@@ -197,8 +197,13 @@
             <p>
               <span class="publish-date">
                 <i class="glyphicon glyphicon-time"></i>
-                Début <span am-time-ago="event.start_date"></span> <span>({{event.start_date | amUtc | amLocal | amDateFormat:'DD/MM/YY'}})</span> -
-                Fin <span am-time-ago="event.end_date"></span> <span>({{event.end_date | amUtc | amLocal | amDateFormat:'DD/MM/YY'}})</span>
+                <span ng-show="!isStarted(event)">
+                  Début <span am-time-ago="event.start_date"></span>
+                </span>
+                <span ng-show="isStarted(event)">
+                  Fin <span am-time-ago="event.end_date"></span>
+                </span>
+                - <span>Du {{event.start_date | amUtc | amLocal | amDateFormat:'DD/MM/YY'}}</span> au <span>{{event.end_date | amUtc | amLocal | amDateFormat:'DD/MM/YY'}}</span>
               </span>
               <span class="pull-right">
                 <button type="button" class="btn btn-default" ng-click="toggle()">

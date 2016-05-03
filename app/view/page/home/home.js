@@ -26,7 +26,7 @@ appPageHome.config(function($routeProvider, uiGmapGoogleMapApiProvider) {
 
 appPageHome.controller('HomeCtrl', function($scope, $http, $log, API_URL) {
 
-  $scope.eventsOrderBy = '-end_date';
+  $scope.eventsOrderBy = '-start_date';
 
   $scope.events = [];
   var loader = jQuery('.home-page .loader-container');
@@ -72,6 +72,10 @@ appPageHome.controller('EventCtrl', function($scope, $log, $timeout) {
 
   $scope.onMarkerClick = function(marker, eventName, model) {
     model.show = !model.show;
+  };
+
+  $scope.isStarted = function(event) {
+    return moment().isAfter(event.start_date);
   };
 });
 
