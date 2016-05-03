@@ -45,15 +45,25 @@
           </thead>
           <tbody>
           <tr ng-repeat="history in historyList | filter:historyQuery | orderBy:historyOrderBy">
-            <td class="text-center">
-              <span ng-if="history.citizen_act.points > 0">+</span>
-              <span ng-class="{'positive':history.citizen_act.points > 0, 'negative':history.citizen_act.points < 0}">
-                {{history.citizen_act.points}}
-              </span>
+            <td class="text-center positive" ng-if="history.hasOwnProperty('citizen_act')">
+              +{{history.citizen_act.points}}
+            </td>
+            <td class="text-center negative" ng-if="history.hasOwnProperty('partner_offer')">
+              -{{history.partner_offer.points}}
             </td>
             <td class="text-center">{{history.date | amUtc | amLocal | amDateFormat:'DD/MM/YY HH:mm'}}</td>
-            <td class="text-center">{{history.citizen_act.title}}</td>
-            <td class="text-center">{{history.citizen_act.description}}</td>
+            <td class="text-center" ng-if="history.hasOwnProperty('citizen_act')">
+              Action citoyenne
+            </td>
+            <td class="text-center" ng-if="history.hasOwnProperty('partner_offer')">
+              Utilisation d'une offre
+            </td>
+            <td class="text-center" ng-if="history.hasOwnProperty('citizen_act')">
+              {{history.citizen_act.title}} - {{history.citizen_act.description | cut:true:50:'...'}}
+            </td>
+            <td class="text-center" ng-if="history.hasOwnProperty('partner_offer')">
+              {{history.partner_offer.title}} - {{history.partner_offer.description | cut:true:50:'...'}}
+            </td>
           </tr>
           </tbody>
         </table>

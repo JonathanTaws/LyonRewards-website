@@ -3,7 +3,8 @@
 var appPageDashboard = angular.module('lyonRewards.dashboard', [
   'ngRoute',
   'chart.js',
-  'lyonRewards.config'
+  'lyonRewards.config',
+  'angularMoment'
 ]);
 
 var checkUserLogin = function ($q, $rootScope, $location) {
@@ -53,30 +54,31 @@ appPageDashboard.config(['$routeProvider', function($routeProvider, $rootScope) 
 
 }]);
 
-appPageDashboard.run(function ($route, $rootScope) {
+appPageDashboard.run(function ($route, $rootScope, $log, $location) {
 
-  // Auto reload page when user change
-  $rootScope.$watch('user.info', function() {
-    $route.reload();
-  });
+  // Auto reload page when user change in dashboard
+  var regexp = new RegExp('^/dashboard.*$');
+  if(regexp.test($location.path())) {
+    $rootScope.$watch('user.info', function() {
+      $route.reload();
+    });
+  }
 });
-
-
-
 
 /**************************************************************************
  ***                           Dashboard                                ***
  **************************************************************************/
 
-appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope) {
+appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope, API_URL, $log) {
 
   $scope.pointsEarnedChart = {
-    labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
-    data: [
-      [65, 59, 80, 81, 56, 55, 40]
-    ]
+    labels: [],
+    data: []
   };
-
+  $scope.pointsEvolutionChart = {
+    labels: [],
+    data: []
+  };
   $scope.transportPointsChart = {
     labels: [],
     data: []
@@ -88,6 +90,7 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope)
 
   if ($rootScope.user.isLogin && !_.isNull($rootScope.user.info)) {
 
+    // Transport Chart - Distance
     if (!_.isNull($rootScope.user.info.bike_points) && !_.isNull($rootScope.user.info.tram_points) && !_.isNull($rootScope.user.info.walk_points)
       && ($rootScope.user.info.bike_points > 0 || $rootScope.user.info.tram_points > 0 || $rootScope.user.info.walk_points > 0)) {
       var transportPointsRounded = {
@@ -102,6 +105,7 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope)
       };
     }
 
+    // Transport Chart - Distance
     if (!_.isNull($rootScope.user.info.bike_distance) && !_.isNull($rootScope.user.info.tram_distance) && !_.isNull($rootScope.user.info.walk_distance)
       && ($rootScope.user.info.bike_distance > 0 || $rootScope.user.info.tram_distance > 0 || $rootScope.user.info.walk_distance > 0)) {
       var transportDistanceRounded = {
@@ -115,6 +119,47 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope)
         data: [transportDistanceRounded.bike, transportDistanceRounded.tram, transportDistanceRounded.walk]
       };
     }
+
+    // Line Chart - Earned / Current Points
+    if (!_.isNull($rootScope.user.info.id)) {
+      var historySuccessCallback = function(response) {
+        $log.debug(response);
+        var labelsCurrentPoints = [],
+          dataCurrentPoints = [],
+          currentPoints = 0,
+          labelsEarnedPoints = [],
+          dataEarnedPoints = [];
+
+        angular.forEach(response.data, function(value) {
+
+          labelsCurrentPoints.push(moment(value.date).format('DD/MM à HH[h]mm'));
+
+          if (value.hasOwnProperty('citizen_act')) {
+            currentPoints += value.citizen_act.points;
+            dataCurrentPoints.push(currentPoints);
+
+            labelsEarnedPoints.push(moment(value.date).format('DD/MM à HH[h]mm'));
+            dataEarnedPoints.push(value.citizen_act.points);
+
+          } else if (value.hasOwnProperty('partner_offer')) {
+            currentPoints -= value.partner_offer.points;
+            dataCurrentPoints.push(currentPoints);
+          }
+
+        });
+
+        $scope.pointsEarnedChart.labels = labelsEarnedPoints;
+        $scope.pointsEarnedChart.data.push(dataEarnedPoints);
+
+        $scope.pointsEvolutionChart.labels = labelsCurrentPoints;
+        $scope.pointsEvolutionChart.data.push(dataCurrentPoints);
+      };
+      var historyErrorCallback = function(response) {
+        $log.error(response);
+      };
+      $http.get(API_URL + '/api/users/' + $rootScope.user.info.id + '/history/', {responseType: 'json'}).then(historySuccessCallback, historyErrorCallback);
+    }
+
   }
 
 });

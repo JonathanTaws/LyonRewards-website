@@ -7,18 +7,40 @@
       <h3>Vue d'ensemble</h3>
       <div class="row">
 
-        <div class="col-sm-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">Historique des points gagnés</h4>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Historique des points gagnés</h4>
+                </div>
+                <div class="panel-body">
+                  <canvas ng-if="pointsEarnedChart.data.length" class="chart chart-line" chart-data="pointsEarnedChart.data" chart-labels="pointsEarnedChart.labels"></canvas>
+                  <div ng-if="!pointsEarnedChart.data.length">
+                    <p class="text-center">Vous n'avez pas gagné de point pour le moment.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="panel-body">
-              <canvas class="chart chart-line" chart-data="pointsEarnedChart.data" chart-labels="pointsEarnedChart.labels"></canvas>
+
+            <div class="col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Évolution des points disponibles</h4>
+                </div>
+                <div class="panel-body">
+                  <canvas ng-if="pointsEvolutionChart.data.length" class="chart chart-line" chart-data="pointsEvolutionChart.data" chart-labels="pointsEvolutionChart.labels"></canvas>
+                  <div ng-if="!pointsEvolutionChart.data.length">
+                    <p class="text-center">Vous n'avez pas gagné ou perdu de point pour le moment.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="col-sm-6">
+
+        <div class="col-lg-6 col-md-12 col-sm-12">
 
           <div class="panel panel-default">
             <div class="panel-heading">
