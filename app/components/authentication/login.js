@@ -2,7 +2,8 @@
 
 var appLogin = angular.module('lyonRewards.login', [
   'http-auth-interceptor',
-  'lyonRewards.config']);
+  'lyonRewards.config'
+]);
 
 appLogin.run(function ($rootScope, $uibModal, $log, $location, authService, $http, ADMIN_ID, SUPVI_ID) {
 

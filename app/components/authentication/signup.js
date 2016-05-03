@@ -1,6 +1,9 @@
 'use strict';
 
-var appLogin = angular.module('lyonRewards.signup', []);
+var appLogin = angular.module('lyonRewards.signup', [
+  'http-auth-interceptor',
+  'lyonRewards.config'
+]);
 
 appLogin.run(function ($rootScope, $uibModal, $log) {
 
@@ -20,7 +23,7 @@ appLogin.run(function ($rootScope, $uibModal, $log) {
   };
 });
 
-appLogin.controller('SignupModalInstanceCtrl', function ($scope, $uibModalInstance, $log, $http, API_URL) {
+appLogin.controller('SignupModalInstanceCtrl', function ($scope, $uibModalInstance, $log, $http, API_URL, authService) {
 
   var resetSignupForm = function () {
     $scope.signupForm = {
@@ -40,15 +43,13 @@ appLogin.controller('SignupModalInstanceCtrl', function ($scope, $uibModalInstan
   };
   resetMessages();
 
-  var loaderElt = jQuery('#signup-modal > .loader');
-  var contentElt = jQuery('#signup-modal > .content');
   var displayContent = function() {
-    loaderElt.fadeOut(500);
-    contentElt.fadeIn(500);
+    jQuery('#signup-modal > .loader').fadeOut(100);
+    jQuery('#signup-modal > .content').fadeIn(100);
   };
   var displayLoader= function() {
-    loaderElt.fadeIn(500);
-    contentElt.fadeOut(500);
+    jQuery('#signup-modal > .loader').fadeIn(100);
+    jQuery('#signup-modal > .content').fadeOut(100);
   };
 
   $scope.processSignupForm = function() {
@@ -61,11 +62,46 @@ appLogin.controller('SignupModalInstanceCtrl', function ($scope, $uibModalInstan
 
     $log.debug(valuesToPatch);
 
-    var signupSuccessCallback = function (response) {
-      $log.debug(response);
+    var signupSuccessCallback = function (responseSignup) {
+      $log.debug(responseSignup);
       resetMessages();
       resetSignupForm();
-      $uibModalInstance.close();
+
+      // TODO make a promise to signup then login ...
+      $http({
+          method: 'post',
+          url: API_URL + '/api/login/',
+          data: jQuery.param({
+            username: valuesToPatch.username,
+            password: valuesToPatch.password
+          }),
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }
+      ).then(function(responseLogin) {
+        $log.debug(responseLogin);
+
+        // TODO refactoring needed with login.js
+        if (typeof responseLogin != 'undefined') {
+          $log.debug(responseLogin);
+          if (typeof responseLogin.data != 'undefined'
+            && typeof responseLogin.data.token != 'undefined'
+            && typeof responseLogin.data.user != 'undefined') {
+
+            authService.loginConfirmed({
+              user: responseLogin.data.user,
+              token: responseLogin.data.token
+            });
+            $uibModalInstance.close();
+            return;
+          }
+        }
+
+        displayContent();
+        $uibModalInstance.close();
+      }, function(responseLogin) {
+        $log.error(responseLogin);
+        $log.error('Impossible to login new user ! See log above.');
+      });
     };
 
     var signupErrorCallback = function (response) {
