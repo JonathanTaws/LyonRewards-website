@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('lyonRewards.config', [])
-  .constant('API_URL','https://lyonrewards.antoine-chabert.fr');
+  .constant('API_URL','https://lyonrewards.antoine-chabert.fr')
+  .constant('ADMIN_ID',7)
+  .constant('SUPVI_ID',8);
 
 // Declare app level module which depends on views, and components
 var app = angular.module('lyonRewards', [

@@ -3,8 +3,58 @@
     <div class="col-sm-4 col-md-3 col-lg-2 dashboard-nav">
       <ng-include src="'view/page/dashboard/embed/dashboard-submenu.html'" include-replace></ng-include>
     </div>
-    <div class="col-sm-8 col-md-9 col-lg-10">
+    <div class="col-sm-8 col-md-9 col-lg-10 history-page">
       <h3>Historique</h3>
+
+      <div class="loader-container loader-history main-loader">
+        <img src="assets/images/ajax-loader.gif"/>
+      </div>
+
+      <div class="row filters">
+        <div class="col-sm-12">
+          <hr>
+        </div>
+        <div class="order form-group col-sm-6">
+          <label for="order-filter"><i class="glyphicon glyphicon-sort"></i> Trier</label>
+          <select id="order-filter" name="order-filter" class="form-control" ng-model="historyOrderBy">
+            <option value="+date">Dates croissant</option>
+            <option value="-date">Dates décroissant</option>
+          </select>
+        </div>
+        <div class="search form-group col-sm-6">
+          <label for="text-filter"><i class="glyphicon glyphicon-search"></i> Recherche</label>
+          <input id="text-filter" type="search" class="form-control" ng-model="historyQuery" placeholder="Type d'action, description de l'action ...." aria-label="filtre" />
+        </div>
+        <div class="col-sm-12">
+          <hr>
+        </div>
+      </div>
+
+      <div class="table-responsive history-table">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th class="text-center">Points</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Action</th>
+            <th class="text-center">Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="history in historyList | filter:historyQuery | orderBy:historyOrderBy">
+            <td class="text-center">
+              <span ng-if="history.citizen_act.points > 0">+</span>
+              <span ng-class="{'positive':history.citizen_act.points > 0, 'negative':history.citizen_act.points < 0}">
+                {{history.citizen_act.points}}
+              </span>
+            </td>
+            <td class="text-center">{{history.date | amUtc | amLocal | amDateFormat:'DD/MM/YY HH:mm'}}</td>
+            <td class="text-center">{{history.citizen_act.title}}</td>
+            <td class="text-center">{{history.citizen_act.description}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

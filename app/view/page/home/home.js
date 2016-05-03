@@ -6,6 +6,7 @@ var appPageHome = angular.module('lyonRewards.home', [
   'uiGmapgoogle-maps',
   'angular.filter',
   'duScroll',
+  'lyonRewards.ranking',
   'lyonRewards.config'
 ]);
 
@@ -28,8 +29,8 @@ appPageHome.controller('HomeCtrl', function($scope, $http, $log, API_URL) {
   $scope.eventsOrderBy = '-end_date';
 
   $scope.events = [];
-  var loader = jQuery('.home .loader-container');
-  var events = jQuery('.home .events');
+  var loader = jQuery('.home-page .loader-container');
+  var events = jQuery('.home-page .events');
   events.fadeOut(0);
 
   var displayEvents = function() {
@@ -115,16 +116,31 @@ appPageHome.controller('EventsInfoCtrl', function($scope, $log, $timeout){
     zoom: 13
   };
 
+  var currentWindowOpen = null;
   $scope.onMarkerClick = function(marker, eventName, model) {
+    if (currentWindowOpen) {
+      currentWindowOpen.show = false;
+    }
     model.show = !model.show;
+    if (model.show) {
+      currentWindowOpen = model;
+    } else {
+      currentWindowOpen = null;
+    }
   };
 });
 
-appPageHome.controller('EventInfoWindowCtrl', function($scope, $log, $document){
+appPageHome.controller('EventInfoWindowCtrl', function($scope, $log, $document, $timeout){
 
   $scope.gotToEvent = function() {
-    var event = angular.element.find('#event-' + $scope.model.id);
-    $document.scrollToElementAnimated(event);
+
+    // Ugly trick, sorry : get the scope of EventsInfoCtrl
+    $scope.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.eventsQuery = $scope.model.title;
+
+    $timeout(function() {
+      var event = angular.element.find('#event-' + $scope.model.id);
+      $document.scrollToElementAnimated(event);
+    }, 500);
   };
 
 });

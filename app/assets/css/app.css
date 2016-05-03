@@ -49,6 +49,12 @@
     border-left-color: #c42127;
 }
 
+/* Fonts */
+@font-face {
+    font-family: 'FogtwoNo5';
+    src: url('../fonts/FogtwoNo5/FogtwoNo5.ttf'), url('../fonts/FogtwoNo5/FogtwoNo5.otf');
+}
+
 /**************************************************************************************
  ***                                     General                                    ***
  **************************************************************************************/
@@ -59,6 +65,22 @@ body {
 
 body > .main {
     min-height: 70vh;
+}
+
+.lw-title {
+    font-family: 'FogtwoNo5', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.lw-title-lg {
+    font-size: 5em;
+}
+
+.lw-title-md {
+    font-size: 4em;
+}
+
+.lw-title-sm {
+    font-size: 3em;
 }
 
 .container.inverse,
@@ -376,6 +398,22 @@ footer .logo-vdl img {
     border-right: 1px solid #eee;
     min-height: 100vh;
     margin-top: -20px;
+}
+
+.dashboard-page .transport .chart {
+    margin-top: 30px;
+}
+
+/**************************************************************************************
+ ***                                   History page                               ***
+ **************************************************************************************/
+
+.history-page .history-table .positive {
+    color: #3c763d;
+}
+
+.history-page .history-table .negative {
+    color: #a94442;
 }
 
 /**************************************************************************************

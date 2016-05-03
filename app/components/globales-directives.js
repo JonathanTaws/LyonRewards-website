@@ -88,3 +88,14 @@ app.directive('errSrc', function() {
     }
   }
 });
+
+app.directive('dynamicPlaceholder', function () {
+  return {
+    restrict: 'A',
+    link: function ($scope, element, attrs) {
+      attrs.$observe('dynamicPlaceholder', function (value) {
+        element.attr('placeholder', value);
+      });
+    }
+  };
+});

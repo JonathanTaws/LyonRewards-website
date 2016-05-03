@@ -3,35 +3,46 @@
     <div class="col-sm-4 col-md-3 col-lg-2 dashboard-nav">
       <ng-include src="'view/page/dashboard/embed/dashboard-submenu.html'" include-replace></ng-include>
     </div>
-    <div class="col-sm-8 col-md-9 col-lg-10">
+    <div class="col-sm-8 col-md-9 col-lg-10 dashboard-page">
       <h3>Vue d'ensemble</h3>
       <div class="row">
 
-        <div class="col-sm-6" ng-controller="PointsEarnedChartCtrl">
-
+        <div class="col-sm-6">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">Historique des points gagnés</h4>
             </div>
             <div class="panel-body">
-              <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels"></canvas>
+              <canvas class="chart chart-line" chart-data="pointsEarnedChart.data" chart-labels="pointsEarnedChart.labels"></canvas>
             </div>
           </div>
-
         </div>
 
-        <div class="col-sm-6" ng-controller="TransportChartCtrl">
+        <div class="col-sm-6">
 
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title">Transport le plus utilisé</h4>
+              <h4 class="panel-title">Utilisation des transports</h4>
             </div>
-            <div class="panel-body">
-              <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-legend="true"></canvas>
+            <div class="panel-body transport">
+              <uib-tabset active="activeJustified" justified="true">
+                <uib-tab heading="Points gagnés par transport">
+                  <canvas ng-if="transportPointsChart.data.length" class="chart chart-doughnut" chart-data="transportPointsChart.data" chart-labels="transportDistanceChart.labels" chart-legend="true"></canvas>
+                  <div ng-if="!transportPointsChart.data.length">
+                    <p>Vous n'avez pas effectué de trajet pour le moment.</p>
+                  </div>
+                </uib-tab>
+                <uib-tab heading="Distance parcouru en kilomètres par transport">
+                  <canvas ng-if="transportDistanceChart.data.length" class="chart chart-doughnut" chart-data="transportDistanceChart.data" chart-labels="transportDistanceChart.labels" chart-legend="true"></canvas>
+                  <div ng-if="!transportDistanceChart.data.length">
+                    <p>Vous n'avez pas effectué de trajet pour le moment.</p>
+                  </div>
+                </uib-tab>
+              </uib-tabset>
             </div>
           </div>
-
         </div>
+
       </div>
     </div>
   </div>

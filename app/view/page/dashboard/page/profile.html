@@ -32,19 +32,19 @@
                 <div class="form-group">
                   <label for="email" class="col-sm-3 col-sm-offset-1 control-label">Adresse mail</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="email" placeholder="{{$root.user.info.email}}" ng-model="editProfileForm.email" ng-disabled="!isEdit">
+                    <input type="text" class="form-control" id="email" dynamic-placeholder="{{$root.user.info.email}}" ng-model="editProfileForm.email" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="firstName" class="col-sm-3 col-sm-offset-1 control-label">Prénom</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="firstName" placeholder="{{$root.user.info.first_name}}" ng-model="editProfileForm.firstName" ng-disabled="!isEdit">
+                    <input type="text" class="form-control" id="firstName" dynamic-placeholder="{{$root.user.info.first_name}}" ng-model="editProfileForm.first_name" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="lastName" class="col-sm-3 col-sm-offset-1 control-label">Nom</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="lastName" placeholder="{{$root.user.info.last_name}}" ng-model="editProfileForm.lastName" ng-disabled="!isEdit">
+                    <input type="text" class="form-control" id="lastName" dynamic-placeholder="{{$root.user.info.last_name}}" ng-model="editProfileForm.last_name" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="form-group">
@@ -57,7 +57,7 @@
                 </div>
                 <div class="text-center">
                   <button ng-show="!isEdit" ng-click="isEdit = !isEdit" type="button" class="btn btn-default">Éditer</button>
-                  <button ng-show="isEdit" ng-click="isEdit = !isEdit" type="reset" class="btn btn-default">Annuler</button>
+                  <button ng-show="isEdit" ng-click="isEdit = !isEdit" type="button" ng-click="resetEditProfileForm()" class="btn btn-default">Annuler</button>
                   <button ng-show="isEdit" type="submit" class="btn btn-primary">Modifier</button>
                 </div>
 

@@ -8,7 +8,7 @@ var appPageDashboard = angular.module('lyonRewards.dashboard', [
 
 var checkUserLogin = function ($q, $rootScope, $location) {
   // TODO remove after dev
-  //return true;
+  return true;
   if ($rootScope.user.isLogin) {
     return true;
   } else {
@@ -16,7 +16,7 @@ var checkUserLogin = function ($q, $rootScope, $location) {
   }
 };
 
-appPageDashboard.config(['$routeProvider', function($routeProvider) {
+appPageDashboard.config(['$routeProvider', function($routeProvider, $rootScope) {
   $routeProvider.when('/dashboard', {
     templateUrl: 'view/page/dashboard/page/dashboard.html',
     controller: 'DashboardCtrl',
@@ -41,6 +41,14 @@ appPageDashboard.config(['$routeProvider', function($routeProvider) {
     resolve: {
       factory: checkUserLogin
     }
+  }).when('/dashboard/supervisor', {
+    templateUrl: 'view/page/dashboard/page/supervisor.html',
+    controller: 'DashboardSupervisorCtrl',
+    resolve: {
+      factory: function($q, $rootScope, $location) {
+        return checkUserLogin($q, $rootScope, $location) && ($rootScope.user.isSupervisor || $rootScope.user.isAdmin);
+      }
+    }
   }).otherwise({ redirectTo: '/' });
 
 }]);
@@ -50,29 +58,72 @@ appPageDashboard.config(['$routeProvider', function($routeProvider) {
  ***                           Dashboard                                ***
  **************************************************************************/
 
-appPageDashboard.controller('DashboardCtrl', function($scope, $http) {
+appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope) {
 
-});
+  $scope.pointsEarnedChart = {
+    labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+    data: [
+      [65, 59, 80, 81, 56, 55, 40]
+    ]
+  };
 
-appPageDashboard.controller("PointsEarnedChartCtrl", function ($scope) {
+  var transportPointsRounded = {
+    bike: _.round($rootScope.user.info.bike_points, 2),
+    tram: _.round($rootScope.user.info.tram_points, 2),
+    walk: _.round($rootScope.user.info.walk_points, 2)
+  };
 
-  $scope.labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40]
-  ];
-});
+  $scope.transportPointsChart = {
+    labels: ['Vélo: ' + transportPointsRounded.bike + ' pts', 'Bus: ' + transportPointsRounded.tram + ' pts', 'Pied: ' + transportPointsRounded.walk + ' pts'],
+    data: [transportPointsRounded.bike, transportPointsRounded.tram, transportPointsRounded.walk]
+  };
 
-appPageDashboard.controller("TransportChartCtrl", function ($scope) {
+  var transportDistanceRounded = {
+    bike: _.round($rootScope.user.info.bike_distance, 2),
+    tram: _.round($rootScope.user.info.tram_distance, 2),
+    walk: _.round($rootScope.user.info.walk_distance, 2)
+  };
 
-  $scope.labels = ["Voiture", "Bus", "Vélo", "Pied"];
-  $scope.data = [300, 500, 100, 600];
+  $scope.transportDistanceChart = {
+    labels: ['Vélo: ' + transportDistanceRounded.bike + ' km', 'Bus: ' + transportDistanceRounded.tram + ' km', 'Pied: ' + transportDistanceRounded.walk + ' km'],
+    data: [transportDistanceRounded.bike, transportDistanceRounded.tram, transportDistanceRounded.walk]
+  };
+
 });
 
 /**************************************************************************
  ***                            History                                 ***
  **************************************************************************/
 
-appPageDashboard.controller('DashboardHistoryCtrl', function($scope, $http) {
+appPageDashboard.controller('DashboardHistoryCtrl', function($scope, $http, API_URL, $log, $rootScope) {
+
+  $scope.historyList = [];
+  $scope.historyOrderBy = '-date';
+
+  var loaderHistoryElt = jQuery('.history-page .loader-history');
+  var historyTableElt = jQuery('.history-page .history-table');
+  var filtersElt = jQuery('.history-page .filters');
+  filtersElt.fadeOut(0);
+  historyTableElt.fadeOut(0);
+
+  var displayHistory = function() {
+    loaderHistoryElt.hide();
+    historyTableElt.fadeIn(500);
+    filtersElt.fadeIn(500);
+  };
+
+  var historySuccessCallback = function(response) {
+    $scope.historyList = response.data;
+    $log.debug(response);
+    displayHistory();
+  };
+
+  var historyErrorCallback = function(response) {
+    $log.error(response);
+    displayHistory();
+  };
+
+  $http.get(API_URL + '/api/users/' + $rootScope.user.info.id + '/history/', {responseType: 'json'}).then(historySuccessCallback, historyErrorCallback);
 
 });
 
@@ -85,13 +136,16 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
 
   $scope.isEdit = false;
 
-  $scope.editProfileForm = {
-    email: null,
-    firstName: null,
-    lastName: null,
-    password: null,
-    passwordConfirmation: null
+  $scope.resetEditProfileForm = function () {
+    $scope.editProfileForm = {
+      email: null,
+      firstName: null,
+      lastName: null,
+      password: null,
+      passwordConfirmation: null
+    };
   };
+  $scope.resetEditProfileForm();
 
   var resetMessages = function() {
     $scope.message = {
@@ -107,13 +161,12 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
     var valuesToPatch = _($scope.editProfileForm).omitBy(_.isUndefined).omitBy(_.isNull).omitBy(_.isEmpty).value();
 
     var editProfileSuccessCallback = function (response) {
-
       $log.debug(response);
-
       resetMessages();
       $scope.message.success = 'Modifications envoyées avec succès !';
       $scope.isEdit = false;
       $rootScope.user.info = response.data;
+      $scope.resetEditProfileForm();
     };
 
     var editProfileErrorCallback = function (response) {
@@ -123,12 +176,20 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
     };
 
     if (!_.isEmpty(valuesToPatch) && !_.isEmpty($rootScope.user.token) && !_.isNull($rootScope.user.info)) {
-       $http({
-         method  : 'patch',
-         url     : API_URL + '/api/users/' + $rootScope.user.info.id + '/',
-         data    : valuesToPatch,
-         headers : { 'Content-Type': 'application/json', 'Authorization': 'Token ' + $rootScope.user.token }
-       }).then(editProfileSuccessCallback, editProfileErrorCallback);
+      if (valuesToPatch.hasOwnProperty('password') && valuesToPatch.hasOwnProperty('passwordConfirmation') && valuesToPatch.password !== valuesToPatch.passwordConfirmation) {
+        resetMessages();
+        $scope.message.error = 'Les deux mots de passe ne correspondent pas.';
+      } else {
+        if (valuesToPatch.hasOwnProperty('passwordConfirmation')) {
+          delete valuesToPatch.passwordConfirmation;
+        }
+        $http({
+          method  : 'patch',
+          url     : API_URL + '/api/users/' + $rootScope.user.info.id + '/',
+          data    : valuesToPatch,
+          headers : { 'Content-Type': 'application/json', 'Authorization': 'Token ' + $rootScope.user.token }
+        }).then(editProfileSuccessCallback, editProfileErrorCallback);
+      }
     } else {
       resetMessages();
       $scope.message.info = 'Aucun champ modifié.';
@@ -143,5 +204,32 @@ appPageDashboard.controller('DashboardProfileCtrl', function($scope, $http, $roo
 
 appPageDashboard.controller('DashboardSettingsCtrl', function($scope, $http) {
 
+});
+
+/**************************************************************************
+ ***                          Supervisor                                ***
+ **************************************************************************/
+
+appPageDashboard.controller('DashboardSupervisorCtrl', function($scope, $http, API_URL, $log) {
+
+  $scope.users = [];
+
+  $scope.pointsEarnedChart = {
+    labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+    data: [
+      [65, 59, 80, 81, 56, 55, 40]
+    ]
+  };
+  
+  var usersSuccessCallback = function(response) {
+    $scope.users = response.data;
+    $log.debug(response);
+  };
+
+  var usersErrorCallback = function(response) {
+    $log.error(response);
+  };
+
+  $http.get(API_URL + '/api/users', {responseType: 'json'}).then(usersSuccessCallback, usersErrorCallback);
 });
 
