@@ -32,19 +32,19 @@
                 <div class="form-group">
                   <label for="email" class="col-sm-3 col-sm-offset-1 control-label">Adresse mail</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="{{$root.user.info.email}}" ng-model="editProfileForm.email" ng-disabled="!isEdit">
+                    <input type="text" class="form-control" id="email" dynamic-placeholder="{{$root.user.info.email}}" ng-model="editProfileForm.email" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="firstName" class="col-sm-3 col-sm-offset-1 control-label">Prénom</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="firstName" name="first_name" placeholder="{{$root.user.info.first_name}}" ng-model="editProfileForm.firstName" ng-disabled="!isEdit">
+                    <input type="text" class="form-control" id="firstName" dynamic-placeholder="{{$root.user.info.first_name}}" ng-model="editProfileForm.first_name" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="lastName" class="col-sm-3 col-sm-offset-1 control-label">Nom</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="lastName" name="last_name" placeholder="{{$root.user.info.last_name}}" ng-model="editProfileForm.lastName" ng-disabled="!isEdit">
+                    <input type="text" class="form-control" id="lastName" dynamic-placeholder="{{$root.user.info.last_name}}" ng-model="editProfileForm.last_name" ng-disabled="!isEdit">
                   </div>
                 </div>
                 <div class="form-group">

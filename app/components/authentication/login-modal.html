@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h3 class="modal-title">Connexion</h3>
 </div>
-<div id="login-modal" class="modal-body" enter-key="ok()">
+<div id="login-modal" class="modal-body">
   <div class="loader text-center" style="display: none;">
     <img src="assets/images/ajax-loader.gif"/>
   </div>
@@ -22,10 +22,10 @@
           <input type="password" class="form-control" id="password" placeholder="Mot de passe" ng-model="userForm.password">
         </div>
       </div>
+      <div class="text-right">
+        <button class="btn btn-default" type="button" ng-click="cancel()">Annuler</button>
+        <button class="btn btn-primary" type="submit" ng-click="ok()">Connexion</button>
+      </div>
     </form>
   </div>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-default" type="button" ng-click="cancel()">Annuler</button>
-  <button class="btn btn-primary" type="button" ng-click="ok()">Connexion</button>
 </div>

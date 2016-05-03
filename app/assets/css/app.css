@@ -52,7 +52,7 @@
 /* Fonts */
 @font-face {
     font-family: 'FogtwoNo5';
-    src: url('../fonts/FogtwoNo5/FogtwoNo5.otf') format('truetype');
+    src: url('../fonts/FogtwoNo5/FogtwoNo5.ttf'), url('../fonts/FogtwoNo5/FogtwoNo5.otf');
 }
 
 /**************************************************************************************
