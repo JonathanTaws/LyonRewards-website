@@ -123,35 +123,56 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope,
     // Line Chart - Earned / Current Points
     if (!_.isNull($rootScope.user.info.id)) {
       var historySuccessCallback = function(response) {
+
         $log.debug(response);
-        var labelsCurrentPoints = [],
+
+        var labels = [],
           dataCurrentPoints = [],
           currentPoints = 0,
-          labelsEarnedPoints = [],
-          dataEarnedPoints = [];
+          dataEarnedPoints = [],
+          currentPointsEarned = 0,
+          currentDay = moment(_.head(response.data).date),
+          addedLastEarnedPoints = false,
+          addedLastCurrentPoints = false;
 
         angular.forEach(response.data, function(value) {
 
-          labelsCurrentPoints.push(moment(value.date).format('DD/MM à HH[h]mm'));
-
           if (value.hasOwnProperty('citizen_act')) {
             currentPoints += value.citizen_act.points;
-            dataCurrentPoints.push(currentPoints);
-
-            labelsEarnedPoints.push(moment(value.date).format('DD/MM à HH[h]mm'));
-            dataEarnedPoints.push(value.citizen_act.points);
-
+            currentPointsEarned += value.citizen_act.points;
+            addedLastEarnedPoints = false;
+            addedLastCurrentPoints = false;
           } else if (value.hasOwnProperty('partner_offer')) {
             currentPoints -= value.partner_offer.points;
-            dataCurrentPoints.push(currentPoints);
+            addedLastCurrentPoints = false;
+          } else {
+            $log.error('Unknown item in history chart generation');
           }
 
+          if (!currentDay.isSame(value.date, 'day')) {
+            dataCurrentPoints.push(currentPoints);
+            dataEarnedPoints.push(currentPointsEarned);
+            labels.push(currentDay.format('DD MMMM YYYY'));
+            currentDay = currentDay.add(1, 'd');
+            addedLastEarnedPoints = true;
+            addedLastCurrentPoints = true;
+          }
         });
 
-        $scope.pointsEarnedChart.labels = labelsEarnedPoints;
+        if (!addedLastEarnedPoints || !addedLastCurrentPoints) {
+          labels.push(currentDay.format('DD MMMM YYYY'));
+          if (!addedLastEarnedPoints) {
+            dataEarnedPoints.push(currentPointsEarned);
+          }
+          if (!addedLastCurrentPoints) {
+            dataCurrentPoints.push(currentPoints);
+          }
+        }
+
+        $scope.pointsEarnedChart.labels = labels;
         $scope.pointsEarnedChart.data.push(dataEarnedPoints);
 
-        $scope.pointsEvolutionChart.labels = labelsCurrentPoints;
+        $scope.pointsEvolutionChart.labels = labels;
         $scope.pointsEvolutionChart.data.push(dataCurrentPoints);
       };
       var historyErrorCallback = function(response) {
