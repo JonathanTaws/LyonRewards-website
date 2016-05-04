@@ -9,7 +9,7 @@ var appPageDashboard = angular.module('lyonRewards.dashboard', [
 
 var checkUserLogin = function ($q, $rootScope, $location) {
   // TODO remove after dev
-  //return true;
+  return true;
   if ($rootScope.user.isLogin) {
     return true;
   } else {
@@ -92,7 +92,7 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope,
 
     // Transport Chart - Points
     if (!_.isNull($rootScope.user.info.bike_points) && !_.isNull($rootScope.user.info.tram_points) && !_.isNull($rootScope.user.info.walk_points)
-      && ($rootScope.user.info.bike_points > 0 || $rootScope.user.info.tram_points > 0 || $rootScope.user.info.walk_points > 0)) {
+      /*&& ($rootScope.user.info.bike_points > 0 || $rootScope.user.info.tram_points > 0 || $rootScope.user.info.walk_points > 0)*/) {
       var transportPointsRounded = {
         bike: _.round($rootScope.user.info.bike_points, 2),
         tram: _.round($rootScope.user.info.tram_points, 2),
@@ -107,7 +107,7 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope,
 
     // Transport Chart - Distance
     if (!_.isNull($rootScope.user.info.bike_distance) && !_.isNull($rootScope.user.info.tram_distance) && !_.isNull($rootScope.user.info.walk_distance)
-      && ($rootScope.user.info.bike_distance > 0 || $rootScope.user.info.tram_distance > 0 || $rootScope.user.info.walk_distance > 0)) {
+      /*&& ($rootScope.user.info.bike_distance > 0 || $rootScope.user.info.tram_distance > 0 || $rootScope.user.info.walk_distance > 0)*/) {
       var transportDistanceRounded = {
         bike: _.round($rootScope.user.info.bike_distance, 2),
         tram: _.round($rootScope.user.info.tram_distance, 2),
@@ -313,49 +313,117 @@ appPageDashboard.controller('DashboardSupervisorCtrl', function($scope, $http, A
 });
 
 appPageDashboard.controller('SupervisorTransportChartCtrl', function($scope, $http, API_URL, $log) {
-  $scope.tranportChart = {
+
+  $scope.transportChart = {
     labels: [],
-    data: []
+    data: [],
+    series: []
   };
 
-  /*
-  var usersSuccessCallback = function(response) {
+  // Fake
+  $scope.transportChart = {
+    labels: [
+      '01 mai 2016',
+      '02 mai 2016',
+      '03 mai 2016',
+      '04 mai 2016'
+    ],
+    data: [
+      [2,1,0,3],
+      [1,3,1,0],
+      [0,1,3,0]
+    ],
+    series: [
+      'Trajets en vélo',
+      'Trajets en tram',
+      'Trajets à pied'
+    ]
+  };
+
+  var travelsSuccessCallback = function(response) {
     $log.debug(response);
-    var labels = [],
-      dataUsedPoints = [],
-      dataEarnedPoints = [],
-      lastUsedPoints = 0,
-      lastEarnedPoints = 0;
 
-    angular.forEach(response.data, function(value) {
+    /*
+    if (response.data.hasOwnProperty('bike') && response.data.hasOwnProperty('tram') && response.data.hasOwnProperty('walk')) {
 
-      labels.push(moment(value.date).format('DD/MM à HH[h]mm'));
-
-      if (value.hasOwnProperty('citizen_act')) {
-        dataEarnedPoints.push(value.citizen_act.points);
-        lastEarnedPoints = value.citizen_act.points;
-        //dataUsedPoints.push(lastUsedPoints);
-        dataUsedPoints.push(null);
-      } else if (value.hasOwnProperty('partner_offer')) {
-        dataUsedPoints.push(value.partner_offer.points);
-        lastUsedPoints = value.partner_offer.points;
-        //dataEarnedPoints.push(lastEarnedPoints);
-        dataEarnedPoints.push(null);
+      var labels = [],
+        dataBikeTravels = [],
+        dataTramTravels = [],
+        dataWalkTravels = [],
+        bikeData = response.data.bike,
+        tramData = response.data.tram,
+        walkData = response.data.walk,
+        bikeIndex = 0,
+        tramIndex = 0,
+        walkIndex = 0;
+      var minDates = [];
+      if (bikeData.length) {
+        minDates.push(moment(bikeData[bikeIndex].date));
       }
-    });
+      if (tramData.length) {
+        minDates.push(moment(tramData[tramIndex].date));
+      }
+      if (walkData.length) {
+        minDates.push(moment(walkData[walkIndex].date));
+      }
+      var currentDay = moment.min(minDates);
 
-    $scope.pointsChart.labels = labels;
-    $scope.pointsChart.data = [
-      dataUsedPoints,
-      dataEarnedPoints
-    ];
+      for(;
+        (bikeIndex < bikeData.length)
+           ||
+        (tramIndex < tramData.length)
+           ||
+        (walkIndex < walkData.length)
+        ;) {
 
+        $log.debug('bikeIndex:' + bikeIndex + ' / tramIndex:' + tramIndex + ' / walkIndex:' + walkIndex);
+
+        if (bikeData.length && currentDay.isSame(bikeData[bikeIndex].day, 'day')) {
+          dataBikeTravels.push(bikeData[bikeIndex].user_bike_count);
+          bikeIndex++;
+        } else {
+          dataBikeTravels.push(null);
+        }
+        if (tramData.length && currentDay.isSame(tramData[tramIndex].day, 'day')) {
+          dataTramTravels.push(tramData[tramIndex].user_tram_count);
+          tramIndex++;
+        } else {
+          dataTramTravels.push(null);
+        }
+        if (walkData.length && currentDay.isSame(walkData[walkIndex].day, 'day')) {
+          dataWalkTravels.push(walkData[walkIndex].user_walk_count);
+          walkIndex++;
+        } else {
+          dataWalkTravels.push(null);
+        }
+        labels.push(currentDay.format('DD MMMM YYYY'));
+        currentDay = currentDay.add(1, 'd');
+      }
+
+      $scope.transportChart = {
+        labels: labels,
+        data: [
+          dataBikeTravels,
+          dataTramTravels,
+          dataWalkTravels
+        ],
+        series: [
+          'Trajets en vélo',
+          'Trajets en tram',
+          'Trajets à pied'
+        ]
+      };
+
+    } else {
+      $log.error('A data is missing in the construction of the transport chart.');
+    }
+    */
   };
-  var usersErrorCallback = function(response) {
+  var travelsErrorCallback = function(response) {
     $log.error(response);
   };
-  $http.get(API_URL + '/api/users/', {responseType: 'json'}).then(usersSuccessCallback, usersErrorCallback);
-  */
+  $http.get(API_URL + '/api/users/globaltravel/', {responseType: 'json'}).then(travelsSuccessCallback, travelsErrorCallback);
+
 });
 
 appPageDashboard.controller('SupervisorPointsChartCtrl', function($scope, $http, API_URL, $log) {
