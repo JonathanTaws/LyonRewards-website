@@ -90,7 +90,7 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope,
 
   if ($rootScope.user.isLogin && !_.isNull($rootScope.user.info)) {
 
-    // Transport Chart - Distance
+    // Transport Chart - Points
     if (!_.isNull($rootScope.user.info.bike_points) && !_.isNull($rootScope.user.info.tram_points) && !_.isNull($rootScope.user.info.walk_points)
       && ($rootScope.user.info.bike_points > 0 || $rootScope.user.info.tram_points > 0 || $rootScope.user.info.walk_points > 0)) {
       var transportPointsRounded = {
@@ -100,7 +100,7 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope,
       };
 
       $scope.transportPointsChart = {
-        labels: ['Vélo: ' + transportPointsRounded.bike + ' pts', 'Bus: ' + transportPointsRounded.tram + ' pts', 'Pied: ' + transportPointsRounded.walk + ' pts'],
+        labels: ['Vélo: ' + transportPointsRounded.bike + ' pts', 'Tram: ' + transportPointsRounded.tram + ' pts', 'Pied: ' + transportPointsRounded.walk + ' pts'],
         data: [transportPointsRounded.bike, transportPointsRounded.tram, transportPointsRounded.walk]
       };
     }
@@ -115,7 +115,7 @@ appPageDashboard.controller('DashboardCtrl', function($scope, $http, $rootScope,
       };
 
       $scope.transportDistanceChart = {
-        labels: ['Vélo: ' + transportDistanceRounded.bike + ' km', 'Bus: ' + transportDistanceRounded.tram + ' km', 'Pied: ' + transportDistanceRounded.walk + ' km'],
+        labels: ['Vélo: ' + transportDistanceRounded.bike + ' km', 'Tram: ' + transportDistanceRounded.tram + ' km', 'Pied: ' + transportDistanceRounded.walk + ' km'],
         data: [transportDistanceRounded.bike, transportDistanceRounded.tram, transportDistanceRounded.walk]
       };
     }
@@ -370,53 +370,54 @@ appPageDashboard.controller('SupervisorPointsChartCtrl', function($scope, $http,
   var historySuccessCallback = function(response) {
     $log.debug(response);
 
-    var labels = [],
-      dataUsedPoints = [],
-      dataEarnedPoints = [],
-      currentPointsUsed = 0,
-      currentPointsEarned = 0,
-      currentDay = moment(_.head(response.data).date);
+    if (response.data.length) {
+      var labels = [],
+        dataUsedPoints = [],
+        dataEarnedPoints = [],
+        currentPointsUsed = 0,
+        currentPointsEarned = 0,
+        currentDay = moment(_.head(response.data).date);
 
-    angular.forEach(response.data, function(value) {
+      angular.forEach(response.data, function(value) {
 
-      if (value.hasOwnProperty('citizen_act')) {
-        currentPointsEarned += value.citizen_act.points;
-      } else if (value.hasOwnProperty('partner_offer')) {
-        currentPointsUsed += value.partner_offer.points;
-      }
+        if (value.hasOwnProperty('citizen_act')) {
+          currentPointsEarned += value.citizen_act.points;
+        } else if (value.hasOwnProperty('partner_offer')) {
+          currentPointsUsed += value.partner_offer.points;
+        }
 
-      if (!currentDay.isSame(value.date, 'day')) {
-        dataUsedPoints.push(currentPointsUsed);
-        dataEarnedPoints.push(currentPointsEarned);
+        if (!currentDay.isSame(value.date, 'day')) {
+          dataUsedPoints.push(currentPointsUsed);
+          dataEarnedPoints.push(currentPointsEarned);
+          labels.push(currentDay.format('DD MMMM YYYY'));
+          currentDay = currentDay.add(1, 'd');
+          currentPointsEarned = 0;
+          currentPointsUsed = 0;
+        }
+
+      });
+
+      if (currentPointsUsed != 0 || currentPointsEarned != 0) {
         labels.push(currentDay.format('DD MMMM YYYY'));
-        currentDay = currentDay.add(1, 'd');
-        currentPointsEarned = 0;
-        currentPointsUsed = 0;
+        if (currentPointsUsed != 0 && currentPointsEarned != 0) {
+          dataEarnedPoints.push(currentPointsEarned);
+          dataUsedPoints.push(currentPointsUsed);
+        } else if (currentPointsEarned != 0) {
+          dataEarnedPoints.push(currentPointsEarned);
+          dataUsedPoints.push(null);
+        } else if (currentPointsUsed != 0) {
+          dataEarnedPoints.push(null);
+          dataUsedPoints.push(currentPointsUsed);
+        }
       }
 
-    });
-
-    if (currentPointsUsed != 0 || currentPointsEarned != 0) {
-      labels.push(currentDay.format('DD MMMM YYYY'));
-      if (currentPointsUsed != 0 && currentPointsEarned != 0) {
-        dataEarnedPoints.push(currentPointsEarned);
-        dataUsedPoints.push(currentPointsUsed);
-      } else if (currentPointsEarned != 0) {
-        dataEarnedPoints.push(currentPointsEarned);
-        dataUsedPoints.push(null);
-      } else if (currentPointsUsed != 0) {
-        dataEarnedPoints.push(null);
-        dataUsedPoints.push(currentPointsUsed);
-      }
+      $scope.pointsChart.labels = labels;
+      $scope.pointsChart.data = [
+        dataUsedPoints,
+        dataEarnedPoints
+      ];
+      $scope.pointsChart.series = ['Points utilisés', 'Points gagnés'];
     }
-
-    $scope.pointsChart.labels = labels;
-    $scope.pointsChart.data = [
-      dataUsedPoints,
-      dataEarnedPoints
-    ];
-    $scope.pointsChart.series = ['Points utilisés', 'Points gagnés'];
-
   };
   var historyErrorCallback = function(response) {
     $log.error(response);

@@ -11,7 +11,10 @@
 
           <div class="panel panel-default" ng-controller="SupervisorTransportChartCtrl">
             <div class="panel-body">
-              <canvas class="chart chart-bar" chart-data="transportChart.data" chart-labels="transportChart.labels"></canvas>
+              <canvas ng-if="transportChart.data.length" class="chart chart-bar" chart-data="transportChart.data" chart-labels="transportChart.labels" chart-series="transportChart.series" chart-legend="true"></canvas>
+              <div ng-if="!transportChart.data.length">
+                <p class="text-center">Pas de données d'utilisateur pour le moment.</p>
+              </div>
             </div>
           </div>
 
@@ -20,7 +23,10 @@
 
           <div class="panel panel-default" ng-controller="SupervisorPointsChartCtrl">
             <div class="panel-body">
-              <canvas class="chart chart-line" chart-data="pointsChart.data" chart-labels="pointsChart.labels" chart-series="pointsChart.series" chart-legend="true"></canvas>
+              <canvas ng-if="pointsChart.data.length" class="chart chart-line" chart-data="pointsChart.data" chart-labels="pointsChart.labels" chart-series="pointsChart.series" chart-legend="true"></canvas>
+              <div ng-if="!pointsChart.data.length">
+                <p class="text-center">Pas de données d'utilisateur pour le moment.</p>
+              </div>
             </div>
           </div>
 
